@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -15,27 +15,89 @@ const Button = ({
   onClick,
   type = 'button',
   className = '',
+  ripple = true,
+  haptic = true,
+  accessibility = true,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const [isPressed, setIsPressed] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [ripples, setRipples] = useState([]);
+  const buttonRef = useRef(null);
+  const scale = useMotionValue(1);
+  const opacity = useTransform(scale, [0.95, 1], [0.8, 1]);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Base classes optimized for mobile
+  const baseClasses = clsx(
+    'relative inline-flex items-center justify-center font-medium transition-all duration-200',
+    'focus:outline-none focus:ring-2 focus:ring-offset-2',
+    'disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none',
+    'select-none overflow-hidden',
+    // Touch-friendly minimum sizes
+    'min-h-[44px] min-w-[44px]',
+    // Better mobile tap target
+    isMobile && 'active:scale-95',
+    // Accessibility
+    accessibility && 'focus-visible:ring-2 focus-visible:ring-primary-500'
+  );
   
   const variants = {
-    primary: 'text-white bg-primary-500 border border-transparent shadow-warm hover:bg-primary-600 focus:ring-primary-500 transform hover:scale-105',
-    secondary: 'text-primary-600 bg-white border border-primary-300 shadow-gentle hover:bg-primary-50 focus:ring-primary-500',
-    accent: 'text-white bg-accent-500 border border-transparent shadow-soft hover:bg-accent-600 focus:ring-accent-500 transform hover:scale-105',
-    outline: 'text-soft-600 bg-transparent border border-soft-300 hover:bg-soft-50 focus:ring-soft-500',
-    ghost: 'text-soft-600 bg-transparent border border-transparent hover:bg-soft-100 focus:ring-soft-500',
-    danger: 'text-white bg-red-500 border border-transparent shadow-sm hover:bg-red-600 focus:ring-red-500 transform hover:scale-105',
-    success: 'text-white bg-green-500 border border-transparent shadow-sm hover:bg-green-600 focus:ring-green-500 transform hover:scale-105',
-    warm: 'text-white bg-warm-500 border border-transparent shadow-warm hover:bg-warm-600 focus:ring-warm-500 transform hover:scale-105'
+    primary: clsx(
+      'text-white bg-primary-500 border border-transparent shadow-warm',
+      'hover:bg-primary-600 focus:ring-primary-500',
+      isMobile ? '' : 'transform hover:scale-105'
+    ),
+    secondary: clsx(
+      'text-primary-600 bg-white border border-primary-300 shadow-gentle',
+      'hover:bg-primary-50 focus:ring-primary-500'
+    ),
+    accent: clsx(
+      'text-white bg-accent-500 border border-transparent shadow-soft',
+      'hover:bg-accent-600 focus:ring-accent-500',
+      isMobile ? '' : 'transform hover:scale-105'
+    ),
+    outline: clsx(
+      'text-soft-600 bg-transparent border border-soft-300',
+      'hover:bg-soft-50 focus:ring-soft-500'
+    ),
+    ghost: clsx(
+      'text-soft-600 bg-transparent border border-transparent',
+      'hover:bg-soft-100 focus:ring-soft-500'
+    ),
+    danger: clsx(
+      'text-white bg-red-500 border border-transparent shadow-sm',
+      'hover:bg-red-600 focus:ring-red-500',
+      isMobile ? '' : 'transform hover:scale-105'
+    ),
+    success: clsx(
+      'text-white bg-green-500 border border-transparent shadow-sm',
+      'hover:bg-green-600 focus:ring-green-500',
+      isMobile ? '' : 'transform hover:scale-105'
+    ),
+    warm: clsx(
+      'text-white bg-warm-500 border border-transparent shadow-warm',
+      'hover:bg-warm-600 focus:ring-warm-500',
+      isMobile ? '' : 'transform hover:scale-105'
+    )
   };
   
   const sizes = {
-    xs: 'px-3 py-1.5 text-xs rounded-lg',
-    sm: 'px-4 py-2 text-sm rounded-lg',
-    md: 'px-6 py-3 text-base rounded-xl',
-    lg: 'px-8 py-4 text-lg rounded-xl',
-    xl: 'px-10 py-5 text-xl rounded-2xl'
+    xs: 'px-2 py-1.5 text-xs rounded-lg min-h-[36px]',
+    sm: 'px-3 py-2 text-sm rounded-lg min-h-[40px]',
+    md: 'px-4 py-3 text-base rounded-xl min-h-[44px]',
+    lg: 'px-6 py-4 text-lg rounded-xl min-h-[48px]',
+    xl: 'px-8 py-5 text-xl rounded-2xl min-h-[52px]'
   };
   
   const iconSizes = {
@@ -46,58 +108,230 @@ const Button = ({
     xl: 'h-6 w-6'
   };
 
+  // Mobile-specific size adjustments
+  const mobileAdjustedSize = isMobile ? {
+    xs: 'px-3 py-2 text-sm rounded-lg min-h-[40px]',
+    sm: 'px-4 py-2.5 text-sm rounded-lg min-h-[44px]',
+    md: 'px-5 py-3 text-base rounded-xl min-h-[48px]',
+    lg: 'px-6 py-4 text-lg rounded-xl min-h-[52px]',
+    xl: 'px-8 py-5 text-xl rounded-2xl min-h-[56px]'
+  }[size] : sizes[size];
+
   const buttonClasses = clsx(
     baseClasses,
     variants[variant],
-    sizes[size],
+    mobileAdjustedSize,
     fullWidth && 'w-full',
     className
   );
 
+  // Haptic feedback for mobile devices
+  const triggerHaptic = () => {
+    if (haptic && isMobile && navigator.vibrate) {
+      navigator.vibrate(10); // Very light haptic feedback
+    }
+  };
+
+  // Create ripple effect
+  const createRipple = (event) => {
+    if (!ripple || !buttonRef.current) return;
+
+    const button = buttonRef.current;
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    const newRipple = {
+      x,
+      y,
+      size,
+      id: Date.now()
+    };
+
+    setRipples(prev => [...prev, newRipple]);
+    
+    // Remove ripple after animation
+    setTimeout(() => {
+      setRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id));
+    }, 600);
+  };
+
   const handleClick = (e) => {
-    if (!disabled && !isLoading && onClick) {
+    if (disabled || isLoading) return;
+    
+    // Create ripple effect
+    createRipple(e);
+    
+    // Trigger haptic feedback
+    triggerHaptic();
+    
+    // Visual feedback
+    setIsPressed(true);
+    setTimeout(() => setIsPressed(false), 150);
+    
+    // Call onClick handler
+    if (onClick) {
       onClick(e);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if ((e.key === 'Enter' || e.key === ' ') && !disabled && !isLoading) {
+      e.preventDefault();
+      handleClick(e);
     }
   };
 
   return (
     <motion.button
+      ref={buttonRef}
       type={type}
       className={buttonClasses}
       onClick={handleClick}
+      onKeyDown={handleKeyDown}
       disabled={disabled || isLoading}
-      whileHover={disabled || isLoading ? {} : { scale: variant === 'ghost' || variant === 'outline' ? 1.02 : 1.05 }}
-      whileTap={disabled || isLoading ? {} : { scale: 0.98 }}
+      style={{ scale, opacity }}
+      whileTap={disabled || isLoading ? {} : { scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      aria-pressed={isPressed}
+      aria-busy={isLoading}
+      role="button"
+      tabIndex={0}
       {...props}
     >
+      {/* Ripple effects */}
+      {ripples.map((ripple) => (
+        <motion.span
+          key={ripple.id}
+          className="absolute bg-white/30 rounded-full pointer-events-none"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            width: ripple.size,
+            height: ripple.size,
+          }}
+          initial={{ scale: 0, opacity: 1 }}
+          animate={{ scale: 2, opacity: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        />
+      ))}
+
+      {/* Loading state */}
       {isLoading ? (
-        <>
+        <div className="flex items-center">
           <Loader2 className={clsx('animate-spin', iconSizes[size], children && 'mr-2')} />
           {children && <span>Loading...</span>}
-        </>
+        </div>
       ) : (
-        <>
+        <div className="flex items-center">
+          {/* Left icon */}
           {Icon && iconPosition === 'left' && (
-            <Icon className={clsx(iconSizes[size], children && 'mr-2')} />
+            <motion.div
+              initial={false}
+              animate={{ rotate: isPressed ? 5 : 0 }}
+              transition={{ duration: 0.1 }}
+              className={clsx(iconSizes[size], children && 'mr-2')}
+            >
+              <Icon className="w-full h-full" />
+            </motion.div>
           )}
-          {children}
+          
+          {/* Button text */}
+          {children && (
+            <span className="relative">
+              {children}
+            </span>
+          )}
+          
+          {/* Right icon */}
           {Icon && iconPosition === 'right' && (
-            <Icon className={clsx(iconSizes[size], children && 'ml-2')} />
+            <motion.div
+              initial={false}
+              animate={{ rotate: isPressed ? -5 : 0 }}
+              transition={{ duration: 0.1 }}
+              className={clsx(iconSizes[size], children && 'ml-2')}
+            >
+              <Icon className="w-full h-full" />
+            </motion.div>
           )}
-        </>
+        </div>
       )}
+
+      {/* Focus ring for accessibility */}
+      <motion.div
+        className="absolute inset-0 rounded-inherit ring-2 ring-primary-500 ring-opacity-0 pointer-events-none"
+        animate={{ ringOpacity: isPressed ? 0.5 : 0 }}
+        transition={{ duration: 0.1 }}
+      />
     </motion.button>
   );
 };
 
-// Specialized button components
-export const PrimaryButton = (props) => <Button variant="primary" {...props} />;
-export const SecondaryButton = (props) => <Button variant="secondary" {...props} />;
-export const AccentButton = (props) => <Button variant="accent" {...props} />;
-export const OutlineButton = (props) => <Button variant="outline" {...props} />;
-export const GhostButton = (props) => <Button variant="ghost" {...props} />;
-export const DangerButton = (props) => <Button variant="danger" {...props} />;
-export const SuccessButton = (props) => <Button variant="success" {...props} />;
-export const WarmButton = (props) => <Button variant="warm" {...props} />;
+// Specialized button components with mobile optimizations
+export const PrimaryButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="primary" {...props} />
+));
+PrimaryButton.displayName = 'PrimaryButton';
+
+export const SecondaryButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="secondary" {...props} />
+));
+SecondaryButton.displayName = 'SecondaryButton';
+
+export const AccentButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="accent" {...props} />
+));
+AccentButton.displayName = 'AccentButton';
+
+export const OutlineButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="outline" {...props} />
+));
+OutlineButton.displayName = 'OutlineButton';
+
+export const GhostButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="ghost" {...props} />
+));
+GhostButton.displayName = 'GhostButton';
+
+export const DangerButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="danger" {...props} />
+));
+DangerButton.displayName = 'DangerButton';
+
+export const SuccessButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="success" {...props} />
+));
+SuccessButton.displayName = 'SuccessButton';
+
+export const WarmButton = React.forwardRef((props, ref) => (
+  <Button ref={ref} variant="warm" {...props} />
+));
+WarmButton.displayName = 'WarmButton';
+
+// Mobile-specific button variants
+export const MobileButton = React.forwardRef((props, ref) => (
+  <Button 
+    ref={ref} 
+    size="md" 
+    ripple={true}
+    haptic={true}
+    className="min-h-[48px] px-6 py-3 font-medium"
+    {...props} 
+  />
+));
+MobileButton.displayName = 'MobileButton';
+
+export const TouchButton = React.forwardRef((props, ref) => (
+  <Button 
+    ref={ref} 
+    size="lg" 
+    ripple={true}
+    haptic={true}
+    className="min-h-[52px] px-8 py-4 font-semibold touch-friendly"
+    {...props} 
+  />
+));
+TouchButton.displayName = 'TouchButton';
 
 export default Button;

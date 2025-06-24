@@ -206,10 +206,10 @@ export const NGO_INFO = {
   tagline: 'Nurturing Lives, Building Hope',
   description: 'Dedicated to providing compassionate care, nutrition, healthcare, and development programs for infants and children to ensure their healthy growth and bright future in a peaceful, nurturing environment.',
   mission: 'Creating a world where every infant and child receives the love, care, and opportunities they need to thrive through comprehensive support programs that strengthen families and build resilient communities.',
-  email: 'info@infantorganisation.org',
+  email: 'info@infantngo.org',
   phone: '+91-9999999999',
   address: 'Sample Address, City, State, PIN - 123456',
-  website: 'www.infantorganisation.org',
+  website: 'www.infantngo.org',
   pan: 'AACTS7973G',
   registration: 'AACTS7973GF2010',
   section_80g: 'AACTS7973GF2010'
