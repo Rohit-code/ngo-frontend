@@ -1,76 +1,126 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Heart, Phone, Mail } from 'lucide-react';
+import { Menu, X, Heart, Phone, Mail, ChevronDown, Home, Info, Target, MessageCircle } from 'lucide-react';
 import { NAVIGATION_ITEMS, NGO_INFO } from '../../utils/constants';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [showTopBar, setShowTopBar] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
 
-  // Handle scroll effect
+  // Enhanced scroll handling with hide/show functionality
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      // Hide/show header based on scroll direction
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setShowTopBar(false);
+      } else {
+        setShowTopBar(true);
+      }
+      
+      setIsScrolled(currentScrollY > 50);
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   // Close mobile menu when route changes
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen]);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Navigation items with icons for mobile
+  const navItemsWithIcons = [
+    { ...NAVIGATION_ITEMS[0], icon: Home },
+    { ...NAVIGATION_ITEMS[1], icon: Info },
+    { ...NAVIGATION_ITEMS[2], icon: Target },
+    { ...NAVIGATION_ITEMS[3], icon: MessageCircle }
+  ];
+
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-primary-500 text-white py-2 hidden md:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between text-sm">
-            <div className="flex items-center space-x-6">
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4" />
-                <span>{NGO_INFO.phone}</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4" />
-                <span>{NGO_INFO.email}</span>
+      {/* Top Bar - Hidden on mobile scroll */}
+      <AnimatePresence>
+        {showTopBar && (
+          <motion.div
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            exit={{ y: -100 }}
+            transition={{ duration: 0.3 }}
+            className="bg-primary-500 text-white py-2 hidden sm:block"
+          >
+            <div className="container-responsive">
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center space-x-4 lg:space-x-6">
+                  <div className="flex items-center space-x-2">
+                    <Phone className="h-3 w-3 lg:h-4 lg:w-4" />
+                    <span className="hidden md:inline">{NGO_INFO.phone}</span>
+                    <span className="md:hidden">Call Us</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Mail className="h-3 w-3 lg:h-4 lg:w-4" />
+                    <span className="hidden lg:inline">{NGO_INFO.email}</span>
+                    <span className="lg:hidden">Email</span>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Heart className="h-3 w-3 lg:h-4 lg:w-4 text-red-300" />
+                  <span className="hidden md:inline">Nurturing Lives, Building Hope</span>
+                  <span className="md:hidden">❤️ Hope</span>
+                </div>
               </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <Heart className="h-4 w-4 text-red-300" />
-              <span>Nurturing Lives, Building Hope</span>
-            </div>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Main Header */}
-      <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+      <motion.header
+        initial={{ y: 0 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.3 }}
+        className={`sticky top-0 z-50 transition-all duration-300 safe-area-top ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-peaceful border-b border-primary-200'
             : 'bg-white shadow-gentle'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="container-responsive">
+          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
+            
             {/* Logo */}
             <motion.div
-              className="flex items-center"
+              className="flex items-center flex-shrink-0"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Link to="/" className="flex items-center space-x-3">
+              <Link to="/" className="flex items-center space-x-2 sm:space-x-3">
                 {/* Logo Image */}
-                <div className="w-12 h-12 lg:w-16 lg:h-16 flex-shrink-0">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex-shrink-0">
                   <img
                     src="/logo.jpg"
                     alt="Infant Organisation Logo"
@@ -78,12 +128,12 @@ const Header = () => {
                   />
                 </div>
                 
-                {/* Logo Text */}
-                <div className="hidden sm:block">
-                  <h1 className="text-xl lg:text-2xl font-bold font-display text-primary-600">
+                {/* Logo Text - Hidden on very small screens */}
+                <div className="hidden xs:block">
+                  <h1 className="text-sm sm:text-xl lg:text-2xl font-bold font-display text-primary-600 leading-tight">
                     Infant Organisation
                   </h1>
-                  <p className="text-xs lg:text-sm text-soft-500 -mt-1">
+                  <p className="text-xs lg:text-sm text-soft-500 -mt-1 hidden sm:block">
                     {NGO_INFO.tagline}
                   </p>
                 </div>
@@ -91,12 +141,12 @@ const Header = () => {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center space-x-8">
+            <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
               {NAVIGATION_ITEMS.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                  className={`relative px-3 py-2 text-sm xl:text-base font-medium transition-colors duration-200 touch-friendly ${
                     location.pathname === item.href
                       ? 'text-primary-600'
                       : 'text-soft-600 hover:text-primary-600'
@@ -115,26 +165,29 @@ const Header = () => {
             </nav>
 
             {/* CTA Button & Mobile Menu */}
-            <div className="flex items-center space-x-4">
-              {/* Donate Button */}
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              {/* Donate Button - Responsive sizing */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="hidden xs:block"
               >
                 <Link
                   to="/donate"
-                  className="btn-primary hidden sm:inline-flex"
+                  className="btn-primary text-xs sm:text-sm lg:text-base px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3"
                 >
-                  <Heart className="h-4 w-4 mr-2" />
-                  Donate Now
+                  <Heart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                  <span className="hidden sm:inline">Donate</span>
+                  <span className="sm:hidden">❤️</span>
                 </Link>
               </motion.div>
 
               {/* Mobile Menu Button */}
               <button
                 onClick={toggleMenu}
-                className="lg:hidden p-2 rounded-lg text-soft-600 hover:text-primary-600 hover:bg-primary-100 transition-colors duration-200"
+                className="lg:hidden p-2 rounded-lg text-soft-600 hover:text-primary-600 hover:bg-primary-100 transition-colors duration-200 touch-friendly"
                 aria-label="Toggle menu"
+                aria-expanded={isMenuOpen}
               >
                 <AnimatePresence mode="wait">
                   {isMenuOpen ? (
@@ -164,77 +217,111 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation Overlay */}
         <AnimatePresence>
           {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden bg-white border-t border-primary-200"
-            >
-              <div className="px-4 py-6 space-y-4">
-                
-                {/* Mobile Logo for Context */}
-                <div className="flex items-center space-x-3 sm:hidden pb-4 border-b border-primary-100">
-                  <div className="w-10 h-10">
-                    <img
-                      src="/logo.jpg"
-                      alt="Infant Organisation Logo"
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                  <div>
-                    <h2 className="text-lg font-bold text-primary-600">
-                      Infant Organisation
-                    </h2>
-                    <p className="text-xs text-soft-500">
-                      {NGO_INFO.tagline}
-                    </p>
-                  </div>
-                </div>
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+                onClick={toggleMenu}
+              />
 
-                {NAVIGATION_ITEMS.map((item, index) => (
+              {/* Mobile Menu */}
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-primary-200 shadow-peaceful z-50 safe-area-bottom"
+              >
+                <div className="mobile-padding py-4 space-y-2 max-h-[calc(100vh-theme(spacing.16))] overflow-y-auto">
+                  
+                  {/* Mobile Logo Section */}
+                  <div className="flex items-center space-x-3 pb-4 border-b border-primary-100 xs:hidden">
+                    <div className="w-10 h-10">
+                      <img
+                        src="/logo.jpg"
+                        alt="Infant Organisation Logo"
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h2 className="text-base font-bold text-primary-600">
+                        Infant Organisation
+                      </h2>
+                      <p className="text-xs text-soft-500">
+                        {NGO_INFO.tagline}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Navigation Items */}
+                  {navItemsWithIcons.map((item, index) => (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link
+                        to={item.href}
+                        className={`mobile-nav-item ${
+                          location.pathname === item.href
+                            ? 'text-primary-600 bg-primary-50 border-l-4 border-primary-500'
+                            : 'text-soft-600 hover:text-primary-600 hover:bg-primary-50'
+                        }`}
+                      >
+                        <item.icon className="h-5 w-5 mr-3 flex-shrink-0" />
+                        <span className="font-medium">{item.name}</span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                  
+                  {/* Mobile Donate Button */}
                   <motion.div
-                    key={item.name}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: navItemsWithIcons.length * 0.1 }}
+                    className="pt-4 border-t border-primary-100"
                   >
                     <Link
-                      to={item.href}
-                      className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors duration-200 ${
-                        location.pathname === item.href
-                          ? 'text-primary-600 bg-primary-50'
-                          : 'text-soft-600 hover:text-primary-600 hover:bg-primary-100'
-                      }`}
+                      to="/donate"
+                      className="btn-primary w-full justify-center py-3"
                     >
-                      {item.name}
+                      <Heart className="h-4 w-4 mr-2" />
+                      Donate Now
                     </Link>
                   </motion.div>
-                ))}
-                
-                {/* Mobile Donate Button */}
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: NAVIGATION_ITEMS.length * 0.1 }}
-                  className="pt-4"
-                >
-                  <Link
-                    to="/donate"
-                    className="btn-primary w-full justify-center"
+
+                  {/* Contact Info in Mobile Menu */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: (navItemsWithIcons.length + 1) * 0.1 }}
+                    className="pt-4 border-t border-primary-100 space-y-3"
                   >
-                    <Heart className="h-4 w-4 mr-2" />
-                    Donate Now
-                  </Link>
-                </motion.div>
-              </div>
-            </motion.div>
+                    <div className="text-sm text-soft-600">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <Phone className="h-4 w-4 text-primary-500" />
+                        <span>{NGO_INFO.phone}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Mail className="h-4 w-4 text-primary-500" />
+                        <span className="break-all">{NGO_INFO.email}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
-      </header>
+      </motion.header>
     </>
   );
 };
