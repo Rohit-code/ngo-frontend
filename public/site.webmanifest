@@ -1,0 +1,12 @@
+{
+    "name": "INFANT NGO - Supporting Infants, Building Futures",
+    "short_name": "INFANT NGO",
+    "description": "Join INFANT NGO in providing essential care, nutrition, healthcare, and development programs for infants and children.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fef7f0",
+    "theme_color": "#f97316",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en"
+  }
