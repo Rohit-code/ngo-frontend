@@ -38,57 +38,75 @@ const Button = ({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Base classes optimized for mobile
+  // Base classes optimized for mobile with smooth focus
   const baseClasses = clsx(
-    'relative inline-flex items-center justify-center font-medium transition-all duration-200',
-    'focus:outline-none focus:ring-2 focus:ring-offset-2',
+    'relative inline-flex items-center justify-center font-medium',
+    'transition-all duration-300 ease-in-out',
+    'focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
     'disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none',
     'select-none overflow-hidden',
     // Touch-friendly minimum sizes
     'min-h-[44px] min-w-[44px]',
     // Better mobile tap target
     isMobile && 'active:scale-95',
-    // Accessibility
-    accessibility && 'focus-visible:ring-2 focus-visible:ring-primary-500'
+    // Smooth focus ring without harsh squares
+    'focus-visible:ring-primary-500/50 focus-visible:ring-offset-2',
+    'focus-visible:shadow-lg focus-visible:shadow-primary-500/25'
   );
   
   const variants = {
     primary: clsx(
       'text-white bg-primary-500 border border-transparent shadow-warm',
-      'hover:bg-primary-600 focus:ring-primary-500',
-      isMobile ? '' : 'transform hover:scale-105'
+      'hover:bg-primary-600 hover:shadow-peaceful',
+      'focus-visible:ring-white/50 focus-visible:ring-offset-primary-600',
+      'focus-visible:bg-primary-600 focus-visible:shadow-xl',
+      isMobile ? '' : 'transform hover:scale-105 hover:-translate-y-0.5'
     ),
     secondary: clsx(
       'text-primary-600 bg-white border border-primary-300 shadow-gentle',
-      'hover:bg-primary-50 focus:ring-primary-500'
+      'hover:bg-primary-50 hover:border-primary-400 hover:shadow-peaceful',
+      'focus-visible:ring-primary-500/50 focus-visible:bg-primary-50',
+      'focus-visible:border-primary-500 focus-visible:shadow-lg'
     ),
     accent: clsx(
       'text-white bg-accent-500 border border-transparent shadow-soft',
-      'hover:bg-accent-600 focus:ring-accent-500',
-      isMobile ? '' : 'transform hover:scale-105'
+      'hover:bg-accent-600 hover:shadow-peaceful',
+      'focus-visible:ring-white/50 focus-visible:ring-offset-accent-600',
+      'focus-visible:bg-accent-600 focus-visible:shadow-xl',
+      isMobile ? '' : 'transform hover:scale-105 hover:-translate-y-0.5'
     ),
     outline: clsx(
       'text-soft-600 bg-transparent border border-soft-300',
-      'hover:bg-soft-50 focus:ring-soft-500'
+      'hover:bg-soft-50 hover:border-soft-400 hover:text-soft-700',
+      'focus-visible:ring-soft-500/50 focus-visible:bg-soft-50',
+      'focus-visible:border-soft-500 focus-visible:text-soft-700'
     ),
     ghost: clsx(
       'text-soft-600 bg-transparent border border-transparent',
-      'hover:bg-soft-100 focus:ring-soft-500'
+      'hover:bg-soft-100 hover:text-soft-700',
+      'focus-visible:ring-soft-500/50 focus-visible:bg-soft-100',
+      'focus-visible:text-soft-700'
     ),
     danger: clsx(
       'text-white bg-red-500 border border-transparent shadow-sm',
-      'hover:bg-red-600 focus:ring-red-500',
-      isMobile ? '' : 'transform hover:scale-105'
+      'hover:bg-red-600 hover:shadow-lg',
+      'focus-visible:ring-white/50 focus-visible:ring-offset-red-600',
+      'focus-visible:bg-red-600 focus-visible:shadow-xl',
+      isMobile ? '' : 'transform hover:scale-105 hover:-translate-y-0.5'
     ),
     success: clsx(
       'text-white bg-green-500 border border-transparent shadow-sm',
-      'hover:bg-green-600 focus:ring-green-500',
-      isMobile ? '' : 'transform hover:scale-105'
+      'hover:bg-green-600 hover:shadow-lg',
+      'focus-visible:ring-white/50 focus-visible:ring-offset-green-600',
+      'focus-visible:bg-green-600 focus-visible:shadow-xl',
+      isMobile ? '' : 'transform hover:scale-105 hover:-translate-y-0.5'
     ),
     warm: clsx(
       'text-white bg-warm-500 border border-transparent shadow-warm',
-      'hover:bg-warm-600 focus:ring-warm-500',
-      isMobile ? '' : 'transform hover:scale-105'
+      'hover:bg-warm-600 hover:shadow-peaceful',
+      'focus-visible:ring-white/50 focus-visible:ring-offset-warm-600',
+      'focus-visible:bg-warm-600 focus-visible:shadow-xl',
+      isMobile ? '' : 'transform hover:scale-105 hover:-translate-y-0.5'
     )
   };
   
@@ -183,6 +201,18 @@ const Button = ({
     }
   };
 
+  const handleFocus = () => {
+    // Add subtle scale on focus for better feedback
+    if (!isMobile) {
+      scale.set(1.02);
+    }
+  };
+
+  const handleBlur = () => {
+    // Reset scale on blur
+    scale.set(1);
+  };
+
   return (
     <motion.button
       ref={buttonRef}
@@ -190,6 +220,8 @@ const Button = ({
       className={buttonClasses}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       disabled={disabled || isLoading}
       style={{ scale, opacity }}
       whileTap={disabled || isLoading ? {} : { scale: 0.95 }}
@@ -258,11 +290,18 @@ const Button = ({
         </div>
       )}
 
-      {/* Focus ring for accessibility */}
+      {/* Smooth focus ring */}
       <motion.div
-        className="absolute inset-0 rounded-inherit ring-2 ring-primary-500 ring-opacity-0 pointer-events-none"
-        animate={{ ringOpacity: isPressed ? 0.5 : 0 }}
-        transition={{ duration: 0.1 }}
+        className="absolute inset-0 rounded-inherit pointer-events-none"
+        initial={{ opacity: 0 }}
+        animate={{ 
+          opacity: isPressed ? 0.1 : 0,
+          scale: isPressed ? 0.95 : 1
+        }}
+        transition={{ duration: 0.15 }}
+        style={{
+          background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)'
+        }}
       />
     </motion.button>
   );

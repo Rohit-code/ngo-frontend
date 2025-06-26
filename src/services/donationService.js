@@ -2,11 +2,85 @@ import api from './api';
 
 export const donationService = {
   /**
-   * Create a new donation
+   * Create a standard donation (Indian)
    */
   createDonation: async (donationData) => {
     try {
       const response = await api.post('/donations', donationData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Create international donation
+   */
+  createInternationalDonation: async (donationData) => {
+    try {
+      const response = await api.post('/donations/international', donationData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Get supported countries for international donations
+   */
+  getSupportedCountries: async () => {
+    try {
+      const response = await api.get('/donations/countries');
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Get country configuration
+   */
+  getCountryConfig: async (countryCode) => {
+    try {
+      const response = await api.get(`/donations/country/${countryCode}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Process payment for donation
+   */
+  processPayment: async (donationId, paymentData) => {
+    try {
+      const response = await api.post(`/donations/${donationId}/payment`, paymentData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Process international payment
+   */
+  processInternationalPayment: async (donationId, paymentData) => {
+    try {
+      const response = await api.post(`/donations/${donationId}/payment/international`, paymentData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Confirm payment after Stripe processing
+   */
+  confirmPayment: async (paymentIntentId) => {
+    try {
+      const response = await api.post('/donations/payment/confirm', {
+        payment_intent_id: paymentIntentId
+      });
       return response;
     } catch (error) {
       throw error;
@@ -38,44 +112,6 @@ export const donationService = {
   },
 
   /**
-   * Process payment for a donation
-   */
-  processPayment: async (donationId, paymentData) => {
-    try {
-      const response = await api.post(`/donations/${donationId}/payment`, paymentData);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  /**
-   * Handle payment callback from gateway
-   */
-  handlePaymentCallback: async (callbackData) => {
-    try {
-      const response = await api.post('/donations/payment/callback', callbackData);
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  /**
-   * Get donation statistics
-   */
-  getDonationStats: async (period = '30d') => {
-    try {
-      const response = await api.get('/donations/stats', { 
-        params: { period } 
-      });
-      return response;
-    } catch (error) {
-      throw error;
-    }
-  },
-
-  /**
    * Create recurring donation
    */
   createRecurringDonation: async (donationData) => {
@@ -93,6 +129,20 @@ export const donationService = {
   cancelRecurringDonation: async (donationId) => {
     try {
       const response = await api.delete(`/donations/${donationId}/recurring`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Get donation statistics
+   */
+  getDonationStats: async (period = '30d') => {
+    try {
+      const response = await api.get('/donations/stats', { 
+        params: { period } 
+      });
       return response;
     } catch (error) {
       throw error;

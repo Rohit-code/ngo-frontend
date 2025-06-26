@@ -70,22 +70,32 @@ const Header = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             exit={{ y: -100 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="bg-primary-500 text-white py-2 hidden sm:block"
           >
             <div className="container-responsive">
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center space-x-4 lg:space-x-6">
-                  <div className="flex items-center space-x-2">
+                  <motion.a
+                    href={`tel:${NGO_INFO.phone}`}
+                    className="flex items-center space-x-2 hover:text-primary-200 transition-colors duration-300 rounded-lg px-2 py-1 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-0"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                     <Phone className="h-3 w-3 lg:h-4 lg:w-4" />
                     <span className="hidden md:inline">{NGO_INFO.phone}</span>
                     <span className="md:hidden">Call Us</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
+                  </motion.a>
+                  <motion.a
+                    href={`mailto:${NGO_INFO.email}`}
+                    className="flex items-center space-x-2 hover:text-primary-200 transition-colors duration-300 rounded-lg px-2 py-1 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-0"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
                     <Mail className="h-3 w-3 lg:h-4 lg:w-4" />
                     <span className="hidden lg:inline">{NGO_INFO.email}</span>
                     <span className="lg:hidden">Email</span>
-                  </div>
+                  </motion.a>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Heart className="h-3 w-3 lg:h-4 lg:w-4 text-red-300" />
@@ -102,8 +112,8 @@ const Header = () => {
       <motion.header
         initial={{ y: 0 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.3 }}
-        className={`sticky top-0 z-50 transition-all duration-300 safe-area-top ${
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className={`sticky top-0 z-50 transition-all duration-500 ease-in-out safe-area-top ${
           isScrolled
             ? 'bg-white/95 backdrop-blur-md shadow-peaceful border-b border-primary-200'
             : 'bg-white shadow-gentle'
@@ -118,7 +128,10 @@ const Header = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Link to="/" className="flex items-center space-x-2 sm:space-x-3">
+              <Link 
+                to="/" 
+                className="flex items-center space-x-2 sm:space-x-3 rounded-xl p-2 -m-2 hover:bg-primary-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50"
+              >
                 {/* Logo Image */}
                 <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex-shrink-0">
                   <img
@@ -146,18 +159,19 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`relative px-3 py-2 text-sm xl:text-base font-medium transition-colors duration-200 touch-friendly ${
+                  className={`relative px-4 py-3 text-sm xl:text-base font-medium transition-all duration-300 ease-in-out rounded-xl hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50 ${
                     location.pathname === item.href
-                      ? 'text-primary-600'
+                      ? 'text-primary-600 bg-primary-50'
                       : 'text-soft-600 hover:text-primary-600'
                   }`}
                 >
                   {item.name}
                   {location.pathname === item.href && (
                     <motion.div
-                      className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-primary-400 to-secondary-400"
+                      className="absolute inset-x-2 -bottom-1 h-0.5 bg-gradient-to-r from-primary-400 to-secondary-400 rounded-full"
                       layoutId="activeTab"
                       initial={false}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                 </Link>
@@ -174,7 +188,7 @@ const Header = () => {
               >
                 <Link
                   to="/donate"
-                  className="btn-primary text-xs sm:text-sm lg:text-base px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3"
+                  className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3 text-xs sm:text-sm lg:text-base font-medium text-white bg-primary-500 border border-transparent rounded-xl hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-warm hover:shadow-peaceful"
                 >
                   <Heart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   <span className="hidden sm:inline">Donate</span>
@@ -183,11 +197,13 @@ const Header = () => {
               </motion.div>
 
               {/* Mobile Menu Button */}
-              <button
+              <motion.button
                 onClick={toggleMenu}
-                className="lg:hidden p-2 rounded-lg text-soft-600 hover:text-primary-600 hover:bg-primary-100 transition-colors duration-200 touch-friendly"
+                className="lg:hidden p-3 rounded-xl text-soft-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50 touch-friendly"
                 aria-label="Toggle menu"
                 aria-expanded={isMenuOpen}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <AnimatePresence mode="wait">
                   {isMenuOpen ? (
@@ -212,7 +228,7 @@ const Header = () => {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
@@ -266,11 +282,11 @@ const Header = () => {
                       key={item.name}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.1, duration: 0.3 }}
                     >
                       <Link
                         to={item.href}
-                        className={`mobile-nav-item ${
+                        className={`flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 min-h-[44px] ${
                           location.pathname === item.href
                             ? 'text-primary-600 bg-primary-50 border-l-4 border-primary-500'
                             : 'text-soft-600 hover:text-primary-600 hover:bg-primary-50'
@@ -286,12 +302,12 @@ const Header = () => {
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: navItemsWithIcons.length * 0.1 }}
+                    transition={{ delay: navItemsWithIcons.length * 0.1, duration: 0.3 }}
                     className="pt-4 border-t border-primary-100"
                   >
                     <Link
                       to="/donate"
-                      className="btn-primary w-full justify-center py-3"
+                      className="inline-flex items-center justify-center w-full py-3 px-4 text-base font-medium text-white bg-primary-500 border border-transparent rounded-xl hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-[1.02] shadow-warm"
                     >
                       <Heart className="h-4 w-4 mr-2" />
                       Donate Now
@@ -302,18 +318,24 @@ const Header = () => {
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: (navItemsWithIcons.length + 1) * 0.1 }}
+                    transition={{ delay: (navItemsWithIcons.length + 1) * 0.1, duration: 0.3 }}
                     className="pt-4 border-t border-primary-100 space-y-3"
                   >
                     <div className="text-sm text-soft-600">
-                      <div className="flex items-center space-x-2 mb-2">
+                      <a
+                        href={`tel:${NGO_INFO.phone}`}
+                        className="flex items-center space-x-2 mb-2 p-2 rounded-lg hover:bg-primary-50 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2"
+                      >
                         <Phone className="h-4 w-4 text-primary-500" />
                         <span>{NGO_INFO.phone}</span>
-                      </div>
-                      <div className="flex items-center space-x-2">
+                      </a>
+                      <a
+                        href={`mailto:${NGO_INFO.email}`}
+                        className="flex items-center space-x-2 p-2 rounded-lg hover:bg-primary-50 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2"
+                      >
                         <Mail className="h-4 w-4 text-primary-500" />
                         <span className="break-all">{NGO_INFO.email}</span>
-                      </div>
+                      </a>
                     </div>
                   </motion.div>
                 </div>

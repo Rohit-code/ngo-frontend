@@ -43,13 +43,13 @@ const Hero = () => {
       mobileCaption: "Nutrition Programs"
     },
     {
-      src: "https://images.unsplash.com/photo-1594736797933-d0dba0e6b999?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      src: "https://dayearlylearning.org/wp-content/uploads/2022/06/Child16-1.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       alt: "Happy family moment with children",
       caption: "Strengthening Families and Communities",
       mobileCaption: "Family Support"
     },
     {
-      src: "https://images.unsplash.com/photo-1502781252888-9143ba7f074e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      src: "https://www.healthyyoungminds.com/wp-content/uploads/2024/09/how-do-newborns-primarily-learn_min.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       alt: "Children in a beautiful learning environment",
       caption: "Safe Spaces for Growth and Discovery",
       mobileCaption: "Safe Environments"

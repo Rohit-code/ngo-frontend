@@ -14,7 +14,7 @@ export const campaignService = {
   },
 
   /**
-   * Get featured campaigns
+   * Get featured campaigns (max 6)
    */
   getFeaturedCampaigns: async () => {
     try {
@@ -26,7 +26,7 @@ export const campaignService = {
   },
 
   /**
-   * Get campaign by ID
+   * Get campaign by ID with recent donations
    */
   getCampaignById: async (id) => {
     try {
@@ -127,6 +127,34 @@ export const campaignService = {
   deleteCampaign: async (campaignId) => {
     try {
       const response = await api.delete(`/campaigns/${campaignId}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Search campaigns
+   */
+  searchCampaigns: async (searchTerm, filters = {}) => {
+    try {
+      const params = {
+        search: searchTerm,
+        ...filters
+      };
+      const response = await api.get('/campaigns', { params });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  /**
+   * Get campaign progress analytics
+   */
+  getCampaignProgress: async (campaignId) => {
+    try {
+      const response = await api.get(`/campaigns/${campaignId}/progress`);
       return response;
     } catch (error) {
       throw error;

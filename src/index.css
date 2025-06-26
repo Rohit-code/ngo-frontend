@@ -450,3 +450,174 @@
     @apply ring-2 ring-primary-500 ring-offset-2 ring-offset-white;
   }
 }
+
+* {
+  outline: none;
+}
+
+a, button, input, select, textarea, [tabindex] {
+  /* Remove default focus outline */
+  outline: none !important;
+  
+  /* Add smooth transition for focus states */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth focus ring for links */
+a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3), 0 0 0 4px rgba(20, 184, 166, 0.1);
+  border-radius: 8px;
+  background-color: rgba(20, 184, 166, 0.05);
+}
+
+/* Smooth focus ring for buttons */
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3), 0 0 0 4px rgba(20, 184, 166, 0.1);
+  transform: scale(1.02);
+}
+
+/* Smooth focus ring for form inputs */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: rgba(20, 184, 166, 0.5);
+  box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+  background-color: rgba(20, 184, 166, 0.02);
+}
+
+/* Header specific focus styles */
+.header-link:focus-visible {
+  outline: none;
+  background-color: rgba(20, 184, 166, 0.1);
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3);
+  border-radius: 12px;
+  transform: translateY(-1px);
+}
+
+/* Navigation link focus styles */
+.nav-link {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link:focus-visible {
+  outline: none;
+  background-color: rgba(20, 184, 166, 0.1);
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3), 0 4px 12px rgba(20, 184, 166, 0.15);
+  border-radius: 12px;
+  transform: translateY(-2px);
+}
+
+.nav-link:hover {
+  transform: translateY(-1px);
+  background-color: rgba(20, 184, 166, 0.05);
+}
+
+/* Mobile menu item focus styles */
+.mobile-nav-item:focus-visible {
+  outline: none;
+  background-color: rgba(20, 184, 166, 0.1);
+  box-shadow: inset 4px 0 0 rgba(20, 184, 166, 0.5), 0 0 0 2px rgba(20, 184, 166, 0.2);
+  border-radius: 8px;
+}
+
+/* Button focus styles */
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.8), 0 0 0 6px rgba(20, 184, 166, 0.3);
+  transform: scale(1.05);
+}
+
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3), 0 0 0 4px rgba(20, 184, 166, 0.1);
+  background-color: rgba(20, 184, 166, 0.05);
+  border-color: rgba(20, 184, 166, 0.4);
+}
+
+/* Smooth hover transitions */
+.smooth-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Logo focus styles */
+.logo-link:focus-visible {
+  outline: none;
+  background-color: rgba(20, 184, 166, 0.05);
+  box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.3);
+  border-radius: 16px;
+  transform: scale(1.02);
+}
+
+/* Remove text selection highlighting that might look blocky */
+::selection {
+  background-color: rgba(20, 184, 166, 0.2);
+  color: inherit;
+}
+
+::-moz-selection {
+  background-color: rgba(20, 184, 166, 0.2);
+  color: inherit;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection for readable content */
+p, span, div, h1, h2, h3, h4, h5, h6, li {
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Input fields should allow selection */
+input, textarea, select {
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Enhanced focus styles for accessibility */
+@media (prefers-reduced-motion: no-preference) {
+  *:focus-visible {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *:focus-visible {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  *:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}

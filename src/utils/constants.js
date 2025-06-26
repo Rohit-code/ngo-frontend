@@ -1,5 +1,5 @@
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5002/api';
 
 // Donation Types
 export const DONATION_TYPES = {
@@ -33,14 +33,6 @@ export const PAYMENT_METHOD_LABELS = {
   [PAYMENT_METHODS.BANK_TRANSFER]: 'Bank Transfer'
 };
 
-// Payment Gateways
-export const PAYMENT_GATEWAYS = {
-  RAZORPAY: 'razorpay',
-  STRIPE: 'stripe',
-  PAYU: 'payu',
-  CASHFREE: 'cashfree'
-};
-
 // Payment Status
 export const PAYMENT_STATUS = {
   PENDING: 'pending',
@@ -57,6 +49,93 @@ export const CAMPAIGN_STATUS = {
   COMPLETED: 'completed',
   PAUSED: 'paused',
   CANCELLED: 'cancelled'
+};
+
+// Supported Countries for International Donations
+export const SUPPORTED_COUNTRIES = [
+  {
+    code: 'IN',
+    name: 'India',
+    currency: 'INR',
+    currency_symbol: '₹',
+    tax_benefit: true,
+    tax_section: '80G',
+    min_donation: 10,
+    address_format: ['address', 'city', 'state', 'pincode'],
+    phone_validation: /^[6-9]\d{9}$/,
+    postal_validation: /^[1-9][0-9]{5}$/
+  },
+  {
+    code: 'US',
+    name: 'United States',
+    currency: 'USD',
+    currency_symbol: '$',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'state', 'zipcode'],
+    phone_validation: /^[\+]?[1]?[\s\-\.]?\(?[0-9]{3}\)?[\s\-\.]?[0-9]{3}[\s\-\.]?[0-9]{4}$/,
+    postal_validation: /^\d{5}(-\d{4})?$/
+  },
+  {
+    code: 'GB',
+    name: 'United Kingdom',
+    currency: 'GBP',
+    currency_symbol: '£',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'county', 'postcode'],
+    phone_validation: /^(\+44|0)[\d\s\-\(\)]{10,}$/,
+    postal_validation: /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i
+  },
+  {
+    code: 'CA',
+    name: 'Canada',
+    currency: 'CAD',
+    currency_symbol: 'C$',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'province', 'postal_code'],
+    phone_validation: /^[\+]?[1]?[\s\-\.]?\(?[0-9]{3}\)?[\s\-\.]?[0-9]{3}[\s\-\.]?[0-9]{4}$/,
+    postal_validation: /^[A-Z]\d[A-Z]\s?\d[A-Z]\d$/i
+  },
+  {
+    code: 'AU',
+    name: 'Australia',
+    currency: 'AUD',
+    currency_symbol: 'A$',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'state', 'postcode'],
+    phone_validation: /^(\+61|0)[2-9]\d{8}$/,
+    postal_validation: /^\d{4}$/
+  },
+  {
+    code: 'SG',
+    name: 'Singapore',
+    currency: 'SGD',
+    currency_symbol: 'S$',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'postal_code'],
+    phone_validation: /^(\+65)?[689]\d{7}$/,
+    postal_validation: /^\d{6}$/
+  }
+];
+
+// Currency Information
+export const CURRENCIES = {
+  INR: { symbol: '₹', name: 'Indian Rupee', decimal_places: 0 },
+  USD: { symbol: '$', name: 'US Dollar', decimal_places: 2 },
+  GBP: { symbol: '£', name: 'British Pound', decimal_places: 2 },
+  EUR: { symbol: '€', name: 'Euro', decimal_places: 2 },
+  CAD: { symbol: 'C$', name: 'Canadian Dollar', decimal_places: 2 },
+  AUD: { symbol: 'A$', name: 'Australian Dollar', decimal_places: 2 },
+  SGD: { symbol: 'S$', name: 'Singapore Dollar', decimal_places: 2 }
 };
 
 // Indian States
@@ -99,7 +178,7 @@ export const INDIAN_STATES = [
   'Puducherry'
 ];
 
-// Impact messages based on donation amount
+// Impact messages based on donation amount (international support)
 export const IMPACT_MESSAGES = {
   200: "Can provide basic care for an infant for 1 week",
   500: "Can provide nutritious meals for an infant for 2 weeks",
@@ -109,12 +188,26 @@ export const IMPACT_MESSAGES = {
   10000: "Can provide comprehensive support for an infant for 3 months"
 };
 
+// International Impact Messages (USD)
+export const INTERNATIONAL_IMPACT_MESSAGES = {
+  5: "Can provide clean water for an infant for 1 week",
+  10: "Can provide nutritious meals for an infant for 1 week", 
+  25: "Can support basic healthcare for an infant for 1 week",
+  50: "Can provide educational materials for an infant for 1 month",
+  100: "Can support complete care for an infant for 2 weeks",
+  250: "Can provide comprehensive support for an infant for 1 month"
+};
+
 // Form validation patterns
 export const VALIDATION_PATTERNS = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   mobile: /^[6-9]\d{9}$/,
+  international_mobile: /^[\+]?[\d\s\-\(\)]{8,}$/,
   pan: /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/,
-  pincode: /^[1-9][0-9]{5}$/
+  pincode: /^[1-9][0-9]{5}$/,
+  us_zipcode: /^\d{5}(-\d{4})?$/,
+  uk_postcode: /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i,
+  ca_postal: /^[A-Z]\d[A-Z]\s?\d[A-Z]\d$/i
 };
 
 // Toast messages
@@ -123,11 +216,21 @@ export const TOAST_MESSAGES = {
     success: 'Donation created successfully! Proceed to payment.',
     error: 'Failed to create donation. Please try again.',
     payment_success: 'Payment completed successfully! Thank you for your donation.',
-    payment_error: 'Payment failed. Please try again.'
+    payment_error: 'Payment failed. Please try again.',
+    international_success: 'International donation created successfully!',
+    recurring_success: 'Recurring donation set up successfully!'
   },
   form: {
     validation_error: 'Please check all fields and try again.',
     submit_error: 'Failed to submit form. Please try again.'
+  },
+  payment: {
+    processing: 'Processing payment...',
+    stripe_error: 'Payment processing failed. Please try again.',
+    network_error: 'Network error during payment. Please check your connection.',
+    success: 'Payment completed successfully!',
+    cancelled: 'Payment was cancelled.',
+    insufficient_funds: 'Insufficient funds. Please try a different card.'
   },
   general: {
     loading: 'Loading...',
@@ -138,7 +241,7 @@ export const TOAST_MESSAGES = {
 
 // Social Media Links
 export const SOCIAL_LINKS = {
-  facebook: 'https://facebook.com/infantorganisation',
+  facebook: 'https://www.facebook.com/profile.php?id=61577405711455',
   twitter: 'https://twitter.com/infantorganisation',
   instagram: 'https://instagram.com/infantorganisation',
   linkedin: 'https://linkedin.com/company/infantorganisation',
@@ -153,52 +256,70 @@ export const NAVIGATION_ITEMS = [
   { name: 'Contact', href: '/contact' }
 ];
 
-// Sponsorship Packages
+// Sponsorship Packages (International)
 export const SPONSORSHIP_PACKAGES = [
   {
-    title: 'Basic Care Package',
+    title: 'Basic Education Package',
     amount: 2500,
-    description: 'Provide essential healthcare and nutrition support for an infant.',
+    amount_usd: 30,
+    description: 'Sponsor a child\'s basic education including books, supplies, and school fees.',
     features: [
-      'Regular health checkups',
-      'Nutritional supplements',
-      'Basic medical care',
-      'Growth monitoring'
+      'School fees and supplies',
+      'Textbooks and materials',
+      'Basic educational support',
+      'Progress tracking'
     ]
   },
   {
     title: 'Complete Development Package',
     amount: 5000,
-    description: 'Comprehensive support including healthcare, nutrition, and early education.',
+    amount_usd: 60,
+    description: 'Comprehensive support including education, extracurricular activities, and development programs.',
     features: [
-      'Complete healthcare support',
-      'Nutrition programs',
-      'Early childhood education',
-      'Family counseling',
+      'Complete education support',
+      'Extracurricular activities',
+      'Sports and arts programs',
+      'Personal mentoring',
       'Regular progress reports'
     ],
     popular: true
   },
   {
-    title: 'Family Support Package',
+    title: 'Community Impact Package',
     amount: 10000,
-    description: 'Support entire families with multiple children and community development.',
+    amount_usd: 120,
+    description: 'Support multiple children and contribute to community-wide educational improvements.',
     features: [
-      'Support for multiple children',
-      'Family skill development',
-      'Community health programs',
-      'Educational resources',
+      'Support for 3-4 children',
+      'Community infrastructure',
+      'Teacher training programs',
+      'Educational technology',
       'Long-term sustainability'
     ]
   }
 ];
 
-// Predefined donation amounts (minimum 200)
-export const DONATION_AMOUNTS = [200, 500, 1000, 2500, 5000, 10000];
+// Predefined donation amounts (international support)
+export const DONATION_AMOUNTS = {
+  INR: [200, 500, 1000, 2500, 5000, 10000],
+  USD: [5, 10, 25, 50, 100, 250],
+  GBP: [5, 10, 20, 40, 80, 200],
+  EUR: [5, 10, 25, 50, 100, 250],
+  CAD: [5, 15, 30, 60, 120, 300],
+  AUD: [5, 15, 30, 60, 120, 300],
+  SGD: [5, 15, 30, 60, 120, 300]
+};
 
-// Minimum and maximum donation amounts
-export const MIN_DONATION_AMOUNT = 200;
-export const MAX_DONATION_AMOUNT = 10000000; // 1 crore
+// Minimum and maximum donation amounts by currency
+export const DONATION_LIMITS = {
+  INR: { min: 200, max: 10000000 },
+  USD: { min: 5, max: 100000 },
+  GBP: { min: 5, max: 100000 },
+  EUR: { min: 5, max: 100000 },
+  CAD: { min: 5, max: 100000 },
+  AUD: { min: 5, max: 100000 },
+  SGD: { min: 5, max: 100000 }
+};
 
 // NGO Information
 export const NGO_INFO = {
@@ -213,6 +334,21 @@ export const NGO_INFO = {
   pan: 'AACTS7973G',
   registration: 'AACTS7973GF2010',
   section_80g: 'AACTS7973GF2010'
+};
+
+// Invoice Types
+export const INVOICE_TYPES = {
+  TAX_RECEIPT: 'tax_receipt',
+  DONATION_RECEIPT: 'donation_receipt',
+  INTERNATIONAL_RECEIPT: 'international_receipt'
+};
+
+// Donation Sources
+export const DONATION_SOURCES = {
+  WEBSITE: 'website',
+  MOBILE_APP: 'mobile_app',
+  API: 'api',
+  ADMIN: 'admin'
 };
 
 // Focus Areas Content
@@ -276,3 +412,20 @@ export const STATS = [
   { name: 'Meals Provided', value: '50,000+', icon: '🍽️' },
   { name: 'Health Checkups', value: '800+', icon: '🏥' }
 ];
+
+// Stripe Configuration
+export const STRIPE_CONFIG = {
+  publishableKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY,
+  appearance: {
+    theme: 'stripe',
+    variables: {
+      colorPrimary: '#14b8a6',
+      colorBackground: '#ffffff',
+      colorText: '#1f2937',
+      colorDanger: '#ef4444',
+      fontFamily: 'Inter, system-ui, sans-serif',
+      spacingUnit: '4px',
+      borderRadius: '8px'
+    }
+  }
+};
