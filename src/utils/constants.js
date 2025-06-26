@@ -329,7 +329,7 @@ export const NGO_INFO = {
   mission: 'Creating a world where every infant and child receives the love, care, and opportunities they need to thrive through comprehensive support programs that strengthen families and build resilient communities.',
   email: 'info@infantngo.org',
   phone: '+91-76740 29515',
-  address: '505, mvv greens, sagarnagar, Visakhapatnam, Andhra Pradesh, PIN - 530016',
+  address: '505, mvv greens, sagarnagar, Visakhapatnam, Andhra Pradesh, PIN - 530045',
   website: 'www.infantngo.org',
   pan: 'AACTS7973G',
   registration: 'AACTS7973GF2010',
