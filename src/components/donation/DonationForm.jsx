@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Elements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { 
   Heart, CreditCard, Smartphone, Building, User, Mail, Phone, MapPin,
   CheckCircle, AlertCircle, Eye, EyeOff, ChevronDown, Info, Globe, Flag
@@ -835,12 +835,14 @@ const PaymentStep = ({ donation, isInternational, countryConfig, onSuccess, onEr
       }
 
       const { client_secret } = paymentResponse.data;
-      const cardElement = elements.getElement(CardElement);
+      const cardNumberElement = elements.getElement(CardNumberElement);
+      const cardExpiryElement = elements.getElement(CardExpiryElement);
+      const cardCvcElement = elements.getElement(CardCvcElement);
 
       // Confirm payment
       const { error, paymentIntent } = await stripe.confirmCardPayment(client_secret, {
         payment_method: {
-          card: cardElement,
+          card: cardNumberElement,
           billing_details: {
             name: donation.donor?.full_name,
             email: donation.donor?.email,
@@ -895,25 +897,45 @@ const PaymentStep = ({ donation, isInternational, countryConfig, onSuccess, onEr
         </div>
       </div>
 
-      {/* Card Element */}
-      <div className="mb-6">
-        <label className="block text-sm font-medium text-soft-700 mb-3">
-          Card Details
-        </label>
-        <div className="p-4 border border-primary-200 rounded-lg bg-white">
-          <CardElement
-            options={{
-              style: {
-                base: {
-                  fontSize: '16px',
-                  color: '#1f2937',
-                  '::placeholder': {
-                    color: '#9ca3af',
-                  },
-                },
-              },
-            }}
-          />
+      {/* Enhanced Card Elements */}
+      <div className="mb-6 space-y-4">
+        <div>
+          <label className="block text-sm font-medium text-soft-700 mb-2">
+            Card Number
+          </label>
+          <div className="p-4 border border-primary-200 rounded-lg bg-white">
+            <CardNumberElement
+              options={{
+                style: {
+                  base: {
+                    fontSize: '16px',
+                    color: '#1f2937',
+                    '::placeholder': { color: '#9ca3af' }
+                  }
+                }
+              }}
+            />
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-soft-700 mb-2">
+              Expiry Date
+            </label>
+            <div className="p-4 border border-primary-200 rounded-lg bg-white">
+              <CardExpiryElement options={{ style: { base: { fontSize: '16px' } } }} />
+            </div>
+          </div>
+          
+          <div>
+            <label className="block text-sm font-medium text-soft-700 mb-2">
+              CVC
+            </label>
+            <div className="p-4 border border-primary-200 rounded-lg bg-white">
+              <CardCvcElement options={{ style: { base: { fontSize: '16px' } } }} />
+            </div>
+          </div>
         </div>
       </div>
 
