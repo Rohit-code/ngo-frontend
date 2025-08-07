@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView, useAnimation } from 'framer-motion';
 import { Users, Heart, Gift, Shield, TrendingUp, Award } from 'lucide-react';
 import { STATS } from '../../utils/constants';
-import { formatNumber } from '../../utils/helpers';
+import { formatCurrency, calculateProgress, formatDate, getDaysRemaining, getCampaignStatus, getImpactMessage} from '../../utils/helpers';
 
 const Stats = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -181,7 +181,7 @@ const CountUpAnimation = ({ end, duration = 2, delay = 0 }) => {
           setCount(end);
           clearInterval(counter);
         } else {
-          setCount(formatNumber(current) + (end.includes('+') ? '+' : ''));
+          setCount(formatCurrency(current) + (end.includes('+') ? '+' : ''));
         }
       }, 1000 / 60);
       

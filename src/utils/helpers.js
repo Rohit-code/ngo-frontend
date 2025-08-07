@@ -1,284 +1,219 @@
-import { format, parseISO, isValid } from 'date-fns';
-import { 
-  VALIDATION_PATTERNS, 
-  IMPACT_MESSAGES, 
-  INTERNATIONAL_IMPACT_MESSAGES,
-  CURRENCIES,
-  SUPPORTED_COUNTRIES,
-  DONATION_AMOUNTS
-} from './constants';
+// utils/helpers.js - Enhanced helper functions
+import { format, formatDistanceToNow, isValid, parseISO } from 'date-fns';
 
 /**
- * Format currency based on locale and currency type
+ * Format currency based on locale and currency code
  */
-export const formatCurrency = (amount, currency = 'INR', showDecimals = false) => {
-  if (!amount && amount !== 0) return getCurrencySymbol(currency) + '0';
+export const formatCurrency = (amount, currency = 'INR', locale = 'en-IN') => {
+  if (!amount || isNaN(amount)) return '₹0';
   
-  const num = parseFloat(amount);
-  if (isNaN(num)) return getCurrencySymbol(currency) + '0';
-  
-  const currencyInfo = CURRENCIES[currency];
-  const decimals = showDecimals ? (currencyInfo?.decimal_places || 2) : 0;
-  
-  // Use appropriate locale based on currency
-  const locale = getLocaleForCurrency(currency);
-  
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currency,
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals
-  }).format(num);
-};
-
-/**
- * Get currency symbol
- */
-export const getCurrencySymbol = (currency = 'INR') => {
-  return CURRENCIES[currency]?.symbol || currency;
-};
-
-/**
- * Get appropriate locale for currency formatting
- */
-export const getLocaleForCurrency = (currency) => {
-  const localeMap = {
-    INR: 'en-IN',
-    USD: 'en-US',
-    GBP: 'en-GB',
-    EUR: 'en-GB', // or 'de-DE', 'fr-FR' based on preference
-    CAD: 'en-CA',
-    AUD: 'en-AU',
-    SGD: 'en-SG'
+  const currencyMap = {
+    'INR': { locale: 'en-IN', symbol: '₹' },
+    'USD': { locale: 'en-US', symbol: '$' },
+    'GBP': { locale: 'en-GB', symbol: '£' },
+    'EUR': { locale: 'en-EU', symbol: '€' },
+    'CAD': { locale: 'en-CA', symbol: 'C$' },
+    'AUD': { locale: 'en-AU', symbol: 'A$' },
+    'SGD': { locale: 'en-SG', symbol: 'S$' }
   };
-  return localeMap[currency] || 'en-US';
-};
 
-/**
- * Format large numbers with K, L, Cr suffixes (international support)
- */
-export const formatNumber = (num, currency = 'INR') => {
-  if (!num && num !== 0) return '0';
-  
-  const number = parseFloat(num);
-  if (isNaN(number)) return '0';
-  
-  // Use Indian formatting for INR
-  if (currency === 'INR') {
-    if (number >= 10000000) { // 1 Crore
-      return `${(number / 10000000).toFixed(1)}Cr`;
-    } else if (number >= 100000) { // 1 Lakh
-      return `${(number / 100000).toFixed(1)}L`;
-    } else if (number >= 1000) { // 1 Thousand
-      return `${(number / 1000).toFixed(1)}K`;
-    }
-  } else {
-    // Use international formatting for other currencies
-    if (number >= 1000000) { // 1 Million
-      return `${(number / 1000000).toFixed(1)}M`;
-    } else if (number >= 1000) { // 1 Thousand
-      return `${(number / 1000).toFixed(1)}K`;
-    }
-  }
-  
-  return number.toString();
-};
-
-/**
- * Format date to readable string
- */
-export const formatDate = (dateString, formatString = 'MMM dd, yyyy') => {
-  if (!dateString) return '';
+  const config = currencyMap[currency] || currencyMap['INR'];
   
   try {
-    const date = typeof dateString === 'string' ? parseISO(dateString) : dateString;
-    if (!isValid(date)) return '';
-    return format(date, formatString);
+    return new Intl.NumberFormat(config.locale, {
+      style: 'currency',
+      currency: currency,
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
   } catch (error) {
-    console.error('Date formatting error:', error);
+    // Fallback to symbol + amount
+    return `${config.symbol}${Number(amount).toLocaleString()}`;
+  }
+};
+
+/**
+ * Format date with various options
+ */
+export const formatDate = (date, formatString = 'PPp', options = {}) => {
+  if (!date) return '';
+  
+  let dateObj;
+  
+  // Handle different date inputs
+  if (typeof date === 'string') {
+    dateObj = parseISO(date);
+  } else if (date instanceof Date) {
+    dateObj = date;
+  } else {
     return '';
   }
+  
+  if (!isValid(dateObj)) return '';
+  
+  try {
+    // Common format shortcuts
+    switch (formatString) {
+      case 'short':
+        return format(dateObj, 'MMM d, yyyy');
+      case 'long':
+        return format(dateObj, 'MMMM d, yyyy');
+      case 'time':
+        return format(dateObj, 'HH:mm:ss');
+      case 'datetime':
+        return format(dateObj, 'MMM d, yyyy HH:mm');
+      case 'relative':
+        return formatDistanceToNow(dateObj, { addSuffix: true });
+      default:
+        return format(dateObj, formatString, options);
+    }
+  } catch (error) {
+    console.error('Date formatting error:', error);
+    return date.toString();
+  }
 };
 
 /**
- * Validate email format
+ * Validate email address
  */
 export const isValidEmail = (email) => {
-  return VALIDATION_PATTERNS.email.test(email);
+  if (!email || typeof email !== 'string') return false;
+  
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  return emailRegex.test(email.trim());
 };
 
 /**
- * Validate mobile number based on country
+ * Validate Indian mobile number
  */
 export const isValidMobile = (mobile, countryCode = 'IN') => {
-  const country = SUPPORTED_COUNTRIES.find(c => c.code === countryCode);
-  if (country && country.phone_validation) {
-    return country.phone_validation.test(mobile);
+  if (!mobile || typeof mobile !== 'string') return false;
+  
+  const cleanMobile = mobile.replace(/\D/g, '');
+  
+  switch (countryCode) {
+    case 'IN':
+      return /^[6-9]\d{9}$/.test(cleanMobile);
+    case 'US':
+    case 'CA':
+      return /^\d{10}$/.test(cleanMobile) || /^1\d{10}$/.test(cleanMobile);
+    case 'GB':
+      return /^(\+44|0)[1-9]\d{8,9}$/.test(mobile);
+    case 'AU':
+      return /^(\+61|0)[2-9]\d{8}$/.test(mobile);
+    case 'SG':
+      return /^(\+65)?[689]\d{7}$/.test(mobile);
+    default:
+      return cleanMobile.length >= 8 && cleanMobile.length <= 15;
   }
-  // Fallback to international mobile pattern
-  return VALIDATION_PATTERNS.international_mobile.test(mobile);
 };
 
 /**
- * Validate PAN number (India specific)
+ * Validate Indian PAN number
  */
 export const isValidPAN = (pan) => {
-  return VALIDATION_PATTERNS.pan.test(pan);
+  if (!pan || typeof pan !== 'string') return false;
+  return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan.trim().toUpperCase());
 };
 
 /**
- * Validate postal code based on country
+ * Validate Indian pincode
  */
 export const isValidPincode = (pincode, countryCode = 'IN') => {
-  const country = SUPPORTED_COUNTRIES.find(c => c.code === countryCode);
-  if (country && country.postal_validation) {
-    return country.postal_validation.test(pincode);
+  if (!pincode || typeof pincode !== 'string') return false;
+  
+  const cleanPincode = pincode.trim();
+  
+  switch (countryCode) {
+    case 'IN':
+      return /^[1-9][0-9]{5}$/.test(cleanPincode);
+    case 'US':
+      return /^\d{5}(-\d{4})?$/.test(cleanPincode);
+    case 'GB':
+      return /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i.test(cleanPincode);
+    case 'CA':
+      return /^[A-Z]\d[A-Z]\s?\d[A-Z]\d$/i.test(cleanPincode);
+    case 'AU':
+      return /^\d{4}$/.test(cleanPincode);
+    case 'SG':
+      return /^\d{6}$/.test(cleanPincode);
+    default:
+      return cleanPincode.length >= 3;
   }
-  // Fallback validation
-  return pincode && pincode.length >= 3;
 };
 
 /**
- * Get impact message for donation amount based on currency
+ * Get impact message based on donation amount
  */
 export const getImpactMessage = (amount, currency = 'INR') => {
-  const num = parseFloat(amount);
-  if (isNaN(num) || num <= 0) return '';
+  if (!amount || amount <= 0) return '';
   
-  // Use appropriate impact messages based on currency
-  const messages = currency === 'INR' ? IMPACT_MESSAGES : INTERNATIONAL_IMPACT_MESSAGES;
-  
-  // Find the closest predefined amount
-  const amounts = Object.keys(messages).map(a => parseInt(a)).sort((a, b) => a - b);
-  let closestAmount = amounts[0];
-  
-  for (const amt of amounts) {
-    if (num >= amt) {
-      closestAmount = amt;
-    } else {
-      break;
-    }
+  // Convert to INR for impact calculation (rough conversion)
+  let inrAmount = amount;
+  if (currency !== 'INR') {
+    const conversionRates = {
+      'USD': 83,
+      'GBP': 104,
+      'EUR': 90,
+      'CAD': 61,
+      'AUD': 54,
+      'SGD': 61
+    };
+    inrAmount = amount * (conversionRates[currency] || 83);
   }
   
-  return messages[closestAmount] || 'Your donation will make a meaningful difference in the lives of infants and children.';
-};
-
-/**
- * Calculate progress percentage
- */
-export const calculateProgress = (raised, target) => {
-  if (!target || target <= 0) return 0;
-  const progress = (raised / target) * 100;
-  return Math.min(progress, 100); // Cap at 100%
-};
-
-/**
- * Get donation amounts for a specific currency
- */
-export const getDonationAmounts = (currency = 'INR') => {
-  return DONATION_AMOUNTS[currency] || DONATION_AMOUNTS.USD;
-};
-
-/**
- * Get country configuration by code
- */
-export const getCountryConfig = (countryCode) => {
-  return SUPPORTED_COUNTRIES.find(country => country.code === countryCode);
-};
-
-/**
- * Format phone number for display
- */
-export const formatPhoneNumber = (phone, countryCode = 'IN') => {
-  if (!phone) return '';
-  
-  // Remove all non-digits
-  const cleaned = phone.replace(/\D/g, '');
-  
-  if (countryCode === 'IN' && cleaned.length === 10) {
-    return `+91 ${cleaned.slice(0, 5)} ${cleaned.slice(5)}`;
-  } else if (countryCode === 'US' && cleaned.length === 10) {
-    return `+1 (${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6)}`;
+  if (inrAmount >= 10000) {
+    return 'Can provide complete healthcare and education support for 3 months';
+  } else if (inrAmount >= 5000) {
+    return 'Can provide complete healthcare and education support for 2 months';
+  } else if (inrAmount >= 2000) {
+    return 'Can provide healthcare support for 1 month';
+  } else if (inrAmount >= 1000) {
+    return 'Can provide basic healthcare for 2 weeks';
+  } else if (inrAmount >= 500) {
+    return 'Can provide basic care for 1 week';
+  } else {
+    return 'Can provide essential supplies and care';
   }
-  
-  return phone; // Return original if can't format
 };
 
 /**
- * Convert currency amount (placeholder - would use real exchange rates)
+ * Sanitize string input (basic)
  */
-export const convertCurrency = async (amount, fromCurrency, toCurrency, exchangeRate = null) => {
-  if (fromCurrency === toCurrency) return amount;
+export const sanitizeInput = (input) => {
+  if (!input || typeof input !== 'string') return '';
   
-  if (exchangeRate) {
-    return parseFloat((amount * exchangeRate).toFixed(2));
-  }
-  
-  // In a real implementation, you would call an exchange rate API
-  // For now, return the original amount
-  return amount;
-};
-
-/**
- * Get minimum donation amount for currency
- */
-export const getMinDonation = (currency = 'INR') => {
-  const country = SUPPORTED_COUNTRIES.find(c => c.currency === currency);
-  return country?.min_donation || 1;
-};
-
-/**
- * Validate donation amount
- */
-export const isValidDonationAmount = (amount, currency = 'INR') => {
-  const num = parseFloat(amount);
-  if (isNaN(num) || num <= 0) return false;
-  
-  const minAmount = getMinDonation(currency);
-  return num >= minAmount;
-};
-
-/**
- * Format address based on country format
- */
-export const formatAddress = (addressData, countryCode = 'IN') => {
-  const country = getCountryConfig(countryCode);
-  if (!country || !addressData) return '';
-  
-  const { address, city, state, pincode } = addressData;
-  const parts = [address, city, state, pincode].filter(Boolean);
-  
-  return parts.join(', ');
-};
-
-/**
- * Truncate text with ellipsis
- */
-export const truncateText = (text, maxLength = 100) => {
-  if (!text) return '';
-  if (text.length <= maxLength) return text;
-  return text.substr(0, maxLength) + '...';
+  return input
+    .trim()
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/<[^>]*>?/gm, '')
+    .replace(/[<>]/g, '');
 };
 
 /**
  * Generate random ID
  */
-export const generateId = () => {
-  return Math.random().toString(36).substr(2, 9);
+export const generateId = (prefix = 'id') => {
+  return `${prefix}_${Math.random().toString(36).substr(2, 9)}`;
 };
 
 /**
  * Debounce function
  */
-export const debounce = (func, wait) => {
+export const debounce = (func, wait, immediate = false) => {
   let timeout;
+  
   return function executedFunction(...args) {
     const later = () => {
-      clearTimeout(timeout);
-      func(...args);
+      timeout = null;
+      if (!immediate) func.apply(this, args);
     };
+    
+    const callNow = immediate && !timeout;
     clearTimeout(timeout);
     timeout = setTimeout(later, wait);
+    
+    if (callNow) func.apply(this, args);
   };
 };
 
@@ -287,6 +222,7 @@ export const debounce = (func, wait) => {
  */
 export const throttle = (func, limit) => {
   let inThrottle;
+  
   return function(...args) {
     if (!inThrottle) {
       func.apply(this, args);
@@ -297,84 +233,18 @@ export const throttle = (func, limit) => {
 };
 
 /**
- * Scroll to element smoothly
+ * Format file size
  */
-export const scrollToElement = (elementId, offset = 0) => {
-  const element = document.getElementById(elementId);
-  if (element) {
-    const top = element.offsetTop - offset;
-    window.scrollTo({
-      top,
-      behavior: 'smooth'
-    });
-  }
-};
-
-/**
- * Check if user is on mobile device
- */
-export const isMobile = () => {
-  return window.innerWidth <= 768;
-};
-
-/**
- * Convert donation type to display format
- */
-export const formatDonationType = (type) => {
-  const typeMap = {
-    one_time: 'One Time',
-    monthly: 'Monthly',
-    quarterly: 'Quarterly',
-    yearly: 'Yearly'
-  };
-  return typeMap[type] || type;
-};
-
-/**
- * Convert payment status to display format
- */
-export const formatPaymentStatus = (status) => {
-  const statusMap = {
-    pending: 'Pending',
-    processing: 'Processing',
-    completed: 'Completed',
-    failed: 'Failed',
-    cancelled: 'Cancelled',
-    refunded: 'Refunded'
-  };
-  return statusMap[status] || status;
-};
-
-/**
- * Get status color class
- */
-export const getStatusColor = (status) => {
-  const colorMap = {
-    pending: 'text-secondary-600 bg-secondary-100',
-    processing: 'text-primary-600 bg-primary-100',
-    completed: 'text-accent-600 bg-accent-100',
-    failed: 'text-red-600 bg-red-100',
-    cancelled: 'text-gray-600 bg-gray-100',
-    refunded: 'text-blue-600 bg-blue-100'
-  };
-  return colorMap[status] || 'text-gray-600 bg-gray-100';
-};
-
-/**
- * Generate share URLs for social media
- */
-export const generateShareUrls = (url, title, description) => {
-  const encodedUrl = encodeURIComponent(url);
-  const encodedTitle = encodeURIComponent(title);
-  const encodedDescription = encodeURIComponent(description);
+export const formatFileSize = (bytes, decimals = 2) => {
+  if (bytes === 0) return '0 Bytes';
   
-  return {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-    twitter: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
-    whatsapp: `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`,
-    email: `mailto:?subject=${encodedTitle}&body=${encodedDescription}%20${encodedUrl}`
-  };
+  const k = 1024;
+  const dm = decimals < 0 ? 0 : decimals;
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+  
+  const i = Math.floor(Math.log(bytes) / Math.log(k));
+  
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 };
 
 /**
@@ -385,127 +255,271 @@ export const copyToClipboard = async (text) => {
     await navigator.clipboard.writeText(text);
     return true;
   } catch (error) {
-    console.error('Failed to copy text:', error);
+    // Fallback for older browsers
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.opacity = '0';
+    document.body.appendChild(textArea);
+    textArea.select();
+    
+    try {
+      document.execCommand('copy');
+      return true;
+    } catch (fallbackError) {
+      console.error('Clipboard copy failed:', fallbackError);
+      return false;
+    } finally {
+      document.body.removeChild(textArea);
+    }
+  }
+};
+
+/**
+ * Get browser info
+ */
+export const getBrowserInfo = () => {
+  const { userAgent } = navigator;
+  
+  let browser = 'Unknown';
+  let version = 'Unknown';
+  
+  if (userAgent.includes('Chrome')) {
+    browser = 'Chrome';
+    version = userAgent.match(/Chrome\/([0-9.]+)/)?.[1] || 'Unknown';
+  } else if (userAgent.includes('Firefox')) {
+    browser = 'Firefox';
+    version = userAgent.match(/Firefox\/([0-9.]+)/)?.[1] || 'Unknown';
+  } else if (userAgent.includes('Safari')) {
+    browser = 'Safari';
+    version = userAgent.match(/Safari\/([0-9.]+)/)?.[1] || 'Unknown';
+  } else if (userAgent.includes('Edge')) {
+    browser = 'Edge';
+    version = userAgent.match(/Edge\/([0-9.]+)/)?.[1] || 'Unknown';
+  }
+  
+  return { browser, version, userAgent };
+};
+
+/**
+ * Check if device is mobile
+ */
+export const isMobileDevice = () => {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
+/**
+ * Get device type
+ */
+export const getDeviceType = () => {
+  const userAgent = navigator.userAgent.toLowerCase();
+  
+  if (/tablet|ipad|playbook|silk/i.test(userAgent)) {
+    return 'tablet';
+  }
+  
+  if (/mobile|iphone|ipod|android|blackberry|opera|mini|windows\sce|palm|smartphone|iemobile/i.test(userAgent)) {
+    return 'mobile';
+  }
+  
+  return 'desktop';
+};
+
+/**
+ * Format percentage
+ */
+export const formatPercentage = (value, total, decimals = 1) => {
+  if (!total || total === 0) return '0%';
+  
+  const percentage = (value / total) * 100;
+  return `${percentage.toFixed(decimals)}%`;
+};
+
+/**
+ * Validate URL
+ */
+export const isValidUrl = (url) => {
+  try {
+    new URL(url);
+    return true;
+  } catch {
     return false;
   }
 };
 
 /**
- * Format file size
- */
-export const formatFileSize = (bytes) => {
-  if (bytes === 0) return '0 Bytes';
-  
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-};
-
-/**
- * Check if value is empty
- */
-export const isEmpty = (value) => {
-  if (value === null || value === undefined) return true;
-  if (typeof value === 'string') return value.trim() === '';
-  if (Array.isArray(value)) return value.length === 0;
-  if (typeof value === 'object') return Object.keys(value).length === 0;
-  return false;
-};
-
-/**
- * Sleep function for delays
+ * Sleep/delay function
  */
 export const sleep = (ms) => {
   return new Promise(resolve => setTimeout(resolve, ms));
 };
 
 /**
- * Format donation ID for display
+ * Retry function with exponential backoff
  */
-export const formatDonationId = (id) => {
-  if (!id) return '';
-  if (id.startsWith('INFANT-')) return id;
-  return `INFANT-${id}`;
-};
-
-/**
- * Parse donation ID
- */
-export const parseDonationId = (donationId) => {
-  if (!donationId) return null;
+export const retry = async (fn, maxAttempts = 3, baseDelay = 1000) => {
+  let lastError;
   
-  const parts = donationId.split('-');
-  if (parts.length >= 3) {
-    return {
-      prefix: parts[0],
-      date: parts[1],
-      sequence: parts[2]
-    };
-  }
-  return null;
-};
-
-/**
- * Get currency conversion rate (mock function)
- */
-export const getCurrencyRate = async (fromCurrency, toCurrency) => {
-  // In a real implementation, this would call an exchange rate API
-  const mockRates = {
-    'INR-USD': 0.012,
-    'USD-INR': 83.0,
-    'INR-GBP': 0.010,
-    'GBP-INR': 100.0,
-    'USD-GBP': 0.8,
-    'GBP-USD': 1.25
-  };
-  
-  const key = `${fromCurrency}-${toCurrency}`;
-  return mockRates[key] || 1;
-};
-
-/**
- * Format receipt number
- */
-export const formatReceiptNumber = (receiptNumber) => {
-  if (!receiptNumber) return '';
-  if (receiptNumber.startsWith('RCP-')) return receiptNumber;
-  return `RCP-${receiptNumber}`;
-};
-
-/**
- * Validate campaign data
- */
-export const validateCampaignData = (campaignData) => {
-  const errors = {};
-  
-  if (!campaignData.title || campaignData.title.length < 3) {
-    errors.title = 'Title must be at least 3 characters';
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await fn();
+    } catch (error) {
+      lastError = error;
+      
+      if (attempt === maxAttempts) {
+        throw error;
+      }
+      
+      const delay = baseDelay * Math.pow(2, attempt - 1);
+      await sleep(delay);
+    }
   }
   
-  if (!campaignData.description || campaignData.description.length < 10) {
-    errors.description = 'Description must be at least 10 characters';
-  }
-  
-  if (!campaignData.target_amount || campaignData.target_amount < 100) {
-    errors.target_amount = 'Target amount must be at least 100';
-  }
-  
-  return {
-    isValid: Object.keys(errors).length === 0,
-    errors
-  };
+  throw lastError;
 };
 
 /**
- * Calculate estimated exchange amount
+ * Deep clone object
  */
-export const calculateExchangeAmount = (amount, fromCurrency, toCurrency, rate) => {
-  if (fromCurrency === toCurrency) return amount;
+export const deepClone = (obj) => {
+  if (obj === null || typeof obj !== 'object') return obj;
   
-  const converted = amount * rate;
-  const decimals = CURRENCIES[toCurrency]?.decimal_places || 2;
+  if (obj instanceof Date) return new Date(obj.getTime());
+  if (obj instanceof Array) return obj.map(item => deepClone(item));
+  if (typeof obj === 'object') {
+    const clonedObj = {};
+    Object.keys(obj).forEach(key => {
+      clonedObj[key] = deepClone(obj[key]);
+    });
+    return clonedObj;
+  }
+};
+
+/**
+ * Calculate progress percentage for campaigns
+ */
+export const calculateProgress = (current, target) => {
+  if (!target || target === 0) return 0;
+  const progress = (current / target) * 100;
+  return Math.min(progress, 100); // Cap at 100%
+};
+
+/**
+ * Check if campaign is active
+ */
+export const isCampaignActive = (campaign) => {
+  if (!campaign) return false;
   
-  return parseFloat(converted.toFixed(decimals));
+  const now = new Date();
+  const endDate = new Date(campaign.end_date);
+  
+  return campaign.status === 'active' && endDate > now;
+};
+
+/**
+ * Get days remaining for campaign
+ */
+export const getDaysRemaining = (endDate) => {
+  if (!endDate) return null;
+  
+  const now = new Date();
+  const end = new Date(endDate);
+  const diffTime = end - now;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  return diffDays > 0 ? diffDays : 0;
+};
+
+/**
+ * Get campaign status display text
+ */
+export const getCampaignStatus = (campaign) => {
+  if (!campaign) return 'Unknown';
+  
+  const now = new Date();
+  const endDate = new Date(campaign.end_date);
+  
+  if (campaign.status === 'completed' || endDate < now) {
+    return 'Completed';
+  } else if (campaign.status === 'paused') {
+    return 'Paused';
+  } else if (campaign.status === 'active') {
+    return 'Active';
+  } else {
+    return 'Draft';
+  }
+};
+
+/**
+ * Format number with abbreviations (K, M, B)
+ */
+export const formatNumberAbbreviation = (num) => {
+  if (!num || num === 0) return '0';
+  
+  const absNum = Math.abs(num);
+  
+  if (absNum >= 1000000000) {
+    return (num / 1000000000).toFixed(1) + 'B';
+  } else if (absNum >= 1000000) {
+    return (num / 1000000).toFixed(1) + 'M';
+  } else if (absNum >= 1000) {
+    return (num / 1000).toFixed(1) + 'K';
+  }
+  
+  return num.toString();
+};
+
+/**
+ * Truncate text with ellipsis
+ */
+export const truncateText = (text, maxLength = 100) => {
+  if (!text || typeof text !== 'string') return '';
+  
+  if (text.length <= maxLength) return text;
+  
+  return text.substring(0, maxLength).trim() + '...';
+};
+
+/**
+ * Get relative time string
+ */
+export const getRelativeTime = (date) => {
+  if (!date) return '';
+  
+  try {
+    return formatDistanceToNow(parseISO(date), { addSuffix: true });
+  } catch (error) {
+    return formatDate(date, 'short');
+  }
+};
+
+export default {
+  formatCurrency,
+  formatDate,
+  isValidEmail,
+  isValidMobile,
+  isValidPAN,
+  isValidPincode,
+  getImpactMessage,
+  sanitizeInput,
+  generateId,
+  debounce,
+  throttle,
+  formatFileSize,
+  copyToClipboard,
+  getBrowserInfo,
+  isMobileDevice,
+  getDeviceType,
+  formatPercentage,
+  isValidUrl,
+  sleep,
+  retry,
+  deepClone,
+  calculateProgress,
+  isCampaignActive,
+  getDaysRemaining,
+  getCampaignStatus,
+  formatNumberAbbreviation,
+  truncateText,
+  getRelativeTime
 };

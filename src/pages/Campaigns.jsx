@@ -13,7 +13,13 @@ import {
   Loader2
 } from 'lucide-react';
 import { campaignService } from '../services/campaignService';
-import { formatCurrency, calculateProgress, formatDate } from '../utils/helpers';
+import { 
+  formatCurrency, 
+  calculateProgress, 
+  formatDate,
+  getDaysRemaining,
+  getCampaignStatus 
+} from '../utils/helpers';
 import { CAMPAIGN_STATUS, NGO_INFO } from '../utils/constants';
 import { InlineLoading, CardSkeleton } from '../components/common/Loading';
 import toast from 'react-hot-toast';

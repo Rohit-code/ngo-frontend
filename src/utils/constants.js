@@ -178,6 +178,45 @@ export const INDIAN_STATES = [
   'Puducherry'
 ];
 
+export const INDIAN_STATES_SIMPLE = [
+  'Andhra Pradesh',
+  'Arunachal Pradesh',
+  'Assam',
+  'Bihar',
+  'Chhattisgarh',
+  'Goa',
+  'Gujarat',
+  'Haryana',
+  'Himachal Pradesh',
+  'Jharkhand',
+  'Karnataka',
+  'Kerala',
+  'Madhya Pradesh',
+  'Maharashtra',
+  'Manipur',
+  'Meghalaya',
+  'Mizoram',
+  'Nagaland',
+  'Odisha',
+  'Punjab',
+  'Rajasthan',
+  'Sikkim',
+  'Tamil Nadu',
+  'Telangana',
+  'Tripura',
+  'Uttar Pradesh',
+  'Uttarakhand',
+  'West Bengal',
+  'Andaman and Nicobar Islands',
+  'Chandigarh',
+  'Dadra and Nagar Haveli and Daman and Diu',
+  'Delhi',
+  'Jammu and Kashmir',
+  'Ladakh',
+  'Lakshadweep',
+  'Puducherry'
+];
+
 // Impact messages based on donation amount (international support)
 export const IMPACT_MESSAGES = {
   200: "Can provide basic care for an infant for 1 week",
@@ -191,7 +230,7 @@ export const IMPACT_MESSAGES = {
 // International Impact Messages (USD)
 export const INTERNATIONAL_IMPACT_MESSAGES = {
   5: "Can provide clean water for an infant for 1 week",
-  10: "Can provide nutritious meals for an infant for 1 week", 
+  10: "Can provide nutritious meals for an infant for 1 week",
   25: "Can support basic healthcare for an infant for 1 week",
   50: "Can provide educational materials for an infant for 1 month",
   100: "Can support complete care for an infant for 2 weeks",

@@ -1,3 +1,4 @@
+// services/healthService.js
 import api from './api';
 
 export const healthService = {
@@ -38,7 +39,7 @@ export const healthService = {
   },
 
   /**
-   * Get system status
+   * Get comprehensive system status
    */
   getSystemStatus: async () => {
     try {
@@ -51,45 +52,15 @@ export const healthService = {
       return {
         success: true,
         data: {
-          overall_status: health.status === 'fulfilled' ? 'healthy' : 'unhealthy',
-          health: health.status === 'fulfilled' ? health.value : { error: health.reason },
-          database: database.status === 'fulfilled' ? database.value : { error: database.reason },
-          services: services.status === 'fulfilled' ? services.value : { error: services.reason },
+          overall_status: health.status === 'fulfilled' && health.value.success ? 'healthy' : 'unhealthy',
+          health: health.status === 'fulfilled' ? health.value : { error: health.reason?.message },
+          database: database.status === 'fulfilled' ? database.value : { error: database.reason?.message },
+          services: services.status === 'fulfilled' ? services.value : { error: services.reason?.message },
           timestamp: new Date().toISOString()
         }
       };
     } catch (error) {
       throw error;
-    }
-  },
-
-  /**
-   * Check API connectivity
-   */
-  checkConnectivity: async () => {
-    try {
-      const startTime = Date.now();
-      const response = await this.checkHealth();
-      const endTime = Date.now();
-      
-      return {
-        success: true,
-        data: {
-          status: 'connected',
-          response_time: endTime - startTime,
-          timestamp: new Date().toISOString(),
-          server_info: response.data
-        }
-      };
-    } catch (error) {
-      return {
-        success: false,
-        data: {
-          status: 'disconnected',
-          error: error.message,
-          timestamp: new Date().toISOString()
-        }
-      };
     }
   }
 };
