@@ -351,7 +351,7 @@ const Hero = () => {
                   transition={{ delay: 1.2 + index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-primary-600 mb-1">
+                  {/* <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-primary-600 mb-1">
                     {stat.value}
                   </div>
                   <div className="text-xs sm:text-sm text-soft-600 leading-tight">
@@ -359,7 +359,7 @@ const Hero = () => {
                   </div>
                   <div className="text-lg sm:text-xl mt-1 opacity-60">
                     {stat.icon}
-                  </div>
+                  </div> */}
                 </motion.div>
               ))}
             </div>

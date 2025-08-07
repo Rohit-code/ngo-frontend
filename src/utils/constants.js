@@ -357,17 +357,17 @@ export const FOCUS_AREAS = {
     title: 'Early Education',
     description: 'We nurture children\'s early learning experiences, building strong foundations for academic success and lifelong learning through play-based, child-centered approaches.',
     fullDescription: 'Early education is the cornerstone of a child\'s development. We provide quality early childhood education that respects each child\'s unique pace and style of learning, creating safe, nurturing environments where children can explore, discover, and grow.',
-    stats: '1,500+ Children Supported'
+    // stats: '1,500+ Children Supported'
   },
   health: {
     title: 'Healthcare & Wellness',
     description: 'Comprehensive healthcare services including preventive care, regular checkups, and wellness programs to ensure every child grows up healthy and strong.',
-    stats: '2,500+ Medical Consultations'
+    // stats: '2,500+ Medical Consultations'
   },
   nutrition: {
     title: 'Nutrition & Wellbeing',
     description: 'We provide nutritious meals and nutrition education to combat malnutrition and ensure proper physical and cognitive development for growing children.',
-    stats: '100,000+ Nutritious Meals'
+    // stats: '100,000+ Nutritious Meals'
   }
 };
 
