@@ -11,7 +11,8 @@ export const useHealthMonitoring = (intervalMs = 30000) => {
     timestamp: null,
     lastCheck: null,
     isChecking: false,
-    error: null
+    error: null,
+    backendAvailable: true
   });
   
   const [isMonitoring, setIsMonitoring] = useState(false);
@@ -35,25 +36,32 @@ export const useHealthMonitoring = (intervalMs = 30000) => {
     try {
       setHealthStatus(prev => ({ ...prev, isChecking: true, error: null }));
       
+      // Check if healthService is available
+      if (!healthService || typeof healthService.getSystemStatus !== 'function') {
+        throw new Error('Health service is not available');
+      }
+      
       const response = await healthService.getSystemStatus();
       
       if (!mountedRef.current) return;
       
-      if (response.success) {
+      if (response && response.success) {
         setHealthStatus(prev => ({
           ...prev,
           ...response.data,
           lastCheck: new Date(),
           isChecking: false,
-          error: null
+          error: null,
+          backendAvailable: true
         }));
       } else {
         setHealthStatus(prev => ({
           ...prev,
           overall_status: 'unhealthy',
-          error: response.message || 'Health check failed',
+          error: response?.message || 'Health check failed',
           lastCheck: new Date(),
-          isChecking: false
+          isChecking: false,
+          backendAvailable: false
         }));
       }
     } catch (error) {
@@ -65,7 +73,8 @@ export const useHealthMonitoring = (intervalMs = 30000) => {
         overall_status: 'unhealthy',
         error: error.message || 'Health check failed',
         lastCheck: new Date(),
-        isChecking: false
+        isChecking: false,
+        backendAvailable: false
       }));
     }
   }, []);
@@ -81,7 +90,7 @@ export const useHealthMonitoring = (intervalMs = 30000) => {
     // Initial check
     checkHealthStatus();
     
-    // Set up interval
+    // Set up interval only if backend is available
     intervalRef.current = setInterval(() => {
       if (mountedRef.current) {
         checkHealthStatus();
@@ -123,6 +132,7 @@ export const useHealthMonitoring = (intervalMs = 30000) => {
     startMonitoring,
     stopMonitoring,
     forceCheck,
-    checkHealthStatus
+    checkHealthStatus,
+    backendAvailable: healthStatus.backendAvailable
   };
 };

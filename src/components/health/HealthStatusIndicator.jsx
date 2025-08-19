@@ -22,7 +22,8 @@ const HealthStatusIndicator = ({
     isMonitoring, 
     startMonitoring, 
     stopMonitoring, 
-    forceCheck 
+    forceCheck,
+    backendAvailable
   } = useHealthMonitoring(intervalMs);
 
   const getStatusIcon = (status) => {
@@ -137,6 +138,17 @@ const HealthStatusIndicator = ({
             <div className="flex items-center space-x-2">
               <XCircle className="h-4 w-4 text-red-500" />
               <span className="text-red-700 text-sm">{healthStatus.error}</span>
+            </div>
+          </div>
+        )}
+        
+        {!backendAvailable && (
+          <div className="mt-2 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <div className="flex items-center space-x-2">
+              <AlertCircle className="h-4 w-4 text-yellow-500" />
+              <span className="text-yellow-700 text-sm">
+                Backend server is not available. Showing fallback data.
+              </span>
             </div>
           </div>
         )}

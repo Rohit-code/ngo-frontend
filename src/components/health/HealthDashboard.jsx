@@ -15,7 +15,7 @@ import { formatCurrency, calculateProgress, formatDate, getDaysRemaining, getCam
 
 const HealthDashboard = () => {
   const [monitoringInterval, setMonitoringInterval] = useState(30000);
-  const { healthStatus, isMonitoring, startMonitoring, stopMonitoring } = 
+  const { healthStatus, isMonitoring, startMonitoring, stopMonitoring, backendAvailable } = 
     useHealthMonitoring(monitoringInterval);
 
   const getStatusCounts = () => {
@@ -156,6 +156,25 @@ const HealthDashboard = () => {
             </p>
           </motion.div>
         </div>
+
+        {/* Backend Availability Notice */}
+        {!backendAvailable && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg"
+          >
+            <div className="flex items-center space-x-2">
+              <AlertTriangle className="h-5 w-5 text-yellow-500" />
+              <div>
+                <h4 className="font-medium text-yellow-800">Backend Server Unavailable</h4>
+                <p className="text-sm text-yellow-700">
+                  The backend server is not responding. Health monitoring is showing fallback data.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
         {/* Detailed Health Status */}
         <HealthStatusIndicator showDetails={true} intervalMs={monitoringInterval} />
