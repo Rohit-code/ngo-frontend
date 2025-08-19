@@ -50,7 +50,6 @@ const CorrectedPaymentFlow = ({
       invalid: { color: '#ef4444' },
       complete: { color: '#059669' },
     },
-    hidePostalCode: true,
   };
 
   const handleCardChange = (elementType) => (event) => {
@@ -238,7 +237,7 @@ const CorrectedPaymentFlow = ({
               </div>
 
               {/* Card Form */}
-              <form onSubmit={handlePayment} className="space-y-6">
+              <div className="space-y-6">
                 
                 {/* Card Number */}
                 <div>
@@ -389,7 +388,8 @@ const CorrectedPaymentFlow = ({
 
                 {/* Submit Button */}
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={handlePayment}
                   disabled={!stripe || isProcessing || !isCardValid() || !agreedToTerms}
                   className={`w-full py-4 px-6 rounded-xl font-semibold text-lg transition-all flex items-center justify-center ${
                     !stripe || isProcessing || !isCardValid() || !agreedToTerms
@@ -409,7 +409,7 @@ const CorrectedPaymentFlow = ({
                     </>
                   )}
                 </button>
-              </form>
+              </div>
             </motion.div>
           )}
 

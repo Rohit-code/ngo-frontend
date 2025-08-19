@@ -19,7 +19,6 @@ export const DONATION_TYPE_LABELS = {
 // Payment Methods
 export const PAYMENT_METHODS = {
   CARD: 'card',
-  UPI: 'upi',
   NETBANKING: 'netbanking',
   WALLET: 'wallet',
   BANK_TRANSFER: 'bank_transfer'
@@ -27,7 +26,6 @@ export const PAYMENT_METHODS = {
 
 export const PAYMENT_METHOD_LABELS = {
   [PAYMENT_METHODS.CARD]: 'Credit/Debit Card',
-  [PAYMENT_METHODS.UPI]: 'UPI',
   [PAYMENT_METHODS.NETBANKING]: 'Net Banking',
   [PAYMENT_METHODS.WALLET]: 'Wallet',
   [PAYMENT_METHODS.BANK_TRANSFER]: 'Bank Transfer'

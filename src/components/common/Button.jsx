@@ -56,23 +56,23 @@ const Button = ({
   
   const variants = {
     primary: clsx(
-      'text-white bg-primary-500 border border-transparent shadow-warm',
-      'hover:bg-primary-600 hover:shadow-peaceful',
+      'text-white bg-gradient-to-r from-primary-500 to-primary-600 border border-transparent shadow-lg',
+      'hover:from-primary-600 hover:to-primary-700 hover:shadow-xl',
       'focus-visible:ring-white/50 focus-visible:ring-offset-primary-600',
-      'focus-visible:bg-primary-600 focus-visible:shadow-xl',
+      'focus-visible:from-primary-600 focus-visible:to-primary-700 focus-visible:shadow-xl',
       isMobile ? '' : 'transform hover:scale-105 hover:-translate-y-0.5'
     ),
     secondary: clsx(
-      'text-primary-600 bg-white border border-primary-300 shadow-gentle',
-      'hover:bg-primary-50 hover:border-primary-400 hover:shadow-peaceful',
-      'focus-visible:ring-primary-500/50 focus-visible:bg-primary-50',
+      'text-primary-600 bg-white/90 backdrop-blur-md border border-primary-300 shadow-glass',
+      'hover:bg-white hover:border-primary-400 hover:shadow-glass-hover',
+      'focus-visible:ring-primary-500/50 focus-visible:bg-white',
       'focus-visible:border-primary-500 focus-visible:shadow-lg'
     ),
     accent: clsx(
-      'text-white bg-accent-500 border border-transparent shadow-soft',
-      'hover:bg-accent-600 hover:shadow-peaceful',
+      'text-white bg-gradient-to-r from-accent-500 to-accent-600 border border-transparent shadow-lg',
+      'hover:from-accent-600 hover:to-accent-700 hover:shadow-xl',
       'focus-visible:ring-white/50 focus-visible:ring-offset-accent-600',
-      'focus-visible:bg-accent-600 focus-visible:shadow-xl',
+      'focus-visible:from-accent-600 focus-visible:to-accent-700 focus-visible:shadow-xl',
       isMobile ? '' : 'transform hover:scale-105 hover:-translate-y-0.5'
     ),
     outline: clsx(

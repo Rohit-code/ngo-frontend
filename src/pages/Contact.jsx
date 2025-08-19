@@ -82,7 +82,7 @@ const Contact = () => {
   const faqs = [
     {
       question: 'How can I make a donation?',
-      answer: 'You can make a donation through our secure online donation form, by phone, or by visiting our office. We accept various payment methods including cards, UPI, and bank transfers.'
+      answer: 'You can make a donation through our secure online donation form, by phone, or by visiting our office. We accept various payment methods including cards and bank transfers.'
     },
     {
       question: 'Are donations tax-deductible?',

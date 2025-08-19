@@ -155,7 +155,7 @@ const Carousel = ({
 
   return (
     <div 
-      className={`relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl shadow-peaceful ${className}`}
+      className={`relative overflow-hidden rounded-lg sm:rounded-xl lg:rounded-2xl shadow-glass hover:shadow-glass-hover transition-all duration-300 ${className}`}
       ref={containerRef}
     >
       {/* Main Image Container */}
@@ -203,8 +203,9 @@ const Carousel = ({
               />
             </picture>
             
-            {/* Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+            {/* Enhanced Overlay Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-900/20 via-transparent to-secondary-900/20" />
             
             {/* Caption */}
             {slides[currentIndex].caption && (
@@ -214,7 +215,7 @@ const Carousel = ({
                 transition={{ delay: 0.3 }}
                 className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6"
               >
-                <h3 className="text-white text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold drop-shadow-lg leading-tight">
+                <h3 className="text-white text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold drop-shadow-lg leading-tight text-gradient-hero">
                   {slides[currentIndex].caption}
                 </h3>
               </motion.div>

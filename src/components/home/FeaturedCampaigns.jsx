@@ -67,8 +67,12 @@ const FeaturedCampaigns = () => {
   }
 
   return (
-    <section className="py-20 bg-warm-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-gradient-to-br from-warm-50 via-primary-50/30 to-secondary-50/30 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-pattern opacity-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-transparent via-primary-100/20 to-transparent"></div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -78,7 +82,7 @@ const FeaturedCampaigns = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-soft-900 mb-4">
-            Featured <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Campaigns</span>
+            Featured <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent drop-shadow-sm">Campaigns</span>
           </h2>
           <p className="text-lg text-soft-600 max-w-2xl mx-auto">
             Support our active campaigns and make a direct impact on the lives of 
@@ -103,7 +107,7 @@ const FeaturedCampaigns = () => {
         >
           <Link
             to="/campaigns"
-            className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-primary-600 to-accent-600 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-accent-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 text-white font-semibold rounded-xl hover:from-primary-700 hover:via-secondary-700 hover:to-accent-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-2 relative overflow-hidden group"
           >
             View All Campaigns
             <ArrowRight className="ml-2 h-5 w-5" />
@@ -129,8 +133,8 @@ const CampaignCard = ({ campaign, index }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      className="bg-white/90 backdrop-blur-md rounded-2xl shadow-glass hover:shadow-glass-hover transition-all duration-300 overflow-hidden group border border-white/20"
     >
       {/* Campaign Image */}
       <div className="relative h-48 overflow-hidden">

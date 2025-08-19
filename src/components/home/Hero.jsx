@@ -82,59 +82,6 @@ const Hero = () => {
           />
         </div>
         
-        {/* Overlay Content */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/30 flex items-center">
-          <div className="container-mobile w-full">
-            <div className="max-w-2xl">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-                className="text-white"
-              >
-                {/* Mobile-optimized heading */}
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 leading-tight">
-                  <span className="text-primary-300 block sm:inline">Supporting Infants,</span>
-                  <br className="hidden sm:block" />
-                  <span className="text-white">Building Futures</span>
-                </h1>
-                
-                <p className="text-sm sm:text-lg md:text-xl mb-4 sm:mb-6 opacity-90 leading-relaxed">
-                  Join us in providing essential care, nutrition, and development programs for infants and children.
-                </p>
-                
-                {/* Mobile-optimized CTA buttons */}
-                <div className="flex flex-col xs:flex-row gap-3 sm:gap-4">
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Link
-                      to="/donate"
-                      className="btn-primary bg-primary-500 hover:bg-primary-600 text-white border-none w-full xs:w-auto justify-center text-sm sm:text-base px-4 sm:px-6 py-3"
-                    >
-                      <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-                      Donate Now
-                    </Link>
-                  </motion.div>
-                  
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Link
-                      to="/about"
-                      className="btn-secondary bg-white/20 text-white border-white/30 hover:bg-white/30 w-full xs:w-auto justify-center text-sm sm:text-base px-4 sm:px-6 py-3"
-                    >
-                      Learn More
-                    </Link>
-                  </motion.div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
         {/* Scroll indicator */}
         <motion.button
           onClick={scrollToNext}
@@ -149,8 +96,9 @@ const Hero = () => {
 
       {/* Main Hero Content Section */}
       <section id="focus-areas" className="relative mobile-section-padding bg-gradient-to-br from-primary-50 via-soft-50 to-secondary-50 overflow-hidden">
-        {/* Background Pattern */}
+        {/* Enhanced Background Pattern */}
         <div className="absolute inset-0 bg-pattern opacity-20"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-100/30 via-transparent to-secondary-100/30"></div>
         
         {/* Floating Elements - Optimized for mobile */}
         <div className="absolute top-10 sm:top-20 left-4 sm:left-10 w-12 sm:w-20 h-12 sm:h-20 bg-secondary-200 rounded-full opacity-60 animate-float"></div>
@@ -172,7 +120,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white shadow-gentle border border-primary-200 mb-4 sm:mb-6 text-xs sm:text-sm"
+                className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/90 backdrop-blur-md shadow-glass border border-primary-200/50 mb-4 sm:mb-6 text-xs sm:text-sm"
               >
                 <Award className="h-3 w-3 sm:h-4 sm:w-4 text-primary-500 mr-2" />
                 <span className="font-medium text-primary-700">
@@ -187,11 +135,11 @@ const Hero = () => {
                 transition={{ delay: 0.3 }}
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
               >
-                <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent block sm:inline">
+                <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent block sm:inline drop-shadow-sm">
                   Every Child Deserves
                 </span>
                 <br />
-                <span className="text-soft-900">Love, Care & Opportunity</span>
+                <span className="text-soft-900 drop-shadow-sm">Love, Care & Opportunity</span>
               </motion.h2>
 
               {/* Description */}
@@ -214,7 +162,7 @@ const Hero = () => {
               >
                 <Link
                   to="/donate"
-                  className="btn-primary group bg-primary-500 hover:bg-primary-600 flex-1 xs:flex-none"
+                  className="btn-primary group bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 flex-1 xs:flex-none shadow-lg hover:shadow-xl"
                 >
                   <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 group-hover:scale-110 transition-transform" />
                   Start Supporting
@@ -223,7 +171,7 @@ const Hero = () => {
                 
                 <Link
                   to="/campaigns"
-                  className="btn-secondary group border-primary-300 text-primary-600 hover:bg-primary-50 flex-1 xs:flex-none"
+                  className="btn-secondary group border-primary-300 text-primary-600 hover:bg-primary-50/80 flex-1 xs:flex-none shadow-lg hover:shadow-xl"
                 >
                   View Campaigns
                   <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -238,16 +186,16 @@ const Hero = () => {
                 className="grid grid-cols-3 gap-3 sm:gap-6 text-center lg:text-left"
               >
                 {[
-                  { icon: Shield, title: 'Trusted', subtitle: 'Organization', color: 'bg-primary-100 text-primary-600' },
-                  { icon: Users, title: 'Transparent', subtitle: 'Operations', color: 'bg-secondary-100 text-secondary-600' },
-                  { icon: Heart, title: 'Direct', subtitle: 'Impact', color: 'bg-accent-100 text-accent-600' }
+                  { icon: Shield, title: 'Trusted', subtitle: 'Organization', color: 'bg-primary-100/80 text-primary-600', bgColor: 'bg-primary-50/50' },
+                  { icon: Users, title: 'Transparent', subtitle: 'Operations', color: 'bg-secondary-100/80 text-secondary-600', bgColor: 'bg-secondary-50/50' },
+                  { icon: Heart, title: 'Direct', subtitle: 'Impact', color: 'bg-accent-100/80 text-accent-600', bgColor: 'bg-accent-50/50' }
                 ].map((item, index) => (
-                  <div key={item.title} className="flex flex-col items-center lg:items-start">
-                    <div className={`w-8 h-8 sm:w-10 sm:h-10 ${item.color} rounded-lg sm:rounded-xl flex items-center justify-center mb-2`}>
+                  <div key={item.title} className="flex flex-col items-center lg:items-start group">
+                    <div className={`w-8 h-8 sm:w-10 sm:h-10 ${item.color} ${item.bgColor} rounded-lg sm:rounded-xl flex items-center justify-center mb-2 shadow-glass group-hover:shadow-glass-hover transition-all duration-300 group-hover:scale-110`}>
                       <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
-                    <div className="text-xs sm:text-sm text-soft-600">{item.title}</div>
-                    <div className="text-xs sm:text-sm font-semibold text-soft-900">{item.subtitle}</div>
+                    <div className="text-xs sm:text-sm text-soft-600 group-hover:text-primary-600 transition-colors duration-300">{item.title}</div>
+                    <div className="text-xs sm:text-sm font-semibold text-soft-900 group-hover:text-primary-700 transition-colors duration-300">{item.subtitle}</div>
                   </div>
                 ))}
               </motion.div>

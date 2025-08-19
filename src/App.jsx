@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import './enhanced-styles.css';
 
 // Layout Components
 import Header from './components/common/Header';
@@ -38,7 +39,11 @@ const NotFound = () => (
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50 relative overflow-hidden">
+      {/* Enhanced background with animated gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-secondary-50 animate-gradient-shift"></div>
+      <div className="absolute inset-0 bg-pattern opacity-5"></div>
+      <div className="relative z-10">
       <Header />
       
       <main className="flex-1">
@@ -53,6 +58,7 @@ function App() {
       </main>
       
       <Footer />
+      </div>
     </div>
   );
 }

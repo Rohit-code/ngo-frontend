@@ -137,7 +137,7 @@ const Footer = () => {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-12 h-12 bg-primary-700 rounded-lg flex items-center justify-center text-primary-300 hover:text-white transition-all duration-200 ${color} touch-friendly`}
+                className={`w-12 h-12 bg-primary-700/80 backdrop-blur-sm rounded-lg flex items-center justify-center text-primary-300 hover:text-white transition-all duration-300 ${color} touch-friendly shadow-glass hover:shadow-glass-hover`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 aria-label={name}
@@ -173,9 +173,10 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-soft-800 text-white relative overflow-hidden safe-area-bottom">
-      {/* Background Pattern */}
+    <footer className="bg-gradient-to-br from-soft-800 via-soft-900 to-soft-950 text-white relative overflow-hidden safe-area-bottom">
+      {/* Enhanced Background Pattern */}
       <div className="absolute inset-0 bg-dots opacity-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-900/20 via-transparent to-secondary-900/20"></div>
       
       <div className="relative">
         {/* Main Footer Content */}
@@ -189,7 +190,7 @@ const Footer = () => {
             className="text-center mb-8 sm:mb-12"
           >
             <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-white rounded-xl p-2">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 bg-white/90 backdrop-blur-md rounded-xl p-2 shadow-glass border border-white/20">
                 <img
                   src="/logo.jpg"
                   alt="Infant Organisation Logo"
@@ -197,7 +198,7 @@ const Footer = () => {
                 />
               </div>
               <div className="text-center sm:text-left">
-                <h3 className="text-xl sm:text-2xl font-bold font-display text-white">
+                <h3 className="text-xl sm:text-2xl font-bold font-display text-gradient-primary">
                   Infant Organisation
                 </h3>
                 <p className="text-primary-200 text-sm sm:text-base">{NGO_INFO.tagline}</p>
@@ -278,7 +279,7 @@ const Footer = () => {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="bg-primary-50 border border-primary-200 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center"
+              className="bg-primary-50/90 backdrop-blur-md border border-primary-200/50 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center shadow-glass"
             >
               <div className="flex items-center justify-center mb-2">
                 <span className="text-lg mr-2">🏆</span>
@@ -348,7 +349,7 @@ const Footer = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
             onClick={scrollToTop}
-            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-peaceful flex items-center justify-center transition-colors duration-200 touch-friendly"
+            className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white rounded-full shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 touch-friendly"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Scroll to top"

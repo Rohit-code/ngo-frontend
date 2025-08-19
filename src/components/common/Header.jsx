@@ -71,8 +71,11 @@ const Header = () => {
             animate={{ y: 0 }}
             exit={{ y: -100 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="bg-primary-500 text-white py-2 hidden sm:block"
+            className="bg-gradient-to-r from-primary-600 via-primary-500 to-secondary-500 text-white py-2 hidden sm:block relative overflow-hidden"
           >
+            {/* Animated background pattern */}
+            <div className="absolute inset-0 bg-hexagon opacity-10"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-shimmer"></div>
             <div className="container-responsive">
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center space-x-4 lg:space-x-6">
@@ -115,8 +118,8 @@ const Header = () => {
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className={`sticky top-0 z-50 transition-all duration-500 ease-in-out safe-area-top ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-peaceful border-b border-primary-200'
-            : 'bg-white shadow-gentle'
+            ? 'bg-white/90 backdrop-blur-xl shadow-glass border-b border-primary-200/50'
+            : 'bg-white/80 backdrop-blur-md shadow-gentle'
         }`}
       >
         <div className="container-responsive">
@@ -128,9 +131,9 @@ const Header = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Link 
+                              <Link 
                 to="/" 
-                className="flex items-center space-x-2 sm:space-x-3 rounded-xl p-2 -m-2 hover:bg-primary-50 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50"
+                className="flex items-center space-x-2 sm:space-x-3 rounded-xl p-2 -m-2 hover:bg-primary-50/80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50/80 group"
               >
                 {/* Logo Image */}
                 <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex-shrink-0">
@@ -143,10 +146,10 @@ const Header = () => {
                 
                 {/* Logo Text - Hidden on very small screens */}
                 <div className="hidden xs:block">
-                  <h1 className="text-sm sm:text-xl lg:text-2xl font-bold font-display text-primary-600 leading-tight">
+                  <h1 className="text-sm sm:text-xl lg:text-2xl font-bold font-display text-gradient-primary leading-tight group-hover:scale-105 transition-transform duration-300">
                     Infant Organisation
                   </h1>
-                  <p className="text-xs lg:text-sm text-soft-500 -mt-1 hidden sm:block">
+                  <p className="text-xs lg:text-sm text-soft-500 -mt-1 hidden sm:block group-hover:text-primary-600 transition-colors duration-300">
                     {NGO_INFO.tagline}
                   </p>
                 </div>
@@ -159,9 +162,9 @@ const Header = () => {
                 <Link
                   key={item.name}
                   to={item.href}
-                  className={`relative px-4 py-3 text-sm xl:text-base font-medium transition-all duration-300 ease-in-out rounded-xl hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50 ${
+                  className={`relative px-4 py-3 text-sm xl:text-base font-medium transition-all duration-300 ease-in-out rounded-xl hover:bg-primary-50/80 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50/80 ${
                     location.pathname === item.href
-                      ? 'text-primary-600 bg-primary-50'
+                      ? 'text-primary-600 bg-primary-50/80 shadow-glass'
                       : 'text-soft-600 hover:text-primary-600'
                   }`}
                 >
@@ -188,7 +191,7 @@ const Header = () => {
               >
                 <Link
                   to="/donate"
-                  className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3 text-xs sm:text-sm lg:text-base font-medium text-white bg-primary-500 border border-transparent rounded-xl hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105 shadow-warm hover:shadow-peaceful"
+                  className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3 text-xs sm:text-sm lg:text-base font-medium text-white border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105 relative overflow-hidden bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 shadow-lg hover:shadow-xl"
                 >
                   <Heart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                   <span className="hidden sm:inline">Donate</span>

@@ -21,7 +21,7 @@ import { formatCurrency, getImpactMessage } from '../../utils/helpers';
 import toast from 'react-hot-toast';
 
 // Initialize Stripe
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || 'pk_test_dummy');
 
 const CorrectedDonationForm = ({ selectedCampaign = null }) => {
   // State management
