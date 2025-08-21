@@ -63,8 +63,8 @@ const Donate = () => {
     },
     {
       icon: Award,
-      title: '80G Tax Benefits',
-      description: 'Indian donors get up to 50% tax exemption under Section 80G of Income Tax Act',
+      title: 'Tax Benefits',
+      description: 'Tax benefits available for eligible donors. Please consult your local tax advisor.',
       color: 'text-blue-600',
       bgColor: 'bg-blue-100'
     },
@@ -111,11 +111,11 @@ const Donate = () => {
         <title>Donate Now - {NGO_INFO.name}</title>
         <meta 
           name="description" 
-          content={`Make an international donation to ${NGO_INFO.name} and help support infants and children worldwide. Secure payments with Stripe. Get 80G tax exemption benefits for Indian donors.`}
+          content={`Make an international donation to ${NGO_INFO.name} and help support infants and children worldwide. Secure payments with Stripe. Tax benefits available for eligible donors.`}
         />
         <meta 
           name="keywords" 
-          content="donate, infant NGO, child donation, international donation, 80G tax exemption, secure donation, online donation, Stripe payment"
+          content="donate, infant NGO, child donation, international donation, tax benefits, secure donation, online donation, Stripe payment"
         />
         <meta property="og:title" content={`Donate Now - ${NGO_INFO.name}`} />
         <meta property="og:description" content="Make a difference in the lives of infants and children worldwide with your generous donation." />

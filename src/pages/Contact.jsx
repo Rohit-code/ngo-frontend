@@ -86,7 +86,7 @@ const Contact = () => {
     },
     {
       question: 'Are donations tax-deductible?',
-      answer: 'Yes! Your donations are eligible for up to 50% tax exemption under Section 80G of the Income Tax Act. We\'ll provide you with a tax exemption certificate.'
+      answer: 'Tax benefits are available for eligible donors. Please consult your local tax advisor for specific details about tax deductibility in your country.'
     },
     {
       question: 'How do you use the donations?',
@@ -104,11 +104,11 @@ const Contact = () => {
         <title>Contact Us - {NGO_INFO.name}</title>
         <meta 
           name="description" 
-          content={`Get in touch with ${NGO_INFO.name}. Contact us for donations, volunteering, partnerships, or any questions about our work with infants and children.`}
+          content={`Get in touch with ${NGO_INFO.name}. Contact us for donations, volunteering, or any questions about our work with infants and children.`}
         />
         <meta 
           name="keywords" 
-          content="contact infant NGO, get in touch, volunteer, partnership, donation inquiry, support"
+          content="contact infant NGO, get in touch, volunteer, donation inquiry, support"
         />
         <meta property="og:title" content={`Contact Us - ${NGO_INFO.name}`} />
         <meta property="og:description" content="Contact us to learn more about our work or to get involved in supporting infants and children." />
@@ -129,7 +129,7 @@ const Contact = () => {
               </h1>
               <p className="text-body max-w-2xl mx-auto">
                 We'd love to hear from you! Whether you have questions, want to volunteer, 
-                or are interested in partnering with us, we're here to help.
+                or need support, we're here to help.
               </p>
             </motion.div>
           </div>
@@ -256,9 +256,7 @@ const Contact = () => {
                         <option value="">Select a subject</option>
                         <option value="donation">Donation Inquiry</option>
                         <option value="volunteer">Volunteer Opportunity</option>
-                        <option value="partnership">Partnership</option>
                         <option value="general">General Question</option>
-                        <option value="support">Technical Support</option>
                         <option value="other">Other</option>
                       </select>
                       {errors.subject && (

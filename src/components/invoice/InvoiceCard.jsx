@@ -73,7 +73,7 @@ const InvoiceCard = ({ invoice, compact = false }) => {
         
         {invoice.tax_exemption_applicable && (
           <div className="mt-3 p-2 bg-green-100 rounded text-sm text-green-800">
-            ✓ Eligible for {invoice.tax_section || '80G'} tax exemption
+            ✓ Tax benefits available
           </div>
         )}
       </motion.div>
@@ -125,10 +125,10 @@ const InvoiceCard = ({ invoice, compact = false }) => {
         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
           <div className="flex items-center space-x-2">
             <CheckCircle className="h-5 w-5 text-green-600" />
-            <span className="font-medium text-green-900">Tax Exemption Available</span>
+            <span className="font-medium text-green-900">Tax Benefits Available</span>
           </div>
           <p className="text-green-700 text-sm mt-1">
-            This donation is eligible for tax exemption under Section {invoice.tax_section || '80G'}
+            Tax benefits are available for this donation. Please consult your local tax advisor for details.
           </p>
         </div>
       )}

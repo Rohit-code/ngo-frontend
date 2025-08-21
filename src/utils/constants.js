@@ -122,6 +122,18 @@ export const SUPPORTED_COUNTRIES = [
     address_format: ['address', 'city', 'postal_code'],
     phone_validation: /^(\+65)?[689]\d{7}$/,
     postal_validation: /^\d{6}$/
+  },
+  {
+    code: 'MY',
+    name: 'Malaysia',
+    currency: 'MYR',
+    currency_symbol: 'RM',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'state', 'postcode'],
+    phone_validation: /^(\+60|0)[1-9]\d{8}$/,
+    postal_validation: /^\d{5}$/
   }
 ];
 
@@ -133,7 +145,8 @@ export const CURRENCIES = {
   EUR: { symbol: '€', name: 'Euro', decimal_places: 2 },
   CAD: { symbol: 'C$', name: 'Canadian Dollar', decimal_places: 2 },
   AUD: { symbol: 'A$', name: 'Australian Dollar', decimal_places: 2 },
-  SGD: { symbol: 'S$', name: 'Singapore Dollar', decimal_places: 2 }
+  SGD: { symbol: 'S$', name: 'Singapore Dollar', decimal_places: 2 },
+  MYR: { symbol: 'RM', name: 'Malaysian Ringgit', decimal_places: 2 }
 };
 
 // Indian States
@@ -344,7 +357,8 @@ export const DONATION_AMOUNTS = {
   EUR: [5, 10, 25, 50, 100, 250],
   CAD: [5, 15, 30, 60, 120, 300],
   AUD: [5, 15, 30, 60, 120, 300],
-  SGD: [5, 15, 30, 60, 120, 300]
+  SGD: [5, 15, 30, 60, 120, 300],
+  MYR: [5, 15, 30, 60, 120, 300]
 };
 
 // Minimum and maximum donation amounts by currency
@@ -355,7 +369,8 @@ export const DONATION_LIMITS = {
   EUR: { min: 5, max: 100000 },
   CAD: { min: 5, max: 100000 },
   AUD: { min: 5, max: 100000 },
-  SGD: { min: 5, max: 100000 }
+  SGD: { min: 5, max: 100000 },
+  MYR: { min: 5, max: 100000 }
 };
 
 // NGO Information
@@ -365,12 +380,10 @@ export const NGO_INFO = {
   description: 'Dedicated to providing compassionate care, nutrition, healthcare, and development programs for infants and children to ensure their healthy growth and bright future in a peaceful, nurturing environment.',
   mission: 'Creating a world where every infant and child receives the love, care, and opportunities they need to thrive through comprehensive support programs that strengthen families and build resilient communities.',
   email: 'info@infantngo.org',
-  phone: '+91-76740 29515',
+  phone: '+91 80743 03479',
   address: '505, mvv greens, sagarnagar, Visakhapatnam, Andhra Pradesh, PIN - 530045',
   website: 'www.infantngo.org',
-  pan: 'AACTS7973G',
-  registration: 'AACTS7973GF2010',
-  section_80g: 'AACTS7973GF2010'
+  registration: '602 of 2019'
 };
 
 // Invoice Types
@@ -444,7 +457,7 @@ export const EDUCATION_DIMENSIONS = [
 
 // Statistics for homepage
 export const STATS = [
-  { name: 'Children Supported', value: '2,500+', icon: '👶' },
+  { name: 'Children Supported', value: '1,000-2,000', icon: '👶' },
   { name: 'Families Helped', value: '1,200+', icon: '👨‍👩‍👧‍👦' },
   { name: 'Meals Provided', value: '50,000+', icon: '🍽️' },
   { name: 'Health Checkups', value: '800+', icon: '🏥' }

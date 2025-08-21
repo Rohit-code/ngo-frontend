@@ -20,7 +20,7 @@ const Home = () => {
         />
         <meta 
           name="keywords" 
-          content="infant organisation, child donation, healthcare for children, nutrition programs, education support, 80G tax exemption, quality education, sponsor a child"
+          content="infant organisation, child donation, healthcare for children, nutrition programs, education support, tax benefits, quality education, sponsor a child"
         />
         <meta property="og:title" content={`${NGO_INFO.name} - ${NGO_INFO.tagline}`} />
         <meta property="og:description" content={NGO_INFO.description} />

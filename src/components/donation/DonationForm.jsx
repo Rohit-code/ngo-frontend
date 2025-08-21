@@ -584,31 +584,7 @@ const CorrectedDonationForm = ({ selectedCampaign = null }) => {
                     )}
                   </div>
 
-                  {/* PAN (India only) */}
-                  {selectedCountry === 'IN' && (
-                    <div>
-                      <label className="block text-sm font-medium text-soft-700 mb-2">
-                        PAN Number
-                        <span className="text-xs text-soft-500 ml-2">(Optional, for 80G certificate)</span>
-                      </label>
-                      <input
-                        {...register('pan_number', { 
-                          validate: (value) => !value || validateByCountry.pan(value, selectedCountry)
-                        })}
-                        type="text"
-                        placeholder="ABCDE1234F"
-                        className={`w-full px-4 py-3 border rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors uppercase ${
-                          errors.pan_number ? 'border-red-500' : 'border-soft-300'
-                        }`}
-                      />
-                      {errors.pan_number && (
-                        <div className="flex items-center mt-2 text-red-600">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          <span className="text-sm">{errors.pan_number.message}</span>
-                        </div>
-                      )}
-                    </div>
-                  )}
+
                 </div>
 
                 {/* Address */}

@@ -159,9 +159,7 @@ const Footer = () => {
           <div className="bg-primary-800 rounded-lg p-3">
             <h5 className="font-semibold text-primary-300 mb-2">Registration Details</h5>
             <div className="space-y-1 text-primary-200">
-              <p><span className="font-medium">PAN:</span> {NGO_INFO.pan}</p>
               <p><span className="font-medium">Reg. No:</span> {NGO_INFO.registration}</p>
-              <p><span className="font-medium">80G No:</span> {NGO_INFO.section_80g}</p>
             </div>
           </div>
           <div className="text-primary-300 text-xs">
@@ -288,8 +286,8 @@ const Footer = () => {
                 </span>
               </div>
               <p className="text-primary-700 text-xs sm:text-sm leading-relaxed">
-                Your contributions are eligible for up to 50% tax benefit under Section 80G 
-                as Infant Organisation is registered as a non-profit organization.
+                Tax benefits are available for eligible donors. Please consult your local tax advisor 
+                for specific details about tax deductibility in your country.
               </p>
             </motion.div>
           </div>

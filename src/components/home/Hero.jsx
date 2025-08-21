@@ -124,7 +124,7 @@ const Hero = () => {
               >
                 <Award className="h-3 w-3 sm:h-4 sm:w-4 text-primary-500 mr-2" />
                 <span className="font-medium text-primary-700">
-                  80G Tax Exemption Available
+                  Tax Benefits Available
                 </span>
               </motion.div>
 

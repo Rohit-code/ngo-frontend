@@ -60,8 +60,8 @@ const Features = () => {
   const whyChooseUs = [
     {
       icon: Award,
-      title: '80G Tax Exemption',
-      description: 'Your donations are eligible for 50% tax exemption under Section 80G of the Income Tax Act.'
+      title: 'Tax Benefits',
+      description: 'Your donations are eligible for tax benefits. Please consult your local tax advisor for details.'
     },
     {
       icon: Shield,
