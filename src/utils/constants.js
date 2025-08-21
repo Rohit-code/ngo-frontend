@@ -57,7 +57,7 @@ export const SUPPORTED_COUNTRIES = [
     currency: 'INR',
     currency_symbol: '₹',
     tax_benefit: true,
-    tax_section: '80G',
+    tax_section: 'Tax Benefits',
     min_donation: 10,
     address_format: ['address', 'city', 'state', 'pincode'],
     phone_validation: /^[6-9]\d{9}$/,
