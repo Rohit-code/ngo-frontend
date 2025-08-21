@@ -103,6 +103,8 @@ export const isValidMobile = (mobile, countryCode = 'IN') => {
       return /^(\+61|0)[2-9]\d{8}$/.test(mobile);
     case 'SG':
       return /^(\+65)?[689]\d{7}$/.test(mobile);
+    case 'MY':
+      return /^(\+60|0)[1-9]\d{8}$/.test(mobile);
     default:
       return cleanMobile.length >= 8 && cleanMobile.length <= 15;
   }
@@ -137,6 +139,8 @@ export const isValidPincode = (pincode, countryCode = 'IN') => {
       return /^\d{4}$/.test(cleanPincode);
     case 'SG':
       return /^\d{6}$/.test(cleanPincode);
+    case 'MY':
+      return /^\d{5}$/.test(cleanPincode);
     default:
       return cleanPincode.length >= 3;
   }
@@ -151,14 +155,15 @@ export const getImpactMessage = (amount, currency = 'INR') => {
   // Convert to INR for impact calculation (rough conversion)
   let inrAmount = amount;
   if (currency !== 'INR') {
-    const conversionRates = {
-      'USD': 83,
-      'GBP': 104,
-      'EUR': 90,
-      'CAD': 61,
-      'AUD': 54,
-      'SGD': 61
-    };
+      const conversionRates = {
+    'USD': 83,
+    'GBP': 104,
+    'EUR': 90,
+    'CAD': 61,
+    'AUD': 54,
+    'SGD': 61,
+    'MYR': 17.5
+  };
     inrAmount = amount * (conversionRates[currency] || 83);
   }
   
