@@ -43,6 +43,16 @@ export const validateByCountry = {
           return 'Please enter a valid Singapore phone number';
         }
         break;
+      case 'DE':
+        if (!country.phone_validation.test(value)) {
+          return 'Please enter a valid German phone number';
+        }
+        break;
+      case 'DK':
+        if (!country.phone_validation.test(value)) {
+          return 'Please enter a valid Danish phone number';
+        }
+        break;
       default:
         // Generic international validation
         if (value.length < 8 || value.length > 15) {
@@ -93,6 +103,16 @@ export const validateByCountry = {
       case 'SG':
         if (!country.postal_validation.test(value)) {
           return 'Please enter a valid 6-digit postal code';
+        }
+        break;
+      case 'DE':
+        if (!country.postal_validation.test(value)) {
+          return 'Please enter a valid 5-digit postal code';
+        }
+        break;
+      case 'DK':
+        if (!country.postal_validation.test(value)) {
+          return 'Please enter a valid 4-digit postal code';
         }
         break;
       default:
@@ -170,6 +190,18 @@ export const validateByCountry = {
       },
       'SG': {
         state: 'District',
+        city: 'City',
+        postal: 'Postal Code',
+        address: 'Address'
+      },
+      'DE': {
+        state: 'State',
+        city: 'City',
+        postal: 'Postal Code',
+        address: 'Address'
+      },
+      'DK': {
+        state: 'State',
         city: 'City',
         postal: 'Postal Code',
         address: 'Address'

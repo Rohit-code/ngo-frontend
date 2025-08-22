@@ -424,7 +424,10 @@ const Donate = () => {
                      country.code === 'GB' ? '🇬🇧' : 
                      country.code === 'CA' ? '🇨🇦' : 
                      country.code === 'AU' ? '🇦🇺' :
-                     country.code === 'SG' ? '🇸🇬' : '🌍'}
+                     country.code === 'SG' ? '🇸🇬' :
+                     country.code === 'MY' ? '🇲🇾' :
+                     country.code === 'DE' ? '🇩🇪' :
+                     country.code === 'DK' ? '🇩🇰' : '🌍'}
                   </div>
                   <div className="font-semibold text-sm text-soft-900">{country.name}</div>
                   <div className="text-xs text-soft-600">{country.currency}</div>

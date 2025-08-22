@@ -134,6 +134,30 @@ export const SUPPORTED_COUNTRIES = [
     address_format: ['address', 'city', 'state', 'postcode'],
     phone_validation: /^(\+60|0)[1-9]\d{8}$/,
     postal_validation: /^\d{5}$/
+  },
+  {
+    code: 'DE',
+    name: 'Germany',
+    currency: 'EUR',
+    currency_symbol: '€',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'state', 'postal_code'],
+    phone_validation: /^(\+49|0)[0-9\s\-\(\)]{10,}$/,
+    postal_validation: /^\d{5}$/
+  },
+  {
+    code: 'DK',
+    name: 'Denmark',
+    currency: 'DKK',
+    currency_symbol: 'kr',
+    tax_benefit: false,
+    tax_section: null,
+    min_donation: 1,
+    address_format: ['address', 'city', 'state', 'postal_code'],
+    phone_validation: /^(\+45|0)[0-9\s\-\(\)]{8,}$/,
+    postal_validation: /^\d{4}$/
   }
 ];
 
@@ -146,7 +170,8 @@ export const CURRENCIES = {
   CAD: { symbol: 'C$', name: 'Canadian Dollar', decimal_places: 2 },
   AUD: { symbol: 'A$', name: 'Australian Dollar', decimal_places: 2 },
   SGD: { symbol: 'S$', name: 'Singapore Dollar', decimal_places: 2 },
-  MYR: { symbol: 'RM', name: 'Malaysian Ringgit', decimal_places: 2 }
+  MYR: { symbol: 'RM', name: 'Malaysian Ringgit', decimal_places: 2 },
+  DKK: { symbol: 'kr', name: 'Danish Krone', decimal_places: 2 }
 };
 
 // Indian States
@@ -257,7 +282,9 @@ export const VALIDATION_PATTERNS = {
   pincode: /^[1-9][0-9]{5}$/,
   us_zipcode: /^\d{5}(-\d{4})?$/,
   uk_postcode: /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i,
-  ca_postal: /^[A-Z]\d[A-Z]\s?\d[A-Z]\d$/i
+  ca_postal: /^[A-Z]\d[A-Z]\s?\d[A-Z]\d$/i,
+  de_postal: /^\d{5}$/,
+  dk_postal: /^\d{4}$/
 };
 
 // Toast messages
@@ -358,7 +385,8 @@ export const DONATION_AMOUNTS = {
   CAD: [5, 15, 30, 60, 120, 300],
   AUD: [5, 15, 30, 60, 120, 300],
   SGD: [5, 15, 30, 60, 120, 300],
-  MYR: [5, 15, 30, 60, 120, 300]
+  MYR: [5, 15, 30, 60, 120, 300],
+  DKK: [5, 15, 30, 60, 120, 300]
 };
 
 // Minimum and maximum donation amounts by currency
@@ -370,7 +398,8 @@ export const DONATION_LIMITS = {
   CAD: { min: 5, max: 100000 },
   AUD: { min: 5, max: 100000 },
   SGD: { min: 5, max: 100000 },
-  MYR: { min: 5, max: 100000 }
+  MYR: { min: 5, max: 100000 },
+  DKK: { min: 5, max: 100000 }
 };
 
 // NGO Information
