@@ -222,9 +222,7 @@ const Carousel = ({
               />
             </picture>
             
-            {/* Enhanced Overlay Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-            <div className="absolute inset-0 bg-gradient-to-r from-primary-900/20 via-transparent to-secondary-900/20" />
+
             
             {/* Caption */}
             {slides[currentIndex].caption && (
@@ -234,16 +232,17 @@ const Carousel = ({
                 transition={{ delay: 0.3 }}
                 className="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6"
               >
-                <h3 className="text-white text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold drop-shadow-lg leading-tight text-gradient-hero">
-                  {slides[currentIndex].caption}
-                </h3>
+                <div className="bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 sm:px-6 sm:py-3">
+                  <h3 className="text-soft-800 text-sm sm:text-lg md:text-xl lg:text-2xl font-semibold leading-tight">
+                    {slides[currentIndex].caption}
+                  </h3>
+                </div>
               </motion.div>
             )}
           </motion.div>
         </AnimatePresence>
 
-        {/* Loading placeholder */}
-        <div className="absolute inset-0 bg-gradient-warm opacity-20 animate-pulse" />
+
       </div>
 
       {/* Navigation Arrows - Larger touch targets for mobile */}
