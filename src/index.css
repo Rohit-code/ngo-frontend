@@ -11,16 +11,16 @@
   }
   
   body {
-    @apply font-sans text-soft-900 bg-gradient-to-br from-primary-50 via-white to-secondary-50 antialiased;
+    @apply font-sans text-soft-900 antialiased;
     /* Improve text rendering on mobile */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     /* Prevent zoom on form inputs on iOS */
     -webkit-text-size-adjust: 100%;
-    /* Enhanced background with animated gradient */
-    background: linear-gradient(-45deg, #f0fdfa, #ffffff, #f0fdf4, #fdf4ff);
+    /* Beautiful nurturing background */
+    background: linear-gradient(-45deg, #fef7f0, #ffffff, #f0f9ff, #fdf4ff);
     background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
+    animation: gentleFloat 20s ease infinite;
   }
   
   /* Better tap targets for mobile */
@@ -64,8 +64,8 @@
            disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
            min-h-[44px] min-w-[44px] /* Minimum touch target */
            active:scale-95 relative overflow-hidden; /* Better mobile feedback */
-    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 50%, #0f766e 100%);
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #f27a3a 0%, #e35d2b 50%, #bd4524 100%);
+    box-shadow: 0 4px 15px rgba(242, 122, 58, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .btn-primary::before {
@@ -84,7 +84,7 @@
   }
   
   .btn-primary:hover {
-    box-shadow: 0 8px 25px rgba(20, 184, 166, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(242, 122, 58, 0.4), 0 4px 8px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px) scale(1.05);
   }
   
@@ -96,12 +96,12 @@
            active:scale-95 relative overflow-hidden;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 15px rgba(20, 184, 166, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 15px rgba(242, 122, 58, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05);
   }
   
   .btn-secondary:hover {
     background: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 8px 25px rgba(20, 184, 166, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 25px rgba(242, 122, 58, 0.2), 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px) scale(1.05);
   }
   
@@ -395,14 +395,14 @@
   }
   
   .text-gradient-primary {
-    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    background: linear-gradient(135deg, #f27a3a 0%, #e35d2b 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   
   .text-gradient-secondary {
-    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -417,17 +417,17 @@
   
   /* Enhanced background patterns */
   .bg-pattern {
-    background-image: radial-gradient(circle at 1px 1px, rgba(20, 184, 166, 0.15) 1px, transparent 0);
+    background-image: radial-gradient(circle at 1px 1px, rgba(242, 122, 58, 0.08) 1px, transparent 0);
     background-size: 20px 20px;
   }
   
   .bg-dots {
-    background-image: radial-gradient(circle at 2px 2px, rgba(34, 197, 94, 0.15) 1px, transparent 0);
+    background-image: radial-gradient(circle at 2px 2px, rgba(14, 165, 233, 0.08) 1px, transparent 0);
     background-size: 24px 24px;
   }
   
   .bg-hexagon {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2314b8a6' fill-opacity='0.05'%3E%3Cpath d='M30 0l30 17.32v34.64L30 69.28 0 51.96V17.32L30 0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f27a3a' fill-opacity='0.03'%3E%3Cpath d='M30 0l30 17.32v34.64L30 69.28 0 51.96V17.32L30 0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   }
   
   /* Glassmorphism utilities */
@@ -444,9 +444,9 @@
   }
   
   .glass-primary {
-    background: rgba(20, 184, 166, 0.1);
+    background: rgba(242, 122, 58, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(20, 184, 166, 0.2);
+    border: 1px solid rgba(242, 122, 58, 0.2);
   }
   
   /* Line clamp utilities */

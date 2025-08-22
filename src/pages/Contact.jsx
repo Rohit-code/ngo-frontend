@@ -35,12 +35,25 @@ const Contact = () => {
     try {
       setIsSubmitting(true);
       
-      // Simulate API call (replace with actual contact form submission)
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      toast.success('Thank you for your message! We\'ll get back to you soon.');
-      reset();
+      // Send contact form to backend API
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5002'}/api/contact`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast.success('Thank you for your message! We\'ll get back to you soon.');
+        reset();
+      } else {
+        toast.error(result.message || 'Failed to send message. Please try again.');
+      }
     } catch (error) {
+      console.error('Contact form error:', error);
       toast.error('Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);

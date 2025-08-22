@@ -96,6 +96,7 @@ const FocusAreas = () => {
               images={carouselImages}
               autoPlay={true}
               autoPlayInterval={4000}
+              height="md"
               className="shadow-2xl"
             />
           </motion.div>

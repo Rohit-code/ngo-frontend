@@ -16,15 +16,15 @@ import Donate from './pages/Donate';
 
 // 404 Page Component
 const NotFound = () => (
-  <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+  <div className="min-h-screen flex items-center justify-center bg-gradient-nurturing">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="text-center"
     >
-      <h1 className="text-6xl font-bold text-blue-600 mb-4">404</h1>
-      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Page Not Found</h2>
-      <p className="text-gray-600 mb-8">The page you're looking for doesn't exist.</p>
+      <h1 className="text-6xl font-bold text-gradient-primary mb-4">404</h1>
+      <h2 className="text-2xl font-semibold text-soft-800 mb-4">Page Not Found</h2>
+      <p className="text-soft-600 mb-8">The page you're looking for doesn't exist.</p>
       <motion.a
         href="/"
         className="btn-primary"
@@ -39,10 +39,10 @@ const NotFound = () => (
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative">
-      {/* Clean background with subtle pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50"></div>
-      <div className="absolute inset-0 bg-pattern opacity-3"></div>
+    <div className="min-h-screen bg-gradient-nurturing relative">
+      {/* Beautiful nurturing background with subtle pattern */}
+      <div className="absolute inset-0 bg-gradient-nurturing"></div>
+      <div className="absolute inset-0 bg-pattern opacity-2"></div>
       <div className="relative z-10">
       <Header />
       

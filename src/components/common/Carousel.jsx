@@ -21,33 +21,48 @@ const Carousel = ({
   const x = useMotionValue(0);
 
   // Default images if none provided
-  const defaultImages = [
-    {
-      src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Mother and baby in tender embrace",
-      caption: "Nurturing Love and Care for Every Infant"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Healthcare worker gently examining a baby",
-      caption: "Professional Healthcare for Little Ones"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Children sharing healthy meals together",
-      caption: "Nourishing Bodies and Minds"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1594736797933-d0dba0e6b999?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Happy family moment with children",
-      caption: "Strengthening Families and Communities"
-    },
-    {
-      src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Children playing and learning in a safe environment",
-      caption: "Safe Spaces for Growth and Discovery"
-    }
-  ];
+const defaultImages = [
+  {
+    src: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Mother lovingly holding her newborn baby",
+    caption: "Nurturing Love and Care for Every Infant"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Children sharing healthy meals and smiles",
+    caption: "Nourishing Bodies and Minds"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Healthcare worker gently examining a baby with care",
+    caption: "Professional Healthcare for Little Ones"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1594736797933-d0dba0e6b999?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Happy family moment with children and parents",
+    caption: "Strengthening Families and Communities"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Children playing and learning in a safe environment",
+    caption: "Safe Spaces for Growth and Discovery"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Mother and baby in tender embrace with love",
+    caption: "Building Bonds of Love and Trust"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Joyful children playing and learning together",
+    caption: "Creating Joyful Learning Experiences"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1586769852044-692d6df65393?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+    alt: "Gentle healthcare for children with compassion",
+    caption: "Compassionate Healthcare for Every Child"
+  }
+];
 
   const slides = images.length > 0 ? images : defaultImages;
 
@@ -73,13 +88,13 @@ const Carousel = ({
     return () => clearInterval(interval);
   }, [isPlaying, autoPlayInterval, slides.length, isDragging]);
 
-  // Height classes mapping
+  // Height classes mapping - Better proportions for different screen sizes
   const heightClasses = {
     auto: 'h-48 sm:h-64 md:h-80 lg:h-96',
     sm: 'h-40 sm:h-48 md:h-56',
     md: 'h-56 sm:h-64 md:h-72 lg:h-80',
     lg: 'h-64 sm:h-80 md:h-96 lg:h-[28rem]',
-    xl: 'h-72 sm:h-96 md:h-[28rem] lg:h-[32rem]'
+    xl: 'h-64 sm:h-80 md:h-96 lg:h-[32rem] xl:h-[36rem]'
   };
 
   const goToSlide = useCallback((index) => {
@@ -181,23 +196,27 @@ const Carousel = ({
             style={{ x }}
           >
             <picture>
-              {/* Different image sizes for different devices */}
+              {/* Optimized image sizes for different devices */}
               <source 
                 media="(max-width: 480px)" 
-                srcSet={`${slides[currentIndex].src}&w=480&q=80`} 
+                srcSet={`${slides[currentIndex].src}&w=480&h=320&fit=crop&crop=center&q=85`} 
               />
               <source 
                 media="(max-width: 768px)" 
-                srcSet={`${slides[currentIndex].src}&w=768&q=80`} 
+                srcSet={`${slides[currentIndex].src}&w=768&h=512&fit=crop&crop=center&q=85`} 
               />
               <source 
                 media="(max-width: 1024px)" 
-                srcSet={`${slides[currentIndex].src}&w=1024&q=80`} 
+                srcSet={`${slides[currentIndex].src}&w=1024&h=640&fit=crop&crop=center&q=85`} 
+              />
+              <source 
+                media="(max-width: 1280px)" 
+                srcSet={`${slides[currentIndex].src}&w=1280&h=720&fit=crop&crop=center&q=85`} 
               />
               <img
-                src={slides[currentIndex].src}
+                src={`${slides[currentIndex].src}&w=1440&h=900&fit=crop&crop=center&q=85`}
                 alt={slides[currentIndex].alt}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
                 loading="lazy"
                 draggable="false"
               />
@@ -293,21 +312,7 @@ const Carousel = ({
         </div>
       )}
 
-      {/* Loading Indicator */}
-      {isPlaying && !isDragging && (
-        <div className="absolute bottom-0 left-0 h-1 bg-primary-500/30 w-full">
-          <motion.div
-            className="h-full bg-primary-500"
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ 
-              duration: autoPlayInterval / 1000, 
-              ease: "linear",
-              repeat: Infinity
-            }}
-          />
-        </div>
-      )}
+
 
       {/* Swipe Indicator for Mobile */}
       {isMobile && slides.length > 1 && (
