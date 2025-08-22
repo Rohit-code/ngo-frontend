@@ -20,6 +20,7 @@ import { NGO_INFO, SOCIAL_LINKS } from '../utils/constants';
 import { isValidEmail, isValidMobile } from '../utils/helpers';
 import { ButtonLoading } from '../components/common/Loading';
 import toast from 'react-hot-toast';
+import api from '../services/api';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,16 +36,8 @@ const Contact = () => {
     try {
       setIsSubmitting(true);
       
-      // Send contact form to backend API
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:5002'}/api/contact`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-      });
-
-      const result = await response.json();
+      // Send contact form to backend API using centralized API service
+      const result = await api.post('/contact', data);
 
       if (result.success) {
         toast.success('Thank you for your message! We\'ll get back to you soon.');
@@ -54,7 +47,7 @@ const Contact = () => {
       }
     } catch (error) {
       console.error('Contact form error:', error);
-      toast.error('Failed to send message. Please try again.');
+      toast.error(error.message || 'Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

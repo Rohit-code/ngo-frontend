@@ -1,6 +1,9 @@
 {
     "rewrites": [
       { "source": "/(.*)", "destination": "/" }
-    ]
+    ],
+    "env": {
+      "VITE_API_URL": "https://infantnog.up.railway.app/api"
+    }
   }
   
