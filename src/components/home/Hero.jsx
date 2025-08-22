@@ -25,34 +25,34 @@ const Hero = () => {
   // Hero carousel images optimized for mobile
   const heroImages = [
     {
-      src: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Joyful children playing and learning together",
-      caption: "Creating Joyful Learning Experiences",
-      mobileCaption: "Joyful Learning"
+      src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Mother and baby in tender embrace",
+      caption: "Nurturing Love and Care for Every Infant",
+      mobileCaption: "Infant Care"
     },
     {
-      src: "https://images.unsplash.com/photo-1586769852044-692d6df65393?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Gentle healthcare for children",
-      caption: "Compassionate Healthcare for Every Child",
-      mobileCaption: "Healthcare Support"
+      src: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Healthcare worker gently examining a baby",
+      caption: "Professional Healthcare for Little Ones",
+      mobileCaption: "Healthcare"
     },
     {
       src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       alt: "Children sharing healthy meals together",
       caption: "Nourishing Bodies and Minds",
-      mobileCaption: "Nutrition Programs"
+      mobileCaption: "Nutrition"
     },
     {
-      src: "https://dayearlylearning.org/wp-content/uploads/2022/06/Child16-1.jpg?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      src: "https://images.unsplash.com/photo-1594736797933-d0dba0e6b999?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
       alt: "Happy family moment with children",
       caption: "Strengthening Families and Communities",
       mobileCaption: "Family Support"
     },
     {
-      src: "https://www.healthyyoungminds.com/wp-content/uploads/2024/09/how-do-newborns-primarily-learn_min.jpeg?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Children in a beautiful learning environment",
+      src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Children playing and learning in a safe environment",
       caption: "Safe Spaces for Growth and Discovery",
-      mobileCaption: "Safe Environments"
+      mobileCaption: "Safe Learning"
     }
   ];
 
@@ -95,15 +95,10 @@ const Hero = () => {
       </section>
 
       {/* Main Hero Content Section */}
-      <section id="focus-areas" className="relative mobile-section-padding bg-gradient-to-br from-primary-50 via-soft-50 to-secondary-50 overflow-hidden">
-        {/* Enhanced Background Pattern */}
-        <div className="absolute inset-0 bg-pattern opacity-20"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary-100/30 via-transparent to-secondary-100/30"></div>
-        
-        {/* Floating Elements - Optimized for mobile */}
-        <div className="absolute top-10 sm:top-20 left-4 sm:left-10 w-12 sm:w-20 h-12 sm:h-20 bg-secondary-200 rounded-full opacity-60 animate-float"></div>
-        <div className="absolute top-20 sm:top-40 right-4 sm:right-20 w-10 sm:w-16 h-10 sm:h-16 bg-accent-200 rounded-full opacity-40 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-10 sm:bottom-20 left-8 sm:left-20 w-8 sm:w-12 h-8 sm:h-12 bg-primary-200 rounded-full opacity-50 animate-float" style={{ animationDelay: '2s' }}></div>
+      <section id="focus-areas" className="relative mobile-section-padding bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+        {/* Clean Background Pattern */}
+        <div className="absolute inset-0 bg-pattern opacity-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-100/20 via-transparent to-indigo-100/20"></div>
         
         <div className="relative container-mobile">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -120,10 +115,10 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/90 backdrop-blur-md shadow-glass border border-primary-200/50 mb-4 sm:mb-6 text-xs sm:text-sm"
+                className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/90 backdrop-blur-md shadow-lg border border-blue-200/50 mb-4 sm:mb-6 text-xs sm:text-sm"
               >
-                <Award className="h-3 w-3 sm:h-4 sm:w-4 text-primary-500 mr-2" />
-                <span className="font-medium text-primary-700">
+                <Award className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600 mr-2" />
+                <span className="font-medium text-blue-700">
                   Tax Benefits Available
                 </span>
               </motion.div>
@@ -135,11 +130,11 @@ const Hero = () => {
                 transition={{ delay: 0.3 }}
                 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight"
               >
-                <span className="bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 bg-clip-text text-transparent block sm:inline drop-shadow-sm">
+                <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent block sm:inline drop-shadow-sm">
                   Every Child Deserves
                 </span>
                 <br />
-                <span className="text-soft-900 drop-shadow-sm">Love, Care & Opportunity</span>
+                <span className="text-gray-800 drop-shadow-sm">Love, Care & Opportunity</span>
               </motion.h2>
 
               {/* Description */}
@@ -147,7 +142,7 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="text-sm sm:text-lg text-soft-600 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
+                className="text-sm sm:text-lg text-gray-600 mb-6 sm:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed"
               >
                 We provide comprehensive support through healthcare, education, nutrition, and family programs. 
                 Together, we can ensure every infant and child has the foundation they need to thrive.
@@ -162,7 +157,7 @@ const Hero = () => {
               >
                 <Link
                   to="/donate"
-                  className="btn-primary group bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 flex-1 xs:flex-none shadow-lg hover:shadow-xl"
+                  className="btn-primary group bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 flex-1 xs:flex-none shadow-lg hover:shadow-xl"
                 >
                   <Heart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 group-hover:scale-110 transition-transform" />
                   Start Supporting
@@ -171,7 +166,7 @@ const Hero = () => {
                 
                 <Link
                   to="/campaigns"
-                  className="btn-secondary group border-primary-300 text-primary-600 hover:bg-primary-50/80 flex-1 xs:flex-none shadow-lg hover:shadow-xl"
+                  className="btn-secondary group border-blue-300 text-blue-600 hover:bg-blue-50/80 flex-1 xs:flex-none shadow-lg hover:shadow-xl"
                 >
                   View Campaigns
                   <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -186,16 +181,16 @@ const Hero = () => {
                 className="grid grid-cols-3 gap-3 sm:gap-6 text-center lg:text-left"
               >
                 {[
-                  { icon: Shield, title: 'Trusted', subtitle: 'Organization', color: 'bg-primary-100/80 text-primary-600', bgColor: 'bg-primary-50/50' },
-                  { icon: Users, title: 'Transparent', subtitle: 'Operations', color: 'bg-secondary-100/80 text-secondary-600', bgColor: 'bg-secondary-50/50' },
-                  { icon: Heart, title: 'Direct', subtitle: 'Impact', color: 'bg-accent-100/80 text-accent-600', bgColor: 'bg-accent-50/50' }
+                  { icon: Shield, title: 'Trusted', subtitle: 'Organization', color: 'bg-blue-100/80 text-blue-600', bgColor: 'bg-blue-50/50' },
+                  { icon: Users, title: 'Transparent', subtitle: 'Operations', color: 'bg-indigo-100/80 text-indigo-600', bgColor: 'bg-indigo-50/50' },
+                  { icon: Heart, title: 'Direct', subtitle: 'Impact', color: 'bg-purple-100/80 text-purple-600', bgColor: 'bg-purple-50/50' }
                 ].map((item, index) => (
                   <div key={item.title} className="flex flex-col items-center lg:items-start group">
-                    <div className={`w-8 h-8 sm:w-10 sm:h-10 ${item.color} ${item.bgColor} rounded-lg sm:rounded-xl flex items-center justify-center mb-2 shadow-glass group-hover:shadow-glass-hover transition-all duration-300 group-hover:scale-110`}>
+                    <div className={`w-8 h-8 sm:w-10 sm:h-10 ${item.color} ${item.bgColor} rounded-lg sm:rounded-xl flex items-center justify-center mb-2 shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110`}>
                       <item.icon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </div>
-                    <div className="text-xs sm:text-sm text-soft-600 group-hover:text-primary-600 transition-colors duration-300">{item.title}</div>
-                    <div className="text-xs sm:text-sm font-semibold text-soft-900 group-hover:text-primary-700 transition-colors duration-300">{item.subtitle}</div>
+                    <div className="text-xs sm:text-sm text-gray-600 group-hover:text-blue-600 transition-colors duration-300">{item.title}</div>
+                    <div className="text-xs sm:text-sm font-semibold text-gray-800 group-hover:text-blue-700 transition-colors duration-300">{item.subtitle}</div>
                   </div>
                 ))}
               </motion.div>

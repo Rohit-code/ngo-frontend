@@ -23,14 +23,14 @@ const Carousel = ({
   // Default images if none provided
   const defaultImages = [
     {
-      src: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Joyful children playing and learning together",
-      caption: "Creating Joyful Learning Experiences"
+      src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Mother and baby in tender embrace",
+      caption: "Nurturing Love and Care for Every Infant"
     },
     {
-      src: "https://images.unsplash.com/photo-1586769852044-692d6df65393?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Gentle healthcare for children",
-      caption: "Compassionate Healthcare for Every Child"
+      src: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Healthcare worker gently examining a baby",
+      caption: "Professional Healthcare for Little Ones"
     },
     {
       src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
@@ -43,8 +43,8 @@ const Carousel = ({
       caption: "Strengthening Families and Communities"
     },
     {
-      src: "https://images.unsplash.com/photo-1502781252888-9143ba7f074e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Children in a beautiful learning environment",
+      src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
+      alt: "Children playing and learning in a safe environment",
       caption: "Safe Spaces for Growth and Discovery"
     }
   ];
