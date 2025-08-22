@@ -21,48 +21,48 @@ const Carousel = ({
   const x = useMotionValue(0);
 
   // Default images if none provided
-const defaultImages = [
-  {
-    src: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Mother lovingly holding her newborn baby",
-    caption: "Nurturing Love and Care for Every Infant"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Children sharing healthy meals and smiles",
-    caption: "Nourishing Bodies and Minds"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Healthcare worker gently examining a baby with care",
-    caption: "Professional Healthcare for Little Ones"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1594736797933-d0dba0e6b999?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Happy family moment with children and parents",
-    caption: "Strengthening Families and Communities"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Children playing and learning in a safe environment",
-    caption: "Safe Spaces for Growth and Discovery"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Mother and baby in tender embrace with love",
-    caption: "Building Bonds of Love and Trust"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Joyful children playing and learning together",
-    caption: "Creating Joyful Learning Experiences"
-  },
-  {
-    src: "https://images.unsplash.com/photo-1586769852044-692d6df65393?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
-    alt: "Gentle healthcare for children with compassion",
-    caption: "Compassionate Healthcare for Every Child"
-  }
-];
+  const defaultImages = [
+    {
+      src: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Group of diverse children smiling and playing together",
+      caption: "Every Child Deserves a Bright Future"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Volunteers helping at community event",
+      caption: "Together We Make a Difference"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Mother and baby in caring embrace",
+      caption: "Supporting Mothers, Nurturing Lives"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1584592740039-cddf0671f3d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Baby being examined by healthcare professional",
+      caption: "Quality Healthcare for Every Child"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1542887800-faca0261c9e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Children studying and learning together",
+      caption: "Education Opens Doors to Opportunity"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1617817546276-80b86dd60151?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Happy children in classroom raising hands",
+      caption: "Empowering Through Knowledge"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Family enjoying time together outdoors",
+      caption: "Strengthening Family Bonds"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1543342384-1f1350e27861?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Newborn baby peaceful and safe",
+      caption: "Protecting the Most Vulnerable"
+    }
+  ];
 
   const slides = images.length > 0 ? images : defaultImages;
 

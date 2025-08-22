@@ -25,34 +25,52 @@ const Hero = () => {
   // Hero carousel images optimized for mobile
   const heroImages = [
     {
-      src: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Mother and baby in tender embrace",
-      caption: "Nurturing Love and Care for Every Infant",
-      mobileCaption: "Infant Care"
+      src: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Group of diverse children smiling and playing together",
+      caption: "Every Child Deserves a Bright Future",
+      mobileCaption: "Bright Future"
     },
     {
-      src: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Healthcare worker gently examining a baby",
-      caption: "Professional Healthcare for Little Ones",
+      src: "https://images.unsplash.com/photo-1497486751825-1233686d5d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Volunteers helping at community event",
+      caption: "Together We Make a Difference",
+      mobileCaption: "Community"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1529390079861-591de354faf5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Mother and baby in caring embrace",
+      caption: "Supporting Mothers, Nurturing Lives",
+      mobileCaption: "Mothers"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1584592740039-cddf0671f3d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Baby being examined by healthcare professional",
+      caption: "Quality Healthcare for Every Child",
       mobileCaption: "Healthcare"
     },
     {
-      src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Children sharing healthy meals together",
-      caption: "Nourishing Bodies and Minds",
-      mobileCaption: "Nutrition"
+      src: "https://images.unsplash.com/photo-1542887800-faca0261c9e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Children studying and learning together",
+      caption: "Education Opens Doors to Opportunity",
+      mobileCaption: "Education"
     },
     {
-      src: "https://images.unsplash.com/photo-1594736797933-d0dba0e6b999?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Happy family moment with children",
-      caption: "Strengthening Families and Communities",
-      mobileCaption: "Family Support"
+      src: "https://images.unsplash.com/photo-1617817546276-80b86dd60151?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Happy children in classroom raising hands",
+      caption: "Empowering Through Knowledge",
+      mobileCaption: "Empowerment"
     },
     {
-      src: "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-      alt: "Children playing and learning in a safe environment",
-      caption: "Safe Spaces for Growth and Discovery",
-      mobileCaption: "Safe Learning"
+      src: "https://images.unsplash.com/photo-1593113598332-cd288d649433?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Family enjoying time together outdoors",
+      caption: "Strengthening Family Bonds",
+      mobileCaption: "Family"
+    },
+    {
+      src: "https://images.unsplash.com/photo-1543342384-1f1350e27861?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=85",
+      alt: "Newborn baby peaceful and safe",
+      caption: "Protecting the Most Vulnerable",
+      mobileCaption: "Protection"
     }
   ];
 
@@ -75,7 +93,7 @@ const Hero = () => {
             }))}
             autoPlay={true}
             autoPlayInterval={6000}
-            showDots={true}
+            showDots={false}
             showArrows={!isMobile} // Hide arrows on mobile for swipe navigation
             height="xl"
             className="h-full rounded-none"
@@ -99,11 +117,6 @@ const Hero = () => {
         {/* Enhanced Background Pattern */}
         <div className="absolute inset-0 bg-pattern opacity-20"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary-100/30 via-transparent to-secondary-100/30"></div>
-        
-        {/* Floating Elements - Optimized for mobile */}
-        <div className="absolute top-10 sm:top-20 left-4 sm:left-10 w-12 sm:w-20 h-12 sm:h-20 bg-secondary-200 rounded-full opacity-60 animate-float"></div>
-        <div className="absolute top-20 sm:top-40 right-4 sm:right-20 w-10 sm:w-16 h-10 sm:h-16 bg-accent-200 rounded-full opacity-40 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-10 sm:bottom-20 left-8 sm:left-20 w-8 sm:w-12 h-8 sm:h-12 bg-primary-200 rounded-full opacity-50 animate-float" style={{ animationDelay: '2s' }}></div>
         
         <div className="relative container-mobile">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
