@@ -60,8 +60,8 @@ const Features = () => {
   const whyChooseUs = [
     {
       icon: Award,
-      title: 'Tax Benefits',
-      description: 'Your donations are eligible for tax benefits. Please consult your local tax advisor for details.'
+              title: 'Secure Donations',
+        description: 'Your donations are processed securely through Stripe with industry-standard encryption.'
     },
     {
       icon: Shield,

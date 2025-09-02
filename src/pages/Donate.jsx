@@ -30,7 +30,7 @@ const Donate = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [stats, setStats] = useState({
     totalDonations: 15847,
-    totalAmount: 2547893,
+    totalAmount: 1000000,
     childrenHelped: 5241,
     countries: 12
   });
@@ -63,8 +63,8 @@ const Donate = () => {
     },
     {
       icon: Award,
-      title: 'Tax Benefits',
-      description: 'Tax benefits available for eligible donors. Please consult your local tax advisor.',
+      title: 'Secure Payments',
+      description: 'Your donations are processed securely through Stripe with industry-standard encryption.',
       color: 'text-blue-600',
       bgColor: 'bg-blue-100'
     },
@@ -111,11 +111,11 @@ const Donate = () => {
         <title>Donate Now - {NGO_INFO.name}</title>
         <meta 
           name="description" 
-          content={`Make an international donation to ${NGO_INFO.name} and help support infants and children worldwide. Secure payments with Stripe. Tax benefits available for eligible donors.`}
+          content={`Make an international donation to ${NGO_INFO.name} and help support infants and children worldwide. Secure payments with Stripe.`}
         />
         <meta 
           name="keywords" 
-          content="donate, infant NGO, child donation, international donation, tax benefits, secure donation, online donation, Stripe payment"
+          content="donate, infant NGO, child donation, international donation, secure donation, online donation, Stripe payment"
         />
         <meta property="og:title" content={`Donate Now - ${NGO_INFO.name}`} />
         <meta property="og:description" content="Make a difference in the lives of infants and children worldwide with your generous donation." />
@@ -145,7 +145,7 @@ const Donate = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 max-w-4xl mx-auto">
                 {[
                   { label: 'Total Donations', value: stats.totalDonations.toLocaleString(), icon: Heart },
-                  { label: 'Amount Raised', value: formatCurrency(stats.totalAmount, 'INR'), icon: TrendingUp },
+                  { label: 'Amount Raised', value: '₹10,00,000', icon: TrendingUp },
                   { label: 'Children Helped', value: stats.childrenHelped.toLocaleString(), icon: Users },
                   { label: 'Countries', value: stats.countries, icon: Globe }
                 ].map((stat, index) => (
@@ -431,9 +431,7 @@ const Donate = () => {
                   </div>
                   <div className="font-semibold text-sm text-soft-900">{country.name}</div>
                   <div className="text-xs text-soft-600">{country.currency}</div>
-                  {country.tax_benefit && (
-                    <div className="text-xs text-green-600 font-medium mt-1">Tax Benefits</div>
-                  )}
+                  
                 </motion.div>
               ))}
             </div>

@@ -270,7 +270,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Tax Exemption Notice */}
+        {/* Darpan ID Notice */}
         <div className="bg-primary-700 border-t border-primary-600">
           <div className="container-mobile py-4 sm:py-6">
             <motion.div
@@ -282,12 +282,11 @@ const Footer = () => {
               <div className="flex items-center justify-center mb-2">
                 <span className="text-lg mr-2">🏆</span>
                 <span className="font-semibold text-primary-800 text-sm sm:text-base">
-                  Tax Benefits Available
+                  Darpan ID: AP/2025/7096089
                 </span>
               </div>
               <p className="text-primary-700 text-xs sm:text-sm leading-relaxed">
-                Tax benefits are available for eligible donors. Please consult your local tax advisor 
-                for specific details about tax deductibility in your country.
+                Registered under the Darpan portal of Government of India for transparency and accountability.
               </p>
             </motion.div>
           </div>

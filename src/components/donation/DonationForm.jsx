@@ -361,15 +361,7 @@ const CorrectedDonationForm = ({ selectedCampaign = null }) => {
                         Minimum donation: {countryConfig.currency_symbol}{countryConfig.min_donation}
                       </div>
                     </div>
-                    {countryConfig.tax_benefit && (
-                      <div className="text-right">
-                        <div className="flex items-center text-green-600 font-semibold">
-                          <Award className="h-5 w-5 mr-2" />
-                          Tax Benefits Available
-                        </div>
-                        <div className="text-sm text-green-500">{countryConfig.tax_section}</div>
-                      </div>
-                    )}
+
                   </div>
                 </motion.div>
               )}
@@ -811,17 +803,7 @@ const CorrectedDonationForm = ({ selectedCampaign = null }) => {
                     </div>
                   </div>
 
-                  {countryConfig?.tax_benefit && (
-                    <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
-                      <div className="flex items-center mb-3">
-                        <Award className="h-6 w-6 text-blue-600 mr-2" />
-                        <div className="font-semibold text-blue-800">Tax Benefits</div>
-                      </div>
-                      <div className="text-sm text-blue-700">
-                        Eligible for {countryConfig.tax_section} tax exemption
-                      </div>
-                    </div>
-                  )}
+
 
                   <div className="bg-purple-50 p-6 rounded-xl border border-purple-200">
                     <div className="flex items-center mb-3">

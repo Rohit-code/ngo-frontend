@@ -91,8 +91,8 @@ const Contact = () => {
       answer: 'You can make a donation through our secure online donation form, by phone, or by visiting our office. We accept various payment methods including cards and bank transfers.'
     },
     {
-      question: 'Are donations tax-deductible?',
-      answer: 'Tax benefits are available for eligible donors. Please consult your local tax advisor for specific details about tax deductibility in your country.'
+              question: 'How can I get involved?',
+        answer: 'You can get involved by making a donation, volunteering your time, or spreading awareness about our mission. Contact us for more details.'
     },
     {
       question: 'How do you use the donations?',

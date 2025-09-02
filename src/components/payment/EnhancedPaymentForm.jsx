@@ -678,18 +678,7 @@ const EnhancedPaymentForm = ({
                   {invoiceStatus === 'sending' && 'Sending receipt email...'}
                 </div>
 
-                {countryConfig?.tax_benefit && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <div className="flex items-center text-blue-800">
-                      <FileText className="h-5 w-5 mr-2" />
-                      <span className="font-medium">Tax Benefit Available</span>
-                    </div>
-                    <p className="text-sm text-blue-700 mt-1">
-                      Your donation is eligible for {countryConfig.tax_section} tax exemption. 
-                      Receipt will be emailed to {formData.email}
-                    </p>
-                  </div>
-                )}
+
               </div>
             </motion.div>
           )}

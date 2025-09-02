@@ -137,7 +137,7 @@ const Hero = () => {
               >
                 <Award className="h-3 w-3 sm:h-4 sm:w-4 text-primary-500 mr-2" />
                 <span className="font-medium text-primary-700">
-                  Tax Benefits Available
+
                 </span>
               </motion.div>
 
@@ -248,48 +248,10 @@ const Hero = () => {
                     />
                   </motion.div>
 
-                  {/* Floating Icons */}
-                  <motion.div
-                    animate={{ y: [-8, 8, -8] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                    className="absolute -top-3 -left-3 w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full shadow-peaceful flex items-center justify-center"
-                  >
-                    <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary-500" />
-                  </motion.div>
-                  
-                  <motion.div
-                    animate={{ y: [8, -8, 8] }}
-                    transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                    className="absolute -bottom-3 -right-3 w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full shadow-soft flex items-center justify-center"
-                  >
-                    <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-secondary-500" />
-                  </motion.div>
+
                 </div>
 
-                {/* Decorative Elements */}
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                  className="absolute top-6 sm:top-10 right-6 sm:right-10 w-6 h-6 sm:w-8 sm:h-8 text-secondary-400 text-lg sm:text-xl"
-                >
-                  ✨
-                </motion.div>
-                
-                <motion.div
-                  animate={{ rotate: [360, 0] }}
-                  transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                  className="absolute bottom-12 sm:bottom-16 left-4 sm:left-8 w-4 h-4 sm:w-6 sm:h-6 text-primary-400 text-sm sm:text-lg"
-                >
-                  🌱
-                </motion.div>
-                
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute top-1/2 -left-4 sm:-left-8 w-3 h-3 sm:w-4 sm:h-4 text-accent-400 text-sm"
-                >
-                  💝
-                </motion.div>
+
               </div>
             </motion.div>
           </div>
