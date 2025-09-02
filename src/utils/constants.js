@@ -58,7 +58,7 @@ export const SUPPORTED_COUNTRIES = [
     currency_symbol: '₹',
     tax_benefit: true,
     tax_section: 'Tax Benefits',
-    min_donation: 10,
+    min_donation: 50,
     address_format: ['address', 'city', 'state', 'pincode'],
     phone_validation: /^[6-9]\d{9}$/,
     postal_validation: /^[1-9][0-9]{5}$/
@@ -76,16 +76,16 @@ export const SUPPORTED_COUNTRIES = [
     postal_validation: /^\d{5}(-\d{4})?$/
   },
   {
-    code: 'GB',
-    name: 'United Kingdom',
-    currency: 'GBP',
-    currency_symbol: '£',
+    code: 'EU',
+    name: 'European Union',
+    currency: 'EUR',
+    currency_symbol: '€',
     tax_benefit: false,
     tax_section: null,
     min_donation: 1,
-    address_format: ['address', 'city', 'county', 'postcode'],
-    phone_validation: /^(\+44|0)[\d\s\-\(\)]{10,}$/,
-    postal_validation: /^[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}$/i
+    address_format: ['address', 'city', 'state', 'postal_code'],
+    phone_validation: /^(\+[3-9][0-9]|0)[0-9\s\-\(\)]{8,}$/,
+    postal_validation: /^.{3,10}$/
   },
   {
     code: 'CA',
@@ -135,43 +135,18 @@ export const SUPPORTED_COUNTRIES = [
     phone_validation: /^(\+60|0)[1-9]\d{8}$/,
     postal_validation: /^\d{5}$/
   },
-  {
-    code: 'DE',
-    name: 'Germany',
-    currency: 'EUR',
-    currency_symbol: '€',
-    tax_benefit: false,
-    tax_section: null,
-    min_donation: 1,
-    address_format: ['address', 'city', 'state', 'postal_code'],
-    phone_validation: /^(\+49|0)[0-9\s\-\(\)]{10,}$/,
-    postal_validation: /^\d{5}$/
-  },
-  {
-    code: 'DK',
-    name: 'Denmark',
-    currency: 'DKK',
-    currency_symbol: 'kr',
-    tax_benefit: false,
-    tax_section: null,
-    min_donation: 1,
-    address_format: ['address', 'city', 'state', 'postal_code'],
-    phone_validation: /^(\+45|0)[0-9\s\-\(\)]{8,}$/,
-    postal_validation: /^\d{4}$/
-  }
+
 ];
 
 // Currency Information
 export const CURRENCIES = {
   INR: { symbol: '₹', name: 'Indian Rupee', decimal_places: 0 },
   USD: { symbol: '$', name: 'US Dollar', decimal_places: 2 },
-  GBP: { symbol: '£', name: 'British Pound', decimal_places: 2 },
   EUR: { symbol: '€', name: 'Euro', decimal_places: 2 },
   CAD: { symbol: 'C$', name: 'Canadian Dollar', decimal_places: 2 },
   AUD: { symbol: 'A$', name: 'Australian Dollar', decimal_places: 2 },
   SGD: { symbol: 'S$', name: 'Singapore Dollar', decimal_places: 2 },
-  MYR: { symbol: 'RM', name: 'Malaysian Ringgit', decimal_places: 2 },
-  DKK: { symbol: 'kr', name: 'Danish Krone', decimal_places: 2 }
+  MYR: { symbol: 'RM', name: 'Malaysian Ringgit', decimal_places: 2 }
 };
 
 // Indian States
@@ -255,6 +230,8 @@ export const INDIAN_STATES_SIMPLE = [
 
 // Impact messages based on donation amount (international support)
 export const IMPACT_MESSAGES = {
+  50: "Can provide basic care for an infant for 1 day",
+  100: "Can provide nutritious meals for an infant for 1 week",
   200: "Can provide basic care for an infant for 1 week",
   500: "Can provide nutritious meals for an infant for 2 weeks",
   1000: "Can support basic healthcare for an infant for 1 month",
@@ -265,6 +242,7 @@ export const IMPACT_MESSAGES = {
 
 // International Impact Messages (USD)
 export const INTERNATIONAL_IMPACT_MESSAGES = {
+  1: "Can provide clean water for an infant for 1 day",
   5: "Can provide clean water for an infant for 1 week",
   10: "Can provide nutritious meals for an infant for 1 week",
   25: "Can support basic healthcare for an infant for 1 week",

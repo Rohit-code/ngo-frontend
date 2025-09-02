@@ -86,20 +86,20 @@ const Donate = () => {
 
   const impactStats = [
     {
-      amount: '₹200',
-      description: 'Can provide basic care for 1 week',
+      amount: '₹50',
+      description: 'Can provide basic care for 1 day',
       color: 'text-primary-600',
       bgColor: 'bg-primary-50'
     },
     {
-      amount: '₹1000',
-      description: 'Can provide healthcare for 1 month',
+      amount: '₹200',
+      description: 'Can provide basic care for 1 week',
       color: 'text-accent-600',
       bgColor: 'bg-accent-50'
     },
     {
-      amount: '₹5000',
-      description: 'Can support complete care for 2 months',
+      amount: '₹1000',
+      description: 'Can provide healthcare for 1 month',
       color: 'text-secondary-600',
       bgColor: 'bg-secondary-50'
     }
@@ -421,13 +421,11 @@ const Donate = () => {
                   <div className="text-2xl mb-2">
                     {country.code === 'IN' ? '🇮🇳' : 
                      country.code === 'US' ? '🇺🇸' : 
-                     country.code === 'GB' ? '🇬🇧' : 
+                     country.code === 'EU' ? '🇪🇺' : 
                      country.code === 'CA' ? '🇨🇦' : 
                      country.code === 'AU' ? '🇦🇺' :
                      country.code === 'SG' ? '🇸🇬' :
-                     country.code === 'MY' ? '🇲🇾' :
-                     country.code === 'DE' ? '🇩🇪' :
-                     country.code === 'DK' ? '🇩🇰' : '🌍'}
+                     country.code === 'MY' ? '🇲🇾' : '🌍'}
                   </div>
                   <div className="font-semibold text-sm text-soft-900">{country.name}</div>
                   <div className="text-xs text-soft-600">{country.currency}</div>

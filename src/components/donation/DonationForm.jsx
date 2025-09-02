@@ -67,13 +67,13 @@ const CorrectedDonationForm = ({ selectedCampaign = null }) => {
   const getPresetAmounts = (countryCode) => {
     const country = SUPPORTED_COUNTRIES.find(c => c.code === countryCode);
     if (countryCode === 'IN') {
-      return [500, 1000, 2500, 5000, 10000];
+      return [50, 100, 200, 500, 1000];
     } else if (country?.currency === 'USD') {
-      return [10, 25, 50, 100, 250];
-    } else if (country?.currency === 'GBP') {
-      return [10, 20, 40, 80, 200];
+      return [1, 5, 10, 25, 50];
+    } else if (country?.currency === 'EUR') {
+      return [1, 5, 10, 20, 50];
     }
-    return [10, 25, 50, 100, 250];
+    return [1, 5, 10, 25, 50];
   };
 
   // Initialize country config
@@ -330,12 +330,12 @@ const CorrectedDonationForm = ({ selectedCampaign = null }) => {
                     >
                       <div className="text-center">
                         <div className="text-2xl mb-2">
-                          {country.code === 'IN' ? '🇮🇳' : 
-                           country.code === 'US' ? '🇺🇸' : 
-                           country.code === 'GB' ? '🇬🇧' : 
-                           country.code === 'CA' ? '🇨🇦' : 
-                           country.code === 'AU' ? '🇦🇺' :
-                           country.code === 'SG' ? '🇸🇬' : '🌍'}
+                                            {country.code === 'IN' ? '🇮🇳' :
+                   country.code === 'US' ? '🇺🇸' :
+                   country.code === 'EU' ? '🇪🇺' :
+                   country.code === 'CA' ? '🇨🇦' :
+                   country.code === 'AU' ? '🇦🇺' :
+                   country.code === 'SG' ? '🇸🇬' : '🌍'}
                         </div>
                         <div className="font-semibold text-sm">{country.name}</div>
                         <div className="text-xs opacity-75">{country.currency_symbol}</div>
