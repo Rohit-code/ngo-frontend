@@ -161,11 +161,13 @@ const Footer = () => {
             <div className="space-y-1 text-primary-200">
               <p><span className="font-medium">Reg. No:</span> {NGO_INFO.registration}</p>
               <p><span className="font-medium">Darpan ID:</span> AP/2025/7096089</p>
+              <p><span className="font-medium">Income Tax:</span> 12A & 80G</p>
             </div>
           </div>
           <div className="text-primary-300 text-xs">
             <p>Registered as a non-profit organization under the Income Tax Act</p>
             <p className="mt-1">Registered under the Darpan portal of Government of India for transparency and accountability.</p>
+            <p className="mt-1">Approved under Section 12A & 80G of Income Tax Act for tax benefits.</p>
           </div>
         </div>
       )
