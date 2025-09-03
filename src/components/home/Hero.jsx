@@ -128,18 +128,7 @@ const Hero = () => {
               transition={{ duration: 0.8 }}
               className="text-center lg:text-left order-2 lg:order-1"
             >
-              {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center px-3 sm:px-4 py-2 rounded-full bg-white/90 backdrop-blur-md shadow-glass border border-primary-200/50 mb-4 sm:mb-6 text-xs sm:text-sm"
-              >
-                <Award className="h-3 w-3 sm:h-4 sm:w-4 text-primary-500 mr-2" />
-                <span className="font-medium text-primary-700">
 
-                </span>
-              </motion.div>
 
               {/* Main Heading */}
               <motion.h2

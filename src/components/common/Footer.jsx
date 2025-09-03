@@ -160,10 +160,12 @@ const Footer = () => {
             <h5 className="font-semibold text-primary-300 mb-2">Registration Details</h5>
             <div className="space-y-1 text-primary-200">
               <p><span className="font-medium">Reg. No:</span> {NGO_INFO.registration}</p>
+              <p><span className="font-medium">Darpan ID:</span> AP/2025/7096089</p>
             </div>
           </div>
           <div className="text-primary-300 text-xs">
             <p>Registered as a non-profit organization under the Income Tax Act</p>
+            <p className="mt-1">Registered under the Darpan portal of Government of India for transparency and accountability.</p>
           </div>
         </div>
       )
@@ -270,27 +272,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Darpan ID Notice */}
-        <div className="bg-primary-700 border-t border-primary-600">
-          <div className="container-mobile py-4 sm:py-6">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="bg-primary-50/90 backdrop-blur-md border border-primary-200/50 rounded-lg sm:rounded-xl p-3 sm:p-4 text-center shadow-glass"
-            >
-              <div className="flex items-center justify-center mb-2">
-                <span className="text-lg mr-2">🏆</span>
-                <span className="font-semibold text-primary-800 text-sm sm:text-base">
-                  Darpan ID: AP/2025/7096089
-                </span>
-              </div>
-              <p className="text-primary-700 text-xs sm:text-sm leading-relaxed">
-                Registered under the Darpan portal of Government of India for transparency and accountability.
-              </p>
-            </motion.div>
-          </div>
-        </div>
+
 
         {/* Bottom Footer */}
         <div className="bg-soft-900 border-t border-primary-600">
