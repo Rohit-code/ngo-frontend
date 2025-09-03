@@ -9,7 +9,7 @@ import {
 
 // Components
 import DonationForm from '../components/donation/DonationForm';
-import HealthStatusIndicator from '../components/health/HealthStatusIndicator';
+
 import { InlineLoading } from '../components/common/Loading';
 
 // Services
@@ -384,12 +384,7 @@ const Donate = () => {
           </div>
         </section>
 
-        {/* System Status */}
-        <section className="py-8 bg-soft-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <HealthStatusIndicator />
-          </div>
-        </section>
+
 
         {/* International Support */}
         <section className="py-12">

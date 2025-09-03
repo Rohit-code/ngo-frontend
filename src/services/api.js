@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 // Create axios instance with base configuration
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5002/api',
-  timeout: 30000,
+  timeout: 60000, // Increased timeout for better reliability
   headers: {
     'Content-Type': 'application/json',
   },
@@ -46,7 +46,11 @@ api.interceptors.response.use(
         }
       } else if (error.request) {
         // Network error
-        errorMessage = 'Network error. Please check your internet connection.';
+        if (error.code === 'ECONNABORTED') {
+          errorMessage = 'Request timed out. Please try again.';
+        } else {
+          errorMessage = 'Network error. Please check your internet connection.';
+        }
       }
       
       // Only show error toast for non-404 errors to avoid spam
