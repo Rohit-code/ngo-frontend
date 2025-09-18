@@ -53,13 +53,13 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Navigation items with icons for mobile
-  const navItemsWithIcons = [
-    { ...NAVIGATION_ITEMS[0], icon: Home },
-    { ...NAVIGATION_ITEMS[1], icon: Info },
-    { ...NAVIGATION_ITEMS[2], icon: Target },
-    { ...NAVIGATION_ITEMS[3], icon: MessageCircle }
-  ];
+  // Navigation items with icons for mobile (exclude Home if on home page)
+  const navItemsWithIcons = NAVIGATION_ITEMS
+    .filter(item => location.pathname === '/' ? item.href !== '/' : true)
+    .map((item, index) => {
+      const icons = [Home, Info, Target, MessageCircle];
+      return { ...item, icon: icons[index] };
+    });
 
   return (
     <>
@@ -123,7 +123,7 @@ const Header = () => {
         }`}
       >
         <div className="container-responsive">
-          <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
+          <div className="flex items-center justify-between h-16 sm:h-16 lg:h-20">
             
             {/* Logo */}
             <motion.div
@@ -136,7 +136,7 @@ const Header = () => {
                 className="flex items-center space-x-2 sm:space-x-3 rounded-xl p-2 -m-2 hover:bg-primary-50/80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50/80 group"
               >
                 {/* Logo Image */}
-                <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex-shrink-0">
+                <div className="w-12 h-12 sm:w-12 sm:h-12 lg:w-16 lg:h-16 flex-shrink-0">
                   <img
                     src="/logo.jpg"
                     alt="Infant Organisation Logo"
@@ -144,9 +144,9 @@ const Header = () => {
                   />
                 </div>
                 
-                {/* Logo Text - Hidden on very small screens */}
-                <div className="hidden xs:block">
-                  <h1 className="text-sm sm:text-xl lg:text-2xl font-bold font-display text-gradient-primary leading-tight group-hover:scale-105 transition-transform duration-300">
+                {/* Logo Text - Always visible on mobile */}
+                <div className="block">
+                  <h1 className="text-base sm:text-xl lg:text-2xl font-bold font-display text-gradient-primary leading-tight group-hover:scale-105 transition-transform duration-300">
                     Infant Organisation
                   </h1>
                   <p className="text-xs lg:text-sm text-soft-500 -mt-1 hidden sm:block group-hover:text-primary-600 transition-colors duration-300">
@@ -183,26 +183,25 @@ const Header = () => {
 
             {/* CTA Button & Mobile Menu */}
             <div className="flex items-center space-x-2 sm:space-x-4">
-              {/* Donate Button - Responsive sizing */}
+              {/* Donate Button - Always visible on mobile */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="hidden xs:block"
+                className="block"
               >
                 <Link
                   to="/donate"
-                  className="inline-flex items-center justify-center px-3 py-2 sm:px-4 sm:py-2 lg:px-6 lg:py-3 text-xs sm:text-sm lg:text-base font-medium text-white border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105 relative overflow-hidden bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 shadow-lg hover:shadow-xl"
+                  className="inline-flex items-center justify-center px-4 py-3 sm:px-4 sm:py-2 lg:px-6 lg:py-3 text-sm sm:text-sm lg:text-base font-medium text-white border border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-105 relative overflow-hidden bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 shadow-lg hover:shadow-xl min-h-[48px]"
                 >
-                  <Heart className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                  <span className="hidden sm:inline">Donate</span>
-                  <span className="sm:hidden">❤️</span>
+                  <Heart className="h-4 w-4 sm:h-4 sm:w-4 mr-2 sm:mr-2" />
+                  <span className="text-sm sm:inline">Donate</span>
                 </Link>
               </motion.div>
 
               {/* Mobile Menu Button */}
               <motion.button
                 onClick={toggleMenu}
-                className="lg:hidden p-3 rounded-xl text-soft-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50 touch-friendly"
+                className="lg:hidden p-4 rounded-xl text-soft-600 hover:text-primary-600 hover:bg-primary-50 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 focus:bg-primary-50 min-h-[48px] min-w-[48px]"
                 aria-label="Toggle menu"
                 aria-expanded={isMenuOpen}
                 whileHover={{ scale: 1.05 }}
@@ -289,13 +288,13 @@ const Header = () => {
                     >
                       <Link
                         to={item.href}
-                        className={`flex items-center px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 min-h-[44px] ${
+                        className={`flex items-center px-6 py-4 rounded-xl text-lg font-medium transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 min-h-[56px] ${
                           location.pathname === item.href
                             ? 'text-primary-600 bg-primary-50 border-l-4 border-primary-500'
                             : 'text-soft-600 hover:text-primary-600 hover:bg-primary-50'
                         }`}
                       >
-                        <item.icon className="h-5 w-5 mr-3 flex-shrink-0" />
+                        <item.icon className="h-6 w-6 mr-4 flex-shrink-0" />
                         <span className="font-medium">{item.name}</span>
                       </Link>
                     </motion.div>
@@ -310,9 +309,9 @@ const Header = () => {
                   >
                     <Link
                       to="/donate"
-                      className="inline-flex items-center justify-center w-full py-3 px-4 text-base font-medium text-white bg-primary-500 border border-transparent rounded-xl hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-[1.02] shadow-warm"
+                      className="inline-flex items-center justify-center w-full py-4 px-6 text-lg font-medium text-white bg-primary-500 border border-transparent rounded-xl hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2 transition-all duration-300 ease-in-out transform hover:scale-[1.02] shadow-warm min-h-[56px]"
                     >
-                      <Heart className="h-4 w-4 mr-2" />
+                      <Heart className="h-5 w-5 mr-3" />
                       Donate Now
                     </Link>
                   </motion.div>

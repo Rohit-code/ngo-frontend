@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { 
   Heart, Shield, Award, Users, Globe, CreditCard,
-  CheckCircle, Info, Star, TrendingUp
+  CheckCircle, Info, Star, TrendingUp, ChevronDown, ArrowDown
 } from 'lucide-react';
 
 // Components
@@ -167,11 +167,29 @@ const Donate = () => {
                 ))}
               </div>
             </motion.div>
+
+            {/* Mobile Navigation Arrow - Below Stats */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="flex justify-center mt-8 sm:hidden"
+            >
+              <motion.button
+                onClick={() => document.querySelector('#donation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center text-primary-600 hover:text-primary-700 transition-colors duration-300 p-4 focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="text-sm font-medium mb-2">Start Donating</span>
+                <ChevronDown className="h-6 w-6 animate-bounce" />
+              </motion.button>
+            </motion.div>
           </div>
         </section>
 
         {/* Trust Indicators */}
-        <section className="py-12">
+        <section id="trust-indicators" className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0 }}
@@ -205,11 +223,29 @@ const Donate = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Mobile Navigation Arrow - Below Trust Indicators */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex justify-center mt-8 sm:hidden"
+            >
+              <motion.button
+                onClick={() => document.querySelector('#donation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center text-primary-600 hover:text-primary-700 transition-colors duration-300 p-4 focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="text-sm font-medium mb-2">Start Donating</span>
+                <ChevronDown className="h-6 w-6 animate-bounce" />
+              </motion.button>
+            </motion.div>
           </div>
         </section>
 
         {/* Impact Examples */}
-        <section className="py-12">
+        <section id="impact-examples" className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0 }}
@@ -244,6 +280,24 @@ const Donate = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Mobile Navigation Arrow - Below Impact Examples */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex justify-center mt-8 sm:hidden"
+            >
+              <motion.button
+                onClick={() => document.querySelector('#donation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center text-primary-600 hover:text-primary-700 transition-colors duration-300 p-4 focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="text-sm font-medium mb-2">Start Donating</span>
+                <ArrowDown className="h-5 w-5 animate-bounce" />
+              </motion.button>
+            </motion.div>
           </div>
         </section>
 
@@ -340,7 +394,7 @@ const Donate = () => {
         )}
 
         {/* Donation Form Section */}
-        <section className="py-12">
+        <section id="donation-form" className="py-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -428,11 +482,29 @@ const Donate = () => {
                 </motion.div>
               ))}
             </div>
+
+            {/* Mobile Navigation Arrow - Below International Support */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex justify-center mt-8 sm:hidden"
+            >
+              <motion.button
+                onClick={() => document.querySelector('#donation-form')?.scrollIntoView({ behavior: 'smooth' })}
+                className="flex flex-col items-center text-primary-600 hover:text-primary-700 transition-colors duration-300 p-4 focus:outline-none"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="text-sm font-medium mb-2">Start Donating</span>
+                <ChevronDown className="h-6 w-6 animate-bounce" />
+              </motion.button>
+            </motion.div>
           </div>
         </section>
 
         {/* Footer CTA */}
-        <section className="py-16 bg-gradient-to-r from-primary-600 to-accent-600">
+        <section id="footer-cta" className="py-16 bg-gradient-to-r from-primary-600 to-accent-600">
           <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
