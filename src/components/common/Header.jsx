@@ -127,7 +127,7 @@ const Header = () => {
             
             {/* Logo */}
             <motion.div
-              className="flex items-center flex-shrink-0"
+              className="flex items-center flex-shrink-0 mr-2 sm:mr-0"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -182,7 +182,7 @@ const Header = () => {
             </nav>
 
             {/* CTA Button & Mobile Menu */}
-            <div className="flex items-center space-x-2 sm:space-x-4">
+            <div className="flex items-center space-x-3 sm:space-x-4">
               {/* Donate Button - Always visible on mobile */}
               <motion.div
                 whileHover={{ scale: 1.05 }}
