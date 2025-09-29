@@ -98,7 +98,7 @@ const Footer = () => {
             <div>
               <p className="font-medium">Phone</p>
               <a 
-                href={`tel:${NGO_INFO.phone}`}
+                href={`tel:${NGO_INFO.phone.split(',')[0].trim()}`}
                 className="hover:text-primary-400 transition-colors"
               >
                 {NGO_INFO.phone}

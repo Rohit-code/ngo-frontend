@@ -80,7 +80,7 @@ const Header = () => {
               <div className="flex items-center justify-between text-sm">
                 <div className="flex items-center space-x-4 lg:space-x-6">
                   <motion.a
-                    href={`tel:${NGO_INFO.phone}`}
+                    href={`tel:${NGO_INFO.phone.split(',')[0].trim()}`}
                     className="flex items-center space-x-2 hover:text-primary-200 transition-colors duration-300 rounded-lg px-2 py-1 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/30 focus:ring-offset-0"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -325,7 +325,7 @@ const Header = () => {
                   >
                     <div className="text-sm text-soft-600">
                       <a
-                        href={`tel:${NGO_INFO.phone}`}
+                        href={`tel:${NGO_INFO.phone.split(',')[0].trim()}`}
                         className="flex items-center space-x-2 mb-2 p-2 rounded-lg hover:bg-primary-50 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:ring-offset-2"
                       >
                         <Phone className="h-4 w-4 text-primary-500" />

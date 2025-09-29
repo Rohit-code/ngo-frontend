@@ -387,7 +387,7 @@ export const NGO_INFO = {
   description: 'Dedicated to providing compassionate care, nutrition, healthcare, and development programs for infants and children to ensure their healthy growth and bright future in a peaceful, nurturing environment.',
   mission: 'Creating a world where every infant and child receives the love, care, and opportunities they need to thrive through comprehensive support programs that strengthen families and build resilient communities.',
   email: 'info@infantngo.org',
-  phone: '+91 80743 03479',
+  phone: '+91 78429 63399, +91 76750 63399',
   address: '505, MVV Greens, Sagar Nagar, Visakhapatnam, Andhra Pradesh - 530045',
   website: 'www.infantngo.org',
   registration: '602 of 2019'
