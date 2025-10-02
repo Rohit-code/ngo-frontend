@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Heart, Phone, Mail, ChevronDown, Home, Info, Target, MessageCircle } from 'lucide-react';
+import { Menu, X, Heart, Phone, Mail, ChevronDown, Home, Info, Target, Calendar, MessageCircle } from 'lucide-react';
 import { NAVIGATION_ITEMS, NGO_INFO } from '../../utils/constants';
 
 const Header = () => {
@@ -57,7 +57,7 @@ const Header = () => {
   const navItemsWithIcons = NAVIGATION_ITEMS
     .filter(item => location.pathname === '/' ? item.href !== '/' : true)
     .map((item, index) => {
-      const icons = [Home, Info, Target, MessageCircle];
+      const icons = [Home, Info, Target, Calendar, MessageCircle];
       return { ...item, icon: icons[index] };
     });
 

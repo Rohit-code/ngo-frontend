@@ -13,6 +13,7 @@ import About from './pages/About';
 import Campaigns from './pages/Campaigns';
 import Contact from './pages/Contact';
 import Donate from './pages/Donate';
+import Events from './pages/Events';
 
 // 404 Page Component
 const NotFound = () => (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/events" element={<Events />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

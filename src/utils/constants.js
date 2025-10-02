@@ -308,6 +308,7 @@ export const NAVIGATION_ITEMS = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
   { name: 'Campaigns', href: '/campaigns' },
+  { name: 'Events', href: '/events' },
   { name: 'Contact', href: '/contact' }
 ];
 
