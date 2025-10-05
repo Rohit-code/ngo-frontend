@@ -13,7 +13,12 @@ const api = axios.create({
 // Request interceptor
 api.interceptors.request.use(
   (config) => {
-    // Add any auth tokens here if needed in future
+    // Add auth token if available
+    const token = localStorage.getItem('admin_token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    
     console.log(`🚀 API Request: ${config.method?.toUpperCase()} ${config.url}`);
     return config;
   },
@@ -27,7 +32,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
     (response) => {
       console.log(`✅ API Response: ${response.config.method?.toUpperCase()} ${response.config.url}`);
-      return response.data; // Return only the data part
+      return response; // Return full response to maintain consistency
     },
     (error) => {
       console.error('Response error:', error);
@@ -39,7 +44,13 @@ api.interceptors.response.use(
         const { status, data } = error.response;
         errorMessage = data?.message || `Server error (${status})`;
         
-        if (status === 404) {
+        // Handle 401 errors - clear auth state but don't redirect immediately
+        if (status === 401) {
+          console.log('🔐 Unauthorized - clearing auth state');
+          localStorage.removeItem('admin_token');
+          localStorage.removeItem('admin_user');
+          // Don't redirect here to prevent bouncing
+        } else if (status === 404) {
           errorMessage = 'Resource not found';
         } else if (status === 500) {
           errorMessage = 'Internal server error. Please try again later.';
@@ -53,8 +64,8 @@ api.interceptors.response.use(
         }
       }
       
-      // Only show error toast for non-404 errors to avoid spam
-      if (!error.response || error.response.status !== 404) {
+      // Only show error toast for non-404 and non-401 errors to avoid spam
+      if (!error.response || (error.response.status !== 404 && error.response.status !== 401)) {
         toast.error(errorMessage);
       }
       

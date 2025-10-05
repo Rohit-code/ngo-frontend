@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Heart, Phone, Mail, ChevronDown, Home, Info, Target, Calendar, MessageCircle } from 'lucide-react';
@@ -8,7 +8,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [showTopBar, setShowTopBar] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
   const location = useLocation();
 
   // Enhanced scroll handling with hide/show functionality
@@ -17,19 +17,19 @@ const Header = () => {
       const currentScrollY = window.scrollY;
       
       // Hide/show header based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
         setShowTopBar(false);
       } else {
         setShowTopBar(true);
       }
       
       setIsScrolled(currentScrollY > 50);
-      setLastScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, []); // Empty dependency array since we're using refs
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -54,12 +54,14 @@ const Header = () => {
   };
 
   // Navigation items with icons for mobile (exclude Home if on home page)
-  const navItemsWithIcons = NAVIGATION_ITEMS
-    .filter(item => location.pathname === '/' ? item.href !== '/' : true)
-    .map((item, index) => {
-      const icons = [Home, Info, Target, Calendar, MessageCircle];
-      return { ...item, icon: icons[index] };
-    });
+  const navItemsWithIcons = useMemo(() => {
+    return NAVIGATION_ITEMS
+      .filter(item => location.pathname === '/' ? item.href !== '/' : true)
+      .map((item, index) => {
+        const icons = [Home, Info, Target, Calendar, MessageCircle];
+        return { ...item, icon: icons[index] };
+      });
+  }, [location.pathname]);
 
   return (
     <>
