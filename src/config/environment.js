@@ -7,8 +7,8 @@ const config = {
       DEBUG: true
     },
     production: {
-      API_URL: 'https://api.infantngo.org/api',
-      BASE_URL: 'https://api.infantngo.org',
+      API_URL: 'https://infantnog.up.railway.app/api',
+      BASE_URL: 'https://infantnog.up.railway.app',
       STRIPE_PUBLISHABLE_KEY: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY,
       DEBUG: false
     }
