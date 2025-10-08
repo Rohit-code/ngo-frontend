@@ -192,34 +192,47 @@ const AdminEvents = () => {
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-br from-warm-50 via-primary-50 to-accent-50">
-        {/* Header */}
-        <section className="py-8 bg-white/80 backdrop-blur-md border-b border-primary-200/50">
+        {/* Enhanced Header */}
+        <section className="py-12 bg-white/90 backdrop-blur-lg border-b border-primary-200/30 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between">
-              <div>
-                <h1 className="text-3xl font-bold text-soft-900">Events Management</h1>
-                <p className="text-soft-600 mt-1">Manage events and upload images</p>
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-1 h-8 bg-gradient-to-b from-primary-500 to-primary-600 rounded-full"></div>
+                  <h1 className="text-4xl font-bold text-soft-900">Events Management</h1>
+                </div>
+                <p className="text-lg text-soft-600 mb-2">Manage events and upload images for your organization</p>
                 {user && (
-                  <p className="text-sm text-soft-500 mt-1">
-                    Welcome, {user.full_name} ({user.role})
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <User className="h-4 w-4 text-primary-600" />
+                    <p className="text-sm text-soft-500">
+                      Welcome, <span className="font-semibold text-soft-700">{user.full_name}</span> 
+                      <span className="ml-2 px-2 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium">
+                        {user.role}
+                      </span>
+                    </p>
+                  </div>
                 )}
               </div>
-              <div className="flex items-center gap-3">
-                <button
+              <div className="flex items-center gap-4">
+                <motion.button
                   onClick={() => setShowAddEvent(true)}
-                  className="btn-primary flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-primary flex items-center gap-2 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                 >
                   <Plus className="h-5 w-5" />
                   Add Event
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   onClick={handleLogout}
-                  className="btn-secondary flex items-center gap-2"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="btn-secondary flex items-center gap-2 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                 >
                   <LogOut className="h-5 w-5" />
                   Logout
-                </button>
+                </motion.button>
               </div>
             </div>
           </div>
@@ -229,25 +242,30 @@ const AdminEvents = () => {
         <section className="py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {events.length === 0 ? (
-              <div className="text-center py-12">
-                <ImageIcon className="h-16 w-16 text-soft-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-soft-600 mb-2">No events found</h3>
-                <p className="text-soft-500 mb-6">Create your first event to get started</p>
-                <button
-                  onClick={() => setShowAddEvent(true)}
-                  className="btn-primary"
-                >
-                  Create Event
-                </button>
+              <div className="text-center py-20">
+                <div className="bg-gradient-to-br from-soft-100 to-soft-200 rounded-3xl p-16 border-2 border-dashed border-soft-300 max-w-2xl mx-auto">
+                  <ImageIcon className="h-20 w-20 text-soft-400 mx-auto mb-6" />
+                  <h3 className="text-2xl font-bold text-soft-600 mb-4">No Events Created Yet</h3>
+                  <p className="text-soft-500 text-lg mb-8">Create your first event to start managing your organization's activities</p>
+                  <motion.button
+                    onClick={() => setShowAddEvent(true)}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="btn-primary px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                  >
+                    Create Your First Event
+                  </motion.button>
+                </div>
               </div>
             ) : (
-              <div className="grid gap-6">
+              <div className="grid gap-8">
                 {events.map((event) => (
                   <motion.div
                     key={event.id}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="bg-white/80 backdrop-blur-md rounded-2xl p-6 shadow-glass border border-primary-200/50"
+                    transition={{ duration: 0.5 }}
+                    className="bg-white/90 backdrop-blur-lg rounded-3xl p-8 shadow-xl border border-primary-200/30"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
@@ -297,11 +315,17 @@ const AdminEvents = () => {
                       </div>
                     </div>
 
-                    {/* Images Section */}
-                    <div className="border-t border-soft-200 pt-4">
-                      <div className="flex items-center justify-between mb-4">
-                        <h4 className="font-semibold text-soft-900">Event Images ({event.images?.length || 0})</h4>
-                        <label className="btn-secondary cursor-pointer flex items-center gap-2">
+                    {/* Enhanced Images Section */}
+                    <div className="border-t border-soft-200 pt-6">
+                      <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                          <div className="w-1 h-5 bg-gradient-to-b from-primary-500 to-primary-600 rounded-full"></div>
+                          <h4 className="font-semibold text-soft-900 text-lg">Event Images</h4>
+                          <div className="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
+                            {event.images?.length || 0}
+                          </div>
+                        </div>
+                        <label className="btn-secondary cursor-pointer flex items-center gap-2 hover:bg-primary-50 hover:border-primary-300 transition-all duration-200 shadow-sm hover:shadow-md">
                           <Upload className="h-4 w-4" />
                           Upload Images
                           <input
@@ -316,34 +340,47 @@ const AdminEvents = () => {
                       </div>
 
                       {event.images && event.images.length > 0 ? (
-                        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3">
                           {event.images.map((image, index) => (
                             <div key={index} className="relative group">
-                              <div className="aspect-square overflow-hidden rounded-lg bg-soft-100">
-                <img
-                  src={image.url ? `${config.BASE_URL}${image.url}` : (image.file_path ? `${config.BASE_URL}${image.file_path}` : image)}
-                  alt={`${event.title} - Image ${index + 1}`}
-                  className="w-full h-full object-cover"
-                  crossOrigin="anonymous"
-                  onError={(e) => {
-                    console.error('Image load error:', image.url || image.file_path);
-                    e.target.style.display = 'none';
-                  }}
-                />
+                              <div className="aspect-square overflow-hidden rounded-xl bg-gradient-to-br from-soft-100 to-soft-200 shadow-sm hover:shadow-md transition-all duration-300">
+                                <img
+                                  src={image.url ? `${config.BASE_URL}${image.url}` : (image.file_path ? `${config.BASE_URL}${image.file_path}` : image)}
+                                  alt={`${event.title} - Image ${index + 1}`}
+                                  className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                                  crossOrigin="anonymous"
+                                  onError={(e) => {
+                                    console.error('Image load error:', image.url || image.file_path);
+                                    e.target.style.display = 'none';
+                                  }}
+                                />
                               </div>
+                              
+                              {/* Enhanced Delete Button */}
                               <button
                                 onClick={() => handleDeleteImage(event.id, image.id || index)}
-                                className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                                className="absolute top-2 right-2 p-1.5 bg-red-500/90 hover:bg-red-600 text-white rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 hover:scale-110 shadow-lg backdrop-blur-sm"
                               >
                                 <X className="h-3 w-3" />
                               </button>
+
+                              {/* Image Number Badge */}
+                              <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                {index + 1}
+                              </div>
+
+                              {/* Hover Overlay */}
+                              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300 rounded-xl"></div>
                             </div>
                           ))}
                         </div>
                       ) : (
-                        <div className="text-center py-8 text-soft-500">
-                          <ImageIcon className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                          <p>No images uploaded yet</p>
+                        <div className="text-center py-12 text-soft-500">
+                          <div className="bg-gradient-to-br from-soft-100 to-soft-200 rounded-2xl p-8 border-2 border-dashed border-soft-300">
+                            <ImageIcon className="h-16 w-16 mx-auto mb-4 opacity-50" />
+                            <p className="text-soft-600 font-medium">No images uploaded yet</p>
+                            <p className="text-sm text-soft-500 mt-1">Upload images to showcase this event</p>
+                          </div>
                         </div>
                       )}
                     </div>
