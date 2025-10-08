@@ -321,12 +321,12 @@ const AdminEvents = () => {
                             <div key={index} className="relative group">
                               <div className="aspect-square overflow-hidden rounded-lg bg-soft-100">
                 <img
-                  src={image.file_path ? `${config.BASE_URL}${image.file_path}` : (image.url || image)}
+                  src={image.url ? `${config.BASE_URL}${image.url}` : (image.file_path ? `${config.BASE_URL}${image.file_path}` : image)}
                   alt={`${event.title} - Image ${index + 1}`}
                   className="w-full h-full object-cover"
                   crossOrigin="anonymous"
                   onError={(e) => {
-                    console.error('Image load error:', image.file_path || image.url);
+                    console.error('Image load error:', image.url || image.file_path);
                     e.target.style.display = 'none';
                   }}
                 />

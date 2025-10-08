@@ -269,13 +269,13 @@ const Events = () => {
                               >
                                 <div className="aspect-square overflow-hidden rounded-xl bg-soft-100">
                 <img
-                  src={image.file_path ? `${config.BASE_URL}${image.file_path}` : (image.url || image)}
+                  src={image.url ? `${config.BASE_URL}${image.url}` : (image.file_path ? `${config.BASE_URL}${image.file_path}` : image)}
                   alt={`${selectedEvent.title} - Image ${index + 1}`}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   loading="lazy"
                   crossOrigin="anonymous"
                   onError={(e) => {
-                    console.error('Image load error:', image.file_path || image.url);
+                    console.error('Image load error:', image.url || image.file_path);
                     e.target.style.display = 'none';
                   }}
                 />
@@ -389,12 +389,12 @@ const Events = () => {
 
               {/* Image */}
                 <img
-                  src={selectedImage?.file_path ? `${config.BASE_URL}${selectedImage.file_path}` : (selectedImage?.url || selectedImage)}
+                  src={selectedImage?.url ? `${config.BASE_URL}${selectedImage.url}` : (selectedImage?.file_path ? `${config.BASE_URL}${selectedImage.file_path}` : selectedImage)}
                   alt={`Event gallery image ${currentImageIndex + 1}`}
                   className="max-w-full max-h-[80vh] object-contain rounded-lg"
                   crossOrigin="anonymous"
                   onError={(e) => {
-                    console.error('Modal image load error:', selectedImage?.file_path || selectedImage?.url);
+                    console.error('Modal image load error:', selectedImage?.url || selectedImage?.file_path);
                     e.target.style.display = 'none';
                   }}
                 />
